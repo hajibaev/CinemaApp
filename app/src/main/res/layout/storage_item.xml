@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/storage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="12dp"
+    android:paddingBottom="12dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPoster"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imagePoster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageButton
+        android:id="@+id/buttonBookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:background="?selectableItemBackground"
+        android:padding="12dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/divider"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPoster" />
+
+    <LinearLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cardPoster"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBookmark"
+        app:layout_constraintStart_toEndOf="@+id/cardPoster"
+        app:layout_constraintTop_toTopOf="@+id/cardPoster">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_bold"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Star Wars: IV" />
+
+        <TextView
+            android:id="@+id/textReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:maxLength="10"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="2022-03-17" />
+
+        <TextView
+            android:id="@+id/textGenres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_bold"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="Action, Adventure" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutContent2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/layoutContent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutContent">
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/voteaverage"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="6"
+            android:numStars="6"
+            android:progressBackgroundTint="@color/white"
+            android:progressTint="@color/gold" />
+
+        <TextView
+            android:id="@+id/votecount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

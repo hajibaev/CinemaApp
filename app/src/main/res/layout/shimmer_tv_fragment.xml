@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.tv_screen.tv_screen.TvMoviesFragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.11" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.51" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline232"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+
+    <LinearLayout
+        android:id="@+id/item1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline232"
+        app:layout_constraintTop_toTopOf="@+id/guideline32"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="@dimen/_205sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:background="@drawable/shimmer_bg" />
+
+        <View
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_95sdp"
+            android:background="@drawable/shimmer_bg" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline232"
+        app:layout_constraintTop_toBottomOf="@+id/liner"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="@dimen/_158sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:background="@drawable/shimmer_bg" />
+
+        <View
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_142sdp"
+            android:background="@drawable/shimmer_bg" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline232"
+        app:layout_constraintTop_toBottomOf="@+id/liner2"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="@dimen/_148sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:background="@drawable/shimmer_bg" />
+
+        <View
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_152sdp"
+            android:background="@drawable/shimmer_bg" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner"
+        style="@style/buttonRow"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item1">
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner2"
+        style="@style/buttonRow"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item2">
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner3"
+        style="@style/buttonRow"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item3">
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+        <include layout="@layout/shimmer_item" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

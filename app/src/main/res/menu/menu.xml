@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_movies"
+        android:icon="@drawable/ic_home_vector"
+        android:title="Movies" />
+    <item
+        android:id="@+id/nav_tv_movies"
+        android:icon="@drawable/ic_tv_vector"
+        android:title="Tv Cinema" />
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search_movie"
+        android:title="Search" />
+    <item
+        android:id="@+id/nav_person"
+        android:icon="@drawable/ic_person_vector"
+        android:title="Person" />
+    <item
+        android:id="@+id/nav_storage"
+        android:icon="@drawable/ic_bookmark_vector"
+        android:title="Favorite" />
+
+</menu>

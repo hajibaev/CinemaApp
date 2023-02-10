@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bac_movie"
+    tools:context=".ui.person.details_screen.PersonDetailsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/bac_movie"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/bac_movie"
+            app:expandedTitleMarginBottom="20dp"
+            app:expandedTitleMarginStart="15dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                app:layout_collapseMode="parallax">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/personImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/names_text"
+                    style="@style/persondetailstext"
+                    android:text="Имя:"
+                    app:layout_constraintBottom_toTopOf="@+id/gander_text_view"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/gander_text_view"
+                    style="@style/persondetailstext"
+                    android:text="Пол: "
+                    app:layout_constraintBottom_toTopOf="@+id/popurarity_text"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/names_text" />
+
+                <TextView
+                    android:id="@+id/popurarity_text"
+                    style="@style/persondetailstext"
+                    android:text="Популярность:"
+                    app:layout_constraintBottom_toTopOf="@+id/date_text"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/gander_text_view" />
+
+                <TextView
+                    android:id="@+id/date_text"
+                    style="@style/persondetailstext"
+                    android:text="Дата рождение:"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/popurarity_text" />
+
+
+                <TextView
+                    android:id="@+id/name_person"
+                    style="@style/movieDetailsText"
+                    app:layout_constraintBottom_toBottomOf="@+id/names_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/names_text"
+                    app:layout_constraintTop_toTopOf="@+id/names_text" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    style="@style/movieDetailsText"
+                    app:layout_constraintBottom_toBottomOf="@+id/gander_text_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gander_text_view"
+                    app:layout_constraintTop_toTopOf="@+id/gander_text_view" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/personPopularity_view"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:numStars="4"
+                    android:progressBackgroundTint="@color/green"
+                    android:progressTint="@color/gold"
+                    app:layout_constraintBottom_toBottomOf="@+id/popurarity_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/popurarity_text"
+                    app:layout_constraintTop_toTopOf="@+id/popurarity_text">
+
+                </androidx.appcompat.widget.AppCompatRatingBar>
+
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/movieDetailsText"
+                    android:maxLength="4"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/date_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/date_text"
+                    app:layout_constraintTop_toTopOf="@+id/date_text" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <TextView
+                android:id="@+id/personNameText"
+                style="@style/personDetailsText"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/comic_sans"
+                android:text="Имя"
+                app:layout_constraintEnd_toStartOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/personName"
+                style="@style/personDetailsTextItalic"
+                android:layout_marginStart="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline2"
+                app:layout_constraintTop_toTopOf="@id/personNameText" />
+
+            <TextView
+                android:id="@+id/gender_text"
+                style="@style/personDetailsText"
+                android:text="Пол"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@+id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/personNameText" />
+
+            <TextView
+                android:id="@+id/person_gender"
+                style="@style/personDetailsTextItalic"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/gender_text" />
+
+            <TextView
+                android:id="@+id/popularityText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Популярность"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/gender_text" />
+
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/personPopularity"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:numStars="4"
+                android:progressBackgroundTint="@color/green"
+                android:progressTint="@color/gold"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/popularityText">
+
+            </androidx.appcompat.widget.AppCompatRatingBar>
+
+
+            <TextView
+                android:id="@+id/professionText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Профессия"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/popularityText" />
+
+            <TextView
+                android:id="@+id/profession"
+                style="@style/personDetailsTextItalic"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/professionText" />
+
+            <TextView
+                android:id="@+id/birthdayText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Дата рождение"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/professionText" />
+
+            <TextView
+                android:id="@+id/birthday"
+                style="@style/personDetailsTextItalic"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/birthdayText" />
+
+            <TextView
+                android:id="@+id/deathDayText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Дата смерти"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/birthdayText" />
+
+            <TextView
+                android:id="@+id/deathDay"
+                style="@style/personDetailsTextItalic"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/deathDayText" />
+
+            <TextView
+                android:id="@+id/birthPlaceText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Место рождение"
+                app:layout_constraintEnd_toEndOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/deathDayText" />
+
+            <TextView
+                android:id="@+id/birthPlace"
+                style="@style/personDetailsTextItalic"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personName"
+                app:layout_constraintTop_toTopOf="@id/birthPlaceText" />
+
+
+            <TextView
+                android:id="@+id/biographyText"
+                style="@style/personDetailsText"
+                android:layout_marginTop="8dp"
+                android:text="Биография"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/birthPlaceText" />
+
+            <TextView
+                android:id="@+id/biography"
+                style="@style/personDetailsTextItalic"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/biographyText" />
+
+
+            <TextView
+                android:id="@+id/personMoviesText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/comic_sans"
+                android:text="Фильмы"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/personName"
+                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintTop_toBottomOf="@id/biography" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personMoviesText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/moviesRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/personMoviesText"
+                app:layout_constraintStart_toStartOf="@+id/personMoviesText"
+                app:layout_constraintTop_toBottomOf="@id/view5"
+                tools:listitem="@layout/object_horizontal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

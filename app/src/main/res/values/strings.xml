@@ -1,0 +1,313 @@
+<resources>
+    <string name="app_name">Cinema Time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movies">Home cinema</string>
+    <string name="movieStorage_voteCont">(%sK views)</string>
+    <string name="personStorage_voteCont">(%s popularity)</string>
+
+    <string-array name="favorite">
+        <item>Movie Cinema</item>
+        <item>Tv Shows</item>
+    </string-array>
+
+    <string name="favourite_transition">favourite_transition</string>
+
+    <style name="buttonRow">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <string name="search">Search cinema</string>
+    <string name="actors">Actors</string>
+
+    <string name="popular_category">Popular Movies</string>
+    <string name="top_rated_category">Top Movies</string>
+    <string name="now_playing_category">Now Playing</string>
+    <string name="adventure_text">Coming Soon</string>
+    <string name="trending_category">Trending Movies</string>
+    <string name="family_text">Family Movies</string>
+
+    <string name="action">Action Movies</string>
+    <string name="adventure">Adventure Movies</string>
+    <string name="animation">Animation Movies</string>
+    <string name="comedy">Comedy Movies</string>
+    <string name="Crime">Crime Movies</string>
+    <string name="documentary">Documentary Movies</string>
+    <string name="drama">Drama Movies</string>
+    <string name="fantasy">Fantasy Movies</string>
+    <string name="history">History Movies</string>
+    <string name="horror">Horror Movies</string>
+    <string name="music">Music Movies</string>
+    <string name="mystery">Mystery Movies</string>
+    <string name="romance">Romance Movies</string>
+    <string name="scienceFiction">Science Fiction</string>
+    <string name="tvMovie">TV Movie</string>
+    <string name="thriller">Thriller Movie</string>
+    <string name="war">War Movie</string>
+    <string name="western">Western Movie</string>
+
+    <string name="tv_trending_text">Tv Trending Movies</string>
+    <string name="tv_topreted_text">Tv Top Movies</string>
+    <string name="tv_on_the_air_text">Tv On The Air</string>
+    <string name="tv_popular_text">Tv Popular Movies</string>
+    <string name="tv_airing_today_rv">Tv Airing Today</string>
+
+    <string name="seeMore">See More</string>
+
+
+    <style name="shapeableImageStyle" parent="">
+        <item name="cornerSizeBottomLeft">@dimen/_30sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_30sdp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+    </style>
+
+
+    <style name="genres_rv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">4dp</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+
+
+    <style name="viewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+    <style name="MovieDetailsTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/gilroy_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="movie_details" parent="MovieDetailsTextStyle">
+        <item name="android:textSize">21sp</item>
+        <item name="fontFamily">@font/gilroy_bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="movie_details_text" parent="movie_details">
+        <item name="fontFamily">@font/quicksand_light</item>
+        <item name="android:textColor">@color/divider</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="MovieTextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/quicksand_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="MovieTextStyle2" parent="MovieTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#3980FD</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+
+    <style name="MovieDetailsTextStyle.Italic" parent="MovieDetailsTextStyle">
+        <!--        <item name="android:textStyle">normal</item>-->
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="text_popular">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="fontFamily">@font/quicksand_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="BtnNextStyle" parent="PrevBtnStyle">
+        <item name="shapeAppearance">@style/ShapeAppearanceNextBtn</item>
+    </style>
+
+    <style name="ShapeAppearanceNextBtn" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSizeTopRight">30dp</item>
+        <item name="cornerSizeBottomLeft">30dp</item>
+    </style>
+
+
+    <style name="PrevBtnStyle" parent="Widget.MaterialComponents.Button">
+        <item name="rippleColor">@color/colorAccent</item>
+        <item name="shapeAppearance">@style/ShapeAppearancePrevBtn</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ShapeAppearancePrevBtn" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSizeTopLeft">30dp</item>
+        <item name="cornerSizeBottomRight">30dp</item>
+    </style>
+
+    <style name="text_movie" parent="text_popular">
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+
+    <style name="ContextText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:numStars">5</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:progressTint">@color/yellw</item>
+        <item name="android:progressBackgroundTint">@color/Accent</item>
+    </style>
+
+    <string name="storage">Book mark</string>
+
+    <style name="pageText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
+    <style name="currect_text" parent="pageText">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="buttonMoviesStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/comic_sans</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="movieDetailsTextStyle" parent="MovieDetailsTextStyleItalic">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/comic_sans</item>
+
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="personDetailsText" parent="movieDetailsTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/gilroy_bold</item>
+    </style>
+
+    <style name="personDetailsTextItalic" parent="MovieDetailsTextStyleItalic">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="persondetailstext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="fontFamily">@font/gilroy_bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="MovieDetailsTextStyleItalic">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="personDetailsTextDescItalic" parent="MovieDetailsTextStyleItalic">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="movieDesc" parent="MovieDetailsTextStyleItalic">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/whiteTransparent</item>
+    </style>
+
+    <style name="movieDetailsText" parent="MovieDetailsTextStyleItalic">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">12dp</item>
+    </style>
+
+    <string name="menu_explore">Explore</string>
+    <string name="menu_Live_Chat">Live Chat </string>
+    <string name="menu_Gallery">Gallery</string>
+    <string name="action_search">Search</string>
+    <string name="welcome">welcome</string>
+    <string name="name">Ali Samy </string>
+    <string name="menu_wish_list">Wish List</string>
+    <string name="menu_magazine">E-Magazine</string>
+    <string name="open_website">open website</string>
+    <string name="network_error">Нету подключение к интернету.</string>
+    <string name="generic_error">Что то пошло не так.</string>
+    <string name="service_unavailable">Ошибка Сервера.</string>
+    <string name="news_intro">Get breaking news headlines, and search for articles from over 30,000</string>
+    <string name="action_delete">Delete All</string>
+    <string name="deleteAll">Are you sure you want to delete your favorites? </string>
+    <string name="deleteArticle">Successfully Deleted Article</string>
+    <string name="undo">Undo</string>
+    <string name="yes">Yes , Delete </string>
+    <string name="no"> NO </string>
+
+    <style name="ShapeAppearance_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+    </style>
+
+
+    <style name="TopRoundedCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
+    </style>
+
+    <style name="TopCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">37dp</item>
+        <item name="cornerSizeTopRight">37dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/general_navigation"
+    app:startDestination="@id/nav_movies">
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.mymovieapp.ui.movie.details_screen.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="movie"
+            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_nav_movies"
+            app:destination="@id/nav_movies"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"-->
+        <!--            app:destination="@id/personDetailsFragment" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_movieDetailsFragment_to_castDetailsFragment"-->
+        <!--            app:destination="@id/castDetailsFragment" />-->
+        <!--        <argument-->
+        <!--            android:name="person"-->
+        <!--            app:argType="com.example.mymovieapp.models.person.PersonPresentation" />-->
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.mymovieapp.ui.movie.search_screen.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_in_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_storage"
+        android:name="com.example.mymovieapp.ui.storage_screen.StorageFragment"
+        android:label="fragment_storage"
+        tools:layout="@layout/fragment_storage">
+        <action
+            android:id="@+id/action_storageFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_in_right" />
+        <action
+            android:id="@+id/action_nav_storage_to_tvDetailsFragment"
+            app:destination="@id/tvDetailsFragment"
+            app:enterAnim="@anim/slide_in_right" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_nav_storage_to_personDetailsFragment"-->
+        <!--            app:destination="@id/personDetailsFragment" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_person"
+        android:name="com.example.mymovieapp.ui.person.persons_screen.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person">
+        <action
+            android:id="@+id/action_personFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment"
+            app:enterAnim="@anim/shake_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.example.mymovieapp.ui.person.details_screen.PersonDetailsFragment"
+        android:label="fragment_person_details"
+        tools:layout="@layout/fragment_person_details">
+        <argument
+            android:name="person"
+            app:argType="com.example.mymovieapp.models.person.PersonPresentation" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_movies"
+        android:name="com.example.mymovieapp.ui.movie.movies_screen.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie">
+        <action
+            android:id="@+id/action_movieFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_nav_movies_to_movieTypeFragment"
+            app:destination="@id/movieTypeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="id"
+            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_tv_movies"
+        android:name="com.example.mymovieapp.ui.tv_screen.tv_screen.TvMoviesFragment"
+        android:label="fragment_tv_movies"
+        tools:layout="@layout/fragment_tv_movies">
+        <action
+            android:id="@+id/action_nav_tv_movies_to_tvTypeFragment"
+            app:destination="@id/tvTypeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_nav_tv_movies_to_tvDetailsFragment"
+            app:destination="@id/tvDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieTypeFragment"
+        android:name="com.example.mymovieapp.ui.see_all_screen.fragments.MovieTypeFragment"
+        android:label="fragment_movie_type"
+        tools:layout="@layout/fragment_movie_type">
+
+        <action
+            android:id="@+id/action_movieTypeFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="movieType"
+            app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllMovieType" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvTypeFragment"
+        android:name="com.example.mymovieapp.ui.see_all_screen.fragments.TvTypeFragment"
+        android:label="fragment_tv_type"
+        tools:layout="@layout/fragment_tv_type">
+
+        <action
+            android:id="@+id/action_tvTypeFragment_to_tvDetailsFragment"
+            app:destination="@id/tvDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="tvType"
+            app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllTvType" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvDetailsFragment"
+        android:name="com.example.mymovieapp.ui.tv_screen.details_screen.TvDetailsFragment"
+        android:label="fragment_tv_details"
+        tools:layout="@layout/fragment_tv_details">
+        <argument
+            android:name="tv"
+            app:argType="com.example.mymovieapp.models.movie.SeriesUi" />
+    </fragment>
+
+</navigation>

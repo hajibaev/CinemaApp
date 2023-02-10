@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bac_movie"
+    android:transitionName="@string/favourite_transition"
+    tools:context=".ui.movie.movies_screen.MovieFragment"
+    tools:ignore="ScrollViewCount">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ScrollViewSize"
+        tools:visibility="visible">
+
+        <include layout="@layout/shimmer_fragment" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:ignore="ScrollViewSize">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.03" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.02" />
+
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/MovieTextStyle"
+                android:text="@string/now_playing_category"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+            <View
+                android:id="@+id/v1"
+                style="@style/viewStyle"
+                android:background="@color/yellow"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nowplayingRv"
+                style="@style/genres_rv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v1"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/object_horizontal" />
+
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/MovieTextStyle"
+                android:text="@string/adventure_text"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/nowplayingRv" />
+
+            <View
+                android:id="@+id/v2"
+                style="@style/viewStyle"
+                android:background="@color/yellow"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tv_topreted_rv"
+                style="@style/genres_rv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/MovieTextStyle"
+                android:text="@string/top_rated_category"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_topreted_rv" />
+
+            <View
+                android:id="@+id/v3"
+                style="@style/viewStyle"
+                android:background="@color/yellow"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topRv"
+                style="@style/genres_rv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v3"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/MovieTextStyle"
+                android:text="@string/popular_category"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/topRv" />
+
+            <View
+                android:id="@+id/v4"
+                style="@style/viewStyle"
+                android:background="@color/yellow"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularRv"
+                style="@style/genres_rv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v4"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trendingRv"
+                style="@style/genres_rv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v5"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/MovieTextStyle"
+                android:text="@string/trending_category"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/popularRv" />
+
+
+            <View
+                android:id="@+id/v5"
+                style="@style/viewStyle"
+                android:background="@color/yellow"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/nowplayingText"
+                style="@style/MovieTextStyle2"
+                android:text="@string/seeMore"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nowplayingRv" />
+
+            <TextView
+                android:id="@+id/upcomingText"
+                style="@style/MovieTextStyle2"
+                android:text="@string/seeMore"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+            <TextView
+                android:id="@+id/topText"
+                style="@style/MovieTextStyle2"
+                android:text="@string/seeMore"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/topRv"
+                app:layout_constraintTop_toBottomOf="@+id/tv_topreted_rv" />
+
+            <TextView
+                android:id="@+id/popularText"
+                style="@style/MovieTextStyle2"
+                android:text="@string/seeMore"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/popularRv"
+                app:layout_constraintTop_toBottomOf="@+id/topRv" />
+
+            <TextView
+                android:id="@+id/trendingText"
+                style="@style/MovieTextStyle2"
+                android:text="@string/seeMore"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/trendingRv"
+                app:layout_constraintTop_toBottomOf="@+id/popularRv" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading"
+                app:lottie_renderMode="automatic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

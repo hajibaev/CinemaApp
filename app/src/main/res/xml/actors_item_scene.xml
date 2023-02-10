@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1200"
+        motion:autoTransition="animateToEnd">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/const_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleX="10"
+            android:scaleY="10"
+            motion:layout_constraintEnd_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/personImageCast"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="0"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintEnd_toEndOf="@id/const_layout"
+            motion:layout_constraintStart_toStartOf="@id/const_layout"
+            motion:layout_constraintTop_toTopOf="@id/const_layout" />
+
+        <Constraint
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:alpha="0"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintEnd_toEndOf="@id/const_layout"
+            motion:layout_constraintStart_toStartOf="@id/const_layout"
+            motion:layout_constraintTop_toTopOf="@id/const_layout" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/const_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:transitionEasing="cubic(1,0,1,0)" />
+
+        <Constraint
+            android:id="@+id/personImageCast"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="1"
+            android:scaleX="1"
+            android:scaleY="1"
+            motion:layout_constraintEnd_toEndOf="@id/const_layout"
+            motion:layout_constraintStart_toStartOf="@id/const_layout"
+            motion:layout_constraintTop_toTopOf="@id/const_layout" />
+
+        <Constraint
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:alpha="1"
+            android:scaleX="1"
+            android:scaleY="1"
+            motion:layout_constraintEnd_toEndOf="@+id/personImageCast"
+            motion:layout_constraintStart_toStartOf="@+id/personImageCast"
+            motion:layout_constraintTop_toBottomOf="@+id/personImageCast" />
+
+    </ConstraintSet>
+</MotionScene>
