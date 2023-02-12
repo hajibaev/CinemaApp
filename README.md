@@ -1,6 +1,10 @@
 # MyMovieApp
 My trainee project
 
+# Screens 
+![img1](https://user-images.githubusercontent.com/114996205/218335989-6762be5c-857c-4b21-abc1-7e52a93bd02d.jpg))
+![img2](https://user-images.githubusercontent.com/114996205/218336037-536dbb56-7bae-4606-b2c0-ca04575c6d32.jpg)
+![img3](https://user-images.githubusercontent.com/114996205/218336054-2bbf12bf-73a3-4963-b572-9dbda9e43a7b.jpg)
 
 # Animations
 ![gif](https://user-images.githubusercontent.com/114996205/218335882-f0aa6e45-42b4-4c2f-b112-9aa453e06fdd.MP4)
