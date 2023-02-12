@@ -3,26 +3,17 @@ package com.example.mymovieapp.ui.movie.movies_screen
 import android.os.Bundle
 import android.view.View
 import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.data.cloud.server.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.base.BaseFragment
 import com.example.mymovieapp.databinding.FragmentMovieBinding
 import com.example.mymovieapp.models.movie.MovieUi
+import com.example.mymovieapp.ui.*
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
-import com.example.mymovieapp.ui.hideView
-import com.example.mymovieapp.ui.makeToast
 import com.example.mymovieapp.ui.see_all_screen.SeeAllMovieType
-import com.example.mymovieapp.ui.showView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
-import com.squareup.picasso.Picasso
+import com.example.mymovieapp.utils.extensions.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 
 
@@ -33,23 +24,11 @@ class MovieFragment :
 
     override val viewModel: MovieViewModels by viewModels()
 
-    private val moviesAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this)
-    }
-    private val topAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this)
-    }
-    private val upcomingAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this)
-    }
-    private val nowPlayingAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this)
-    }
-    private val trendingMoviesAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this)
-    }
-
-    private var isFavorite = false
+    private val moviesAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
+    private val topAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
+    private val upcomingAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
+    private val nowPlayingAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
+    private val trendingMoviesAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,14 +37,13 @@ class MovieFragment :
         setupClickers()
     }
 
-
     private fun setupClickers() = with(requireBinding()) {
         viewModel.apply {
-            popularText.setOnClickListener { launchMoviesTypeFragment(SeeAllMovieType.POPULAR) }
-            nowplayingText.setOnClickListener { launchMoviesTypeFragment(SeeAllMovieType.UPCOMING) }
-            topText.setOnClickListener { launchMoviesTypeFragment(SeeAllMovieType.TOP_RATED) }
-            upcomingText.setOnClickListener { launchMoviesTypeFragment(SeeAllMovieType.NOW_PLAYING) }
-            trendingText.setOnClickListener { launchMoviesTypeFragment(SeeAllMovieType.TRENDING) }
+            popularText.setOnDownEffectClickListener { launchMoviesTypeFragment(SeeAllMovieType.POPULAR) }
+            nowplayingText.setOnDownEffectClickListener { launchMoviesTypeFragment(SeeAllMovieType.UPCOMING) }
+            topText.setOnDownEffectClickListener { launchMoviesTypeFragment(SeeAllMovieType.TOP_RATED) }
+            upcomingText.setOnDownEffectClickListener { launchMoviesTypeFragment(SeeAllMovieType.NOW_PLAYING) }
+            trendingText.setOnDownEffectClickListener { launchMoviesTypeFragment(SeeAllMovieType.TRENDING) }
         }
     }
 
@@ -78,31 +56,13 @@ class MovieFragment :
     }
 
     private fun observeViewModel() = with(viewModel) {
-        lifecycleScope.launchWhenResumed {
-            popularMovies.collectLatest {
-                moviesAdapter.moviesList = it.movies
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            ratingMovies.collectLatest {
-                topAdapter.moviesList = it.movies
-                uiVisibility()
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            publishedAtMovies.collectLatest {
-                upcomingAdapter.moviesList = it.movies
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            relevanceMovies.collectLatest {
-                nowPlayingAdapter.moviesList = it.movies
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            trendingMovies.collectLatest {
-                trendingMoviesAdapter.moviesList = it.movies
-            }
+        launchWhenViewStarted {
+            popularMovies.observe { moviesAdapter.moviesList = it.movies }
+            ratingMovies.observe { topAdapter.moviesList = it.movies }
+            publishedAtMovies.observe { upcomingAdapter.moviesList = it.movies }
+            relevanceMovies.observe { nowPlayingAdapter.moviesList = it.movies }
+            uiVisibility()
+            trendingMovies.observe { trendingMoviesAdapter.moviesList = it.movies }
         }
         error.onEach {
             makeToast(it, requireContext())
@@ -111,72 +71,47 @@ class MovieFragment :
         }
     }
 
+    //
+//    private fun openDialogSheet(item: MovieUi) {
+//        val bottomSheet = BottomSheetDialog(requireContext())
+//        bottomSheet.setContentView(R.layout.details_item_dialog)
+//        val posterImage = bottomSheet.findViewById<ImageView>(R.id.poster_image)
+//        val overviewText = bottomSheet.findViewById<TextView>(R.id.overview_text)
+//        val playButton = bottomSheet.findViewById<MaterialButton>(R.id.play_button)
+//        val titleText = bottomSheet.findViewById<TextView>(R.id.title_text)
+//        val closeDetailBtn = bottomSheet.findViewById<ImageView>(R.id.close_detail_btn)
+//        val ratingText = bottomSheet.findViewById<TextView>(R.id.rating_text)
+//        closeDetailBtn?.setOnDownEffectClickListener { bottomSheet.dismiss() }
+//        Picasso.get().load(Utils.IMAGE_PATH + item.posterPath).into(posterImage)
+//        ratingText?.text = item.voteAverage.toString()
+//        overviewText?.text = item.overview
+//        titleText?.text = item.originalTitle
+//        playButton?.setOnDownEffectClickListener {
+//            viewModel.launchMovieDetails(item)
+//            bottomSheet.dismiss()
+//        }
+//        bottomSheet.setCancelable(true)
+//        bottomSheet.show()
+//    }
 
-    private fun openDialogSheet(item: MovieUi) {
-        val bottomSheet = BottomSheetDialog(requireContext())
-        bottomSheet.setContentView(R.layout.details_item_dialog)
-        val movieImage = bottomSheet.findViewById<ImageView>(R.id.poster_image)
-        val movieDes = bottomSheet.findViewById<TextView>(R.id.overview_text)
-        val movieMore = bottomSheet.findViewById<MaterialButton>(R.id.play_button)
-        val movieTitle = bottomSheet.findViewById<TextView>(R.id.title_text)
-        val cancelBtn = bottomSheet.findViewById<ImageView>(R.id.close_detail_btn)
-        val add = bottomSheet.findViewById<ImageView>(R.id.add)
-        val rating = bottomSheet.findViewById<TextView>(R.id.rating_text)
-        cancelBtn?.setOnClickListener {
-            bottomSheet.dismiss()
-        }
-        if (isFavorite) add?.setImageResource(R.drawable.ic_saved)
-        else add?.setImageResource(R.drawable.ic_save_vector)
-        Picasso.get().load(Utils.IMAGE_PATH + item.posterPath).into(movieImage)
-        rating?.text = item.voteAverage.toString()
-        movieDes?.text = item.overview
-        movieTitle?.text = item.originalTitle
-        add?.setOnClickListener {
-            if (isFavorite) {
-                isFavorite = false
-                add.setImageResource(R.drawable.ic_save_vector)
-                viewModel.deleteMovie(item.movieId)
-            } else {
-                isFavorite = true
-                add.setImageResource(R.drawable.ic_saved)
-                viewModel.saveMovie(item)
-            }
-        }
-        movieMore?.setOnClickListener {
-            viewModel.launchMovieDetails(item)
-            bottomSheet.dismiss()
-        }
-        bottomSheet.setCancelable(true)
-        bottomSheet.show()
-    }
 
     private fun uiVisibility() = with(requireBinding()) {
         progress.visibility = INVISIBLE
-        textView.visibility = VISIBLE
-        textView2.visibility = VISIBLE
-        textView3.visibility = VISIBLE
-        textView4.visibility = VISIBLE
-        textView5.visibility = VISIBLE
-        nowplayingText.visibility = VISIBLE
-        upcomingText.visibility = VISIBLE
-        topText.visibility = VISIBLE
-        trendingText.visibility = VISIBLE
-        popularText.visibility = VISIBLE
         shimmerLayout.stopShimmer()
         shimmerLayout.hideView()
         constLayout.showView()
     }
 
-    override fun onItemClick(movie: MovieUi) {
-        openDialogSheet(movie)
-    }
+    override fun onItemClick(movie: MovieUi) = viewModel.launchMovieDetails(movie)
 
     override fun onLongItemClick(movie: MovieUi) {
         viewModel.saveMovie(movie = movie)
-        makeToast(
-            "Фильм (${movie.movieTitle}) Сохранён",
-            context = requireContext()
-        )
+        makeToast("Фильм (${movie.movieTitle}) Сохранён", requireContext())
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_nav_view).showView()
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}

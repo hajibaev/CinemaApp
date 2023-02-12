@@ -10,7 +10,6 @@ plugins {
 
 android {
     compileSdk 33
-
     defaultConfig {
         applicationId "com.example.movieapp"
         minSdk 27
@@ -96,6 +95,12 @@ dependencies {
     //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+
+    //View with push down effect
+    implementation("com.github.thekhaeng:pushdown-anim-click:1.1.1") {
+        exclude group: 'com.android.support'
+    }
 
 
     // youtube player

@@ -56,5 +56,8 @@ class TvDetailsViewModel constructor(
         storageRepository.tvSave(saveMapper.map(tv))
     }
 
+    fun goBack() = navigateBack()
+
+
     fun changeMovieId(movieId: Int) = tvFlow.tryEmit(movieId)
 }

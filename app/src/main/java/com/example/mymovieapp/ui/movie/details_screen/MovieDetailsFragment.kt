@@ -3,27 +3,26 @@ package com.example.mymovieapp.ui.movie.details_screen
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.data.cloud.server.Utils
-import com.example.domain.DataRequestState
 import com.example.mymovieapp.R
 import com.example.mymovieapp.base.BaseFragment
 import com.example.mymovieapp.databinding.FragmentMovieDetailsBinding
 import com.example.mymovieapp.models.movie.CastUi
 import com.example.mymovieapp.models.movie.MovieDetailsUi
 import com.example.mymovieapp.models.movie.MovieUi
-import com.example.mymovieapp.ui.BlurTransformation
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
 import com.example.mymovieapp.ui.adapters.person.ActorsAdapters
-import com.example.mymovieapp.ui.makeToast
+import com.example.mymovieapp.utils.extensions.BlurTransformation
+import com.example.mymovieapp.utils.extensions.hideView
+import com.example.mymovieapp.utils.extensions.makeToast
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -64,15 +63,18 @@ class MovieDetailsFragment :
     }
 
     private fun setupClickers() = with(requireBinding()) {
-        castSizeText.setOnClickListener {
-            personAdapter.fixedSize = false
-            actorsRv.adapter = personAdapter
-            castSizeText.visibility = View.GONE
+        includeBookInfoBlock.apply {
+            castSizeText.setOnClickListener {
+                personAdapter.fixedSize = false
+                actorsRv.adapter = personAdapter
+                castSizeText.visibility = View.GONE
+            }
         }
+        includeBookInfoToolbarBlock.backIcon.setOnClickListener { viewModel.goBack() }
     }
 
-    private fun setupAdapters() {
-        requireBinding().apply {
+    private fun setupAdapters() = with(requireBinding()) {
+        includeBookInfoBlock.apply {
             recommendMoviesRv.adapter = recommendMoviesAdapter
             similarMoviesRv.adapter = similarMoviesAdapter
             actorsRv.adapter = personAdapter
@@ -127,33 +129,35 @@ class MovieDetailsFragment :
         name?.text = item.name
         bottomSheet.setCancelable(true)
         bottomSheet.show()
-
     }
 
     private fun setMovieUi(movie: MovieDetailsUi) {
         with(requireBinding()) {
-            topTitle.text = movie.title
-            movieDate.text = movie.releaseDate
-            movieName.text = movie.originalTitle
-            movieTime.text = movie.runtime.toString()
-            moviePopularity.text = movie.voteAverage.toString()
-            movie_budget_text.text = movie.budget.toString()
-            movie_voted_text.text = movie.voteCount.toString()
-            voteAverage.rating = movie.voteAverage.toFloat()
-            originalLanguage.text = movie.originalLanguage
-            status.text = movie.status
-            overview.text = movie.overview
+            includeBookInfoToolbarBlock.toolbarBookTitle.text = movie.originalTitle
+            Picasso.get().load(Utils.IMAGE_PATH + movie.posterPath)
+                .into(includeBookInfoPosterBlock.moviePoster)
             Glide.with(requireContext()).asBitmap()
                 .load(Utils.IMAGE_PATH + movie.posterPath)
-                .transform(BlurTransformation(requireContext())).into(topMainImage)
-            Picasso.get().load(Utils.IMAGE_PATH + movie.posterPath).into(posterImage)
+                .transform(BlurTransformation(requireContext()))
+                .into(includeBookInfoPosterBlock.bookBlurBackgroundPoster)
+            includeBookInfoPosterBlock.moviemovieTitle.text = movie.originalTitle
+            includeBookInfoBlock.apply {
+                bookPublicYear.text = movie.releaseDate
+                bookChapterCount.text = movie.runtime.toString()
+                bookPageCount.text = movie.voteAverage.toString()
+                movieBudgetText.text = movie.budget.toString()
+                movieVotedText.text = movie.voteCount.toString()
+                voteAverage.rating = movie.voteAverage.toFloat()
+                originalLanguage.text = movie.originalLanguage
+                status.text = movie.status
+                overview.text = movie.overview
+            }
         }
     }
 
 
     override fun onItemClick(item: MovieUi) {
         viewModel.changeMovieId(item.movieId)
-        requireBinding().nestedScrollView2.fullScroll(ScrollView.FOCUS_UP)
     }
 
     override fun onLongItemClick(item: MovieUi) {
@@ -163,6 +167,10 @@ class MovieDetailsFragment :
 
     override fun onPersonItemClick(person: CastUi) {
         openCastDialogSheet(person)
+    }
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_nav_view).hideView()
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}

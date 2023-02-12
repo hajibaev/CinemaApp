@@ -9,10 +9,9 @@ import com.example.domain.repository.PersonRepository
 import com.example.mymovieapp.base.BaseViewModel
 import com.example.mymovieapp.models.movie.MovieUi
 import com.example.mymovieapp.models.person.PersonDetailsPresentation
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.map
+import com.example.mymovieapp.utils.ResourceProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class PersonDetailsViewModel constructor(
@@ -21,6 +20,7 @@ class PersonDetailsViewModel constructor(
     private val repository: PersonRepository,
     private val saveMapper: Maps<MovieUi, MovieDomain>,
     private val mapPersonDetailsDomainToUi: Maps<PersonDetailsDomain, PersonDetailsPresentation>,
+    private val resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)
@@ -28,8 +28,12 @@ class PersonDetailsViewModel constructor(
 
     private val personIdFlow = MutableStateFlow(personId)
 
-    val personFlow = personIdFlow.map(repository::getPersonDetails)
-        .map { it.map(mapPersonDetailsDomainToUi) }
+    val personFlow = personIdFlow.flatMapLatest {
+        repository.getPersonDetails(it)
+    }.map(mapPersonDetailsDomainToUi::map)
+        .flowOn(Dispatchers.Default)
+        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     fun saveMovie(movie: MovieUi) = viewModelScope.launch {
         storageRepository.save(saveMapper.map(movie))

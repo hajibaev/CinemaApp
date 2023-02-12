@@ -8,8 +8,8 @@ import com.example.mymovieapp.base.BaseViewModel
 import com.example.mymovieapp.models.movie.ResponseState
 import com.example.mymovieapp.models.person.PersonPresentation
 import com.example.mymovieapp.models.person.PersonsPresentation
-import com.example.mymovieapp.ui.changeResponseState
 import com.example.mymovieapp.utils.ResourceProvider
+import com.example.mymovieapp.utils.extensions.changeResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

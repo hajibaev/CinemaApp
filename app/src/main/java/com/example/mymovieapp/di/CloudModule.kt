@@ -99,13 +99,11 @@ class CloudModule {
         api: PersonApi,
         mapPersonsCloudToData: Maps<PersonsCloud, PersonsData>,
         mapDetailsCloudToData: Maps<PersonDetailsCloud, PersonDetailsData>,
-        responseHandler: ResponseHandler
     ): PersonsCloudDataSource =
         PersonsCloudDataImpl(
             api = api,
             mapPersonsCloudToData = mapPersonsCloudToData,
             mapDetailsCloudToData = mapDetailsCloudToData,
-            responseHandler = responseHandler
         )
 
     @Provides

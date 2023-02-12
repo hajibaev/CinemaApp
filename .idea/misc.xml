@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_bookmark.xml" value="0.179" />
         <entry key="app/src/main/res/drawable-v24/ic_bookmarked.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_home.xml" value="0.179" />
+        <entry key="app/src/main/res/drawable-v24/ic_item_outline_4dp.xml" value="0.2145" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable-v24/ic_movie.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable-v24/ic_profile.xml" value="0.179" />
@@ -63,32 +64,40 @@
         <entry key="app/src/main/res/layout/asasasasas.xml" value="0.1" />
         <entry key="app/src/main/res/layout/categopry_item.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/details_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/details_item_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/details_item_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_cast_details.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_movie.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_movie_genses.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_movie_practice.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_movie_type.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_person.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_person_details.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_root.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_storage.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_tv_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tv_details.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_tv_movies.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_tv_type.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/include_movie_info_toolbar_block.xml" value="0.29375" />
+        <entry key="app/src/main/res/layout/item_header.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_movie_2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_movie_details_image.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_movie_genress.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/movie_dateils_item.xml" value="0.1774193548387097" />
-        <entry key="app/src/main/res/layout/object_horizontal.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/movie_details_info_block.xml" value="0.29375" />
+        <entry key="app/src/main/res/layout/movie_object_item_horizontal.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/object_horizontal.xml" value="0.45" />
         <entry key="app/src/main/res/layout/object_portrait_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/sas.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/sasas.xml" value="0.1" />
         <entry key="app/src/main/res/layout/shimmer_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/shimmer_item.xml" value="0.3057142857142857" />
         <entry key="app/src/main/res/layout/shimmer_tv_fragment.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/spiner_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/storage_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/tv_block_info.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
     </option>

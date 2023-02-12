@@ -9,6 +9,7 @@ import com.example.domain.repository.MovieStorageRepository
 import com.example.domain.repository.PersonRepository
 import com.example.mymovieapp.models.movie.MovieUi
 import com.example.mymovieapp.models.person.PersonDetailsPresentation
+import com.example.mymovieapp.utils.ResourceProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -21,6 +22,7 @@ class PersonDetailsViewModelFactory @AssistedInject constructor(
     private val mapPersonDetailsDomainToUi: Maps<PersonDetailsDomain, PersonDetailsPresentation>,
     private val storageRepository: MovieStorageRepository,
     private val saveMapper: Maps<MovieUi, MovieDomain>,
+    private val resourceProvider: ResourceProvider,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -30,7 +32,8 @@ class PersonDetailsViewModelFactory @AssistedInject constructor(
             repository = repository,
             storageRepository = storageRepository,
             saveMapper = saveMapper,
-            mapPersonDetailsDomainToUi = mapPersonDetailsDomainToUi
+            mapPersonDetailsDomainToUi = mapPersonDetailsDomainToUi,
+            resourceProvider = resourceProvider
         ) as T
     }
 

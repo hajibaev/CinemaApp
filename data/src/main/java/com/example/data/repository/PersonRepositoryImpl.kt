@@ -24,9 +24,10 @@ class PersonRepositoryImpl(
             .map(mapPersonsDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override suspend fun getPersonDetails(personId: Int): DataRequestState<PersonDetailsDomain> =
+    override fun getPersonDetails(personId: Int): Flow<PersonDetailsDomain> =
         personsCloudDataSource.getAllPersonDetails(personId = personId)
-            .map(mapPersonDetailsToDomain)
+            .map(mapPersonDetailsToDomain::map)
+            .flowOn(Dispatchers.Default)
 
     override suspend fun getSearchPeopleMovies(query: String): Flow<PersonsDomain> =
         personsCloudDataSource.getAllSearchPeopleMovies(query = query)

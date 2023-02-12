@@ -174,11 +174,9 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/play_button"
                         style="@style/Widget.MaterialComponents.Button.Icon"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:layout_marginEnd="10.40dp"
-                        android:layout_toStartOf="@+id/add_to_watchlist_btn"
                         android:backgroundTint="@color/white"
                         android:text="Play"
                         android:textAllCaps="false"
@@ -187,36 +185,6 @@
                         app:iconGravity="textStart"
                         app:iconTint="@color/black" />
 
-                    <LinearLayout
-                        android:id="@+id/add_to_watchlist_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/play_button"
-                        android:layout_alignBottom="@id/play_button"
-                        android:layout_alignParentEnd="true"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="13.00dp">
-
-                        <ImageView
-                            android:id="@+id/add"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_add"
-                            app:tint="@color/text_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="Add"
-                            android:textColor="@color/text_primary"
-                            android:textSize="10.40sp" />
-
-                    </LinearLayout>
                 </RelativeLayout>
 
             </LinearLayout>

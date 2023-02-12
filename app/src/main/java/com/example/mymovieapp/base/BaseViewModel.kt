@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import com.example.mymovieapp.utils.communication.NavigationCommunication
-import com.example.mymovieapp.utils.dispachers.Dispatchers
 import com.example.mymovieapp.utils.event.Event
 import com.example.mymovieapp.utils.navigation.NavigationCommand
-import javax.inject.Inject
 
 
 abstract class BaseViewModel : ViewModel() {

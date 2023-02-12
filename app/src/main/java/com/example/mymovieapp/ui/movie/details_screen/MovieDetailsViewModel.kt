@@ -44,33 +44,29 @@ class MovieDetailsViewModel constructor(
         movieRepository.getDetails(it)
     }.map(mapMovieDetailsDomainToUi::map)
         .flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable ->
-            _error.emit(resourceProvider.handleException(throwable = throwable))
-        }
+        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val actorsFlow = movieIdFlow.flatMapLatest {
         movieRepository.getActors(it)
     }.map(mapCreditsResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable ->
-            _error.emit(resourceProvider.handleException(throwable = throwable))
-        }
+        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val recommendMoviesFlow = movieIdFlow.flatMapLatest {
         movieRepository.getRecommendationsMovies(it)
     }.map(mapMovieResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable ->
-            _error.emit(resourceProvider.handleException(throwable = throwable))
-        }
+        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
     fun saveMovie(movie: MovieUi) = viewModelScope.launch {
         storageRepository.save(mapMovieUiToDomain.map(movie))
     }
+
+    fun goBack() = navigateBack()
 
     fun changeMovieId(movieId: Int) = movieIdFlow.tryEmit(movieId)
 }

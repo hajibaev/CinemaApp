@@ -18,15 +18,16 @@ class PersonsCloudDataImpl(
     private val api: PersonApi,
     private val mapPersonsCloudToData: Maps<PersonsCloud, PersonsData>,
     private val mapDetailsCloudToData: Maps<PersonDetailsCloud, PersonDetailsData>,
-    private val responseHandler: ResponseHandler,
 ) : PersonsCloudDataSource {
     override fun getAllPeople(page: Int): Flow<PersonsData> = flow {
         emit(api.getPeople(page = page))
     }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapPersonsCloudToData::map)
         .flowOn(Dispatchers.Default)
 
-    override suspend fun getAllPersonDetails(personId: Int): DataRequestState<PersonDetailsData> =
-        responseHandler.safeApiMapperCall(mapDetailsCloudToData) { api.getPersonDetails(id = personId) }
+    override fun getAllPersonDetails(personId: Int): Flow<PersonDetailsData> = flow {
+        emit(api.getPersonDetails(id = personId))
+    }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapDetailsCloudToData::map)
+        .flowOn(Dispatchers.Default)
 
     override suspend fun getAllSearchPeopleMovies(query: String): Flow<PersonsData> = flow {
         emit(api.getSearchPeople(query = query))

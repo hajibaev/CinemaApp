@@ -10,10 +10,10 @@ import com.example.mymovieapp.base.BaseViewModel
 import com.example.mymovieapp.models.movie.MovieUi
 import com.example.mymovieapp.models.movie.MoviesResponseUi
 import com.example.mymovieapp.models.movie.ResponseState
-import com.example.mymovieapp.ui.changeResponseState
 import com.example.mymovieapp.ui.see_all_screen.SeeAllMovieType
 import com.example.mymovieapp.ui.see_all_screen.fragments.MovieTypeFragmentDirections
 import com.example.mymovieapp.utils.ResourceProvider
+import com.example.mymovieapp.utils.extensions.changeResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

@@ -10,10 +10,10 @@ import com.example.mymovieapp.base.BaseViewModel
 import com.example.mymovieapp.models.movie.ResponseState
 import com.example.mymovieapp.models.movie.SeriesUi
 import com.example.mymovieapp.models.movie.TvSeriesResponseUi
-import com.example.mymovieapp.ui.changeResponseState
 import com.example.mymovieapp.ui.see_all_screen.SeeAllTvType
 import com.example.mymovieapp.ui.see_all_screen.fragments.TvTypeFragmentDirections
 import com.example.mymovieapp.utils.ResourceProvider
+import com.example.mymovieapp.utils.extensions.changeResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -157,5 +157,4 @@ class TvMoviesFragmentViewModel @Inject constructor(
         const val WESTERN = "37"
         const val DRAMA = "18"
     }
-
 }

@@ -15,21 +15,7 @@
             app:argType="com.example.mymovieapp.models.movie.MovieUi" />
         <action
             android:id="@+id/action_movieDetailsFragment_to_nav_movies"
-            app:destination="@id/nav_movies"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"-->
-        <!--            app:destination="@id/personDetailsFragment" />-->
-        <!--        <action-->
-        <!--            android:id="@+id/action_movieDetailsFragment_to_castDetailsFragment"-->
-        <!--            app:destination="@id/castDetailsFragment" />-->
-        <!--        <argument-->
-        <!--            android:name="person"-->
-        <!--            app:argType="com.example.mymovieapp.models.person.PersonPresentation" />-->
-
+            app:destination="@id/nav_movies" />
     </fragment>
 
     <fragment
@@ -40,7 +26,10 @@
         <action
             android:id="@+id/action_searchFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
     </fragment>
 
     <fragment
@@ -51,14 +40,18 @@
         <action
             android:id="@+id/action_storageFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <action
             android:id="@+id/action_nav_storage_to_tvDetailsFragment"
             app:destination="@id/tvDetailsFragment"
-            app:enterAnim="@anim/slide_in_right" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_nav_storage_to_personDetailsFragment"-->
-        <!--            app:destination="@id/personDetailsFragment" />-->
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+
     </fragment>
 
     <fragment
@@ -69,7 +62,10 @@
         <action
             android:id="@+id/action_personFragment_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment"
-            app:enterAnim="@anim/shake_anim" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
@@ -92,17 +88,17 @@
         <action
             android:id="@+id/action_movieFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
         <action
             android:id="@+id/action_nav_movies_to_movieTypeFragment"
             app:destination="@id/movieTypeFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <argument
             android:name="id"
             app:argType="com.example.mymovieapp.models.movie.MovieUi" />
@@ -115,17 +111,17 @@
         <action
             android:id="@+id/action_nav_tv_movies_to_tvTypeFragment"
             app:destination="@id/tvTypeFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <action
             android:id="@+id/action_nav_tv_movies_to_tvDetailsFragment"
             app:destination="@id/tvDetailsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <argument
             android:name="movie"
             app:argType="com.example.mymovieapp.models.movie.MovieUi" />
@@ -138,11 +134,7 @@
 
         <action
             android:id="@+id/action_movieTypeFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:destination="@id/movieDetailsFragment" />
         <argument
             android:name="movieType"
             app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllMovieType" />
@@ -155,11 +147,7 @@
 
         <action
             android:id="@+id/action_tvTypeFragment_to_tvDetailsFragment"
-            app:destination="@id/tvDetailsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:destination="@id/tvDetailsFragment" />
         <argument
             android:name="tvType"
             app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllTvType" />
@@ -173,5 +161,10 @@
             android:name="tv"
             app:argType="com.example.mymovieapp.models.movie.SeriesUi" />
     </fragment>
+    <fragment
+        android:id="@+id/moviePracticeFragment"
+        android:name="com.example.mymovieapp.ui.adaper_practice.screen.MoviePracticeFragment"
+        android:label="fragment_movie_practice"
+        tools:layout="@layout/fragment_movie_practice" />
 
 </navigation>

@@ -4,26 +4,26 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import com.example.mymovieapp.R
 import com.example.mymovieapp.base.BaseFragment
 import com.example.mymovieapp.databinding.FragmentSearchBinding
 import com.example.mymovieapp.models.movie.MovieUi
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
-import com.example.mymovieapp.ui.makeToast
+import com.example.mymovieapp.utils.extensions.launchWhenViewStarted
+import com.example.mymovieapp.utils.extensions.makeToast
+import com.example.mymovieapp.utils.extensions.showView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     FragmentSearchBinding::inflate
-),
-    MovieAdapter.RecyclerOnClickListener {
-
-    private val moviesAdapter: MovieAdapter by lazy {
-        MovieAdapter(MovieAdapter.PORTRAIT_TYPE, this)
-    }
+), MovieAdapter.RecyclerOnClickListener {
     override val viewModel: SearchViewModel by viewModels()
+
+
+    private val moviesAdapter by lazy { MovieAdapter(MovieAdapter.PORTRAIT_TYPE, this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,17 +32,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     }
 
     private fun observe(keyword: String) = with(viewModel) {
-        lifecycleScope.launchWhenStarted {
-            searchMovie(keyword).collectLatest {
-                moviesAdapter.moviesList = it.movies
-                requireBinding().searchPb.visibility = View.INVISIBLE
+        launchWhenViewStarted {
+            searchMovie(keyword).observe { moviesAdapter.moviesList = it.movies }
+            requireBinding().searchPb.visibility = View.GONE
+            error.onEach {
+                makeToast(it, requireContext())
             }
         }
-        error.onEach {
-            makeToast(it, requireContext())
-        }
     }
-
 
     private fun setUi() = with(requireBinding()) {
         searchRv.adapter = moviesAdapter
@@ -52,14 +49,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
         setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 observe(query.toString())
-//                viewModel.updateKeyword(query.toString())
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                viewModel.updateKeyword(newText.toString())
                 observe(query.toString())
-
                 return true
             }
         })
@@ -68,16 +62,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
         }
     }
 
-    override fun onItemClick(movie: MovieUi) {
-        viewModel.launchMovieDetails(movie)
-    }
+    override fun onItemClick(movie: MovieUi) = viewModel.launchMovieDetails(movie)
 
     override fun onLongItemClick(movie: MovieUi) {
         viewModel.saveMovie(movie)
-        makeToast(
-            "Фильм (${movie.movieTitle}) Сохранён",
-            context = requireContext()
-        )
+        makeToast("Фильм (${movie.movieTitle}) Сохранён", requireContext())
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_nav_view).showView()
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}

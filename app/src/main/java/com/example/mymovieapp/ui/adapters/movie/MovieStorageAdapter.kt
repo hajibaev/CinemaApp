@@ -1,30 +1,25 @@
 package com.example.mymovieapp.ui.adapters.movie
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.cloud.server.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.databinding.StorageItemBinding
 import com.example.mymovieapp.models.movie.MovieUi
+import com.example.mymovieapp.models.movie.SeriesUi
 import com.example.mymovieapp.ui.adapters.diffCallBack.DiffCallBack
 import com.squareup.picasso.Picasso
 
 class MovieStorageAdapter(
     private val context: Context,
     private val listener: RecyclerFavOnClickListener
-) : RecyclerView.Adapter<MovieStorageAdapter.ViewHolder>() {
-
-    var moviesList = listOf<MovieUi>()
-        set(value) {
-            val callback = DiffCallBack(moviesList, value)
-            val diffResult = DiffUtil.calculateDiff(callback)
-            diffResult.dispatchUpdatesTo(this)
-            field = value
-        }
+) : ListAdapter<MovieUi, MovieStorageAdapter.ViewHolder>(MovieDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -33,20 +28,21 @@ class MovieStorageAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(moviesList[position])
-        holder.itemView.setOnLongClickListener {
-            listener.onClearItemClick(moviesList[position])
-            true
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            listener.onMoviwItemClick(getItem(position))
         }
         holder.itemView.setOnClickListener {
-            listener.onItemClick(moviesList[position])
+            listener.onMovieClearItemClick(getItem(position))
         }
+        holder.bind(getItem(position))
     }
 
     interface RecyclerFavOnClickListener {
-        fun onItemClick(movie: MovieUi)
-        fun onClearItemClick(movie: MovieUi)
+        fun onMoviwItemClick(movieUi: MovieUi)
+        fun onMovieClearItemClick(movieUi: MovieUi)
     }
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = StorageItemBinding.bind(itemView)
@@ -54,10 +50,10 @@ class MovieStorageAdapter(
             with(binding) {
                 Picasso.get().load(Utils.IMAGE_PATH + posterPath).into(imagePoster)
                 buttonBookmark.setOnClickListener {
-                    listener.onClearItemClick(moviesList[adapterPosition])
+                    listener.onMovieClearItemClick(getItem(adapterPosition))
                 }
                 storage.setOnClickListener {
-                    listener.onItemClick(moviesList[adapterPosition])
+                    listener.onMoviwItemClick(getItem(adapterPosition))
                 }
                 votecount.text = String.format(
                     context.resources.getString(R.string.movieStorage_voteCont),
@@ -70,17 +66,16 @@ class MovieStorageAdapter(
             }
         }
     }
-
-    override fun getItemCount(): Int = moviesList.size
 }
-//
-//class FavDiffCallBack : DiffUtil.ItemCallback<MovieUi>() {
-//
-//    override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi) =
-//        oldItem.movieId == newItem.movieId
-//
-//
-//    override fun areContentsTheSame(oldItem: MovieUi, newItem: MovieUi) =
-//        oldItem == newItem
-//
-//}
+
+class MovieDiffCallBack : DiffUtil.ItemCallback<MovieUi>() {
+
+    override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi) =
+        oldItem.movieId == newItem.movieId
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: MovieUi, newItem: MovieUi) =
+        oldItem == newItem
+
+}
+

@@ -1,6 +1,7 @@
 package com.example.mymovieapp.models.movie
 
 import android.os.Parcelable
+import com.broadcast.myapplication.adapter.Item
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -19,4 +20,4 @@ data class MovieUi(
     val voteCount: Int,
     val isHasVideo: Boolean,
     val voteAverage: Double,
-) : Parcelable
+) : Parcelable, Item

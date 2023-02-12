@@ -1,4 +1,4 @@
-package com.example.mymovieapp.ui
+package com.example.mymovieapp.utils.extensions
 
 
 import android.content.Context

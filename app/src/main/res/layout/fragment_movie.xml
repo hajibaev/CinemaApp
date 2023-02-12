@@ -58,7 +58,6 @@
                 android:id="@+id/textView"
                 style="@style/MovieTextStyle"
                 android:text="@string/now_playing_category"
-                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
@@ -82,7 +81,6 @@
                 android:id="@+id/textView2"
                 style="@style/MovieTextStyle"
                 android:text="@string/adventure_text"
-                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/nowplayingRv" />
 
@@ -104,7 +102,6 @@
                 android:id="@+id/textView3"
                 style="@style/MovieTextStyle"
                 android:text="@string/top_rated_category"
-                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/tv_topreted_rv" />
 
@@ -126,7 +123,6 @@
                 android:id="@+id/textView4"
                 style="@style/MovieTextStyle"
                 android:text="@string/popular_category"
-                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/topRv" />
 
@@ -155,7 +151,6 @@
                 android:id="@+id/textView5"
                 style="@style/MovieTextStyle"
                 android:text="@string/trending_category"
-                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/popularRv" />
 
@@ -171,7 +166,6 @@
                 android:id="@+id/nowplayingText"
                 style="@style/MovieTextStyle2"
                 android:text="@string/seeMore"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nowplayingRv" />
 
@@ -179,16 +173,13 @@
                 android:id="@+id/upcomingText"
                 style="@style/MovieTextStyle2"
                 android:text="@string/seeMore"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
             <TextView
                 android:id="@+id/topText"
                 style="@style/MovieTextStyle2"
                 android:text="@string/seeMore"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/topRv"
                 app:layout_constraintTop_toBottomOf="@+id/tv_topreted_rv" />
 
@@ -196,7 +187,6 @@
                 android:id="@+id/popularText"
                 style="@style/MovieTextStyle2"
                 android:text="@string/seeMore"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/popularRv"
                 app:layout_constraintTop_toBottomOf="@+id/topRv" />
 
@@ -204,7 +194,6 @@
                 android:id="@+id/trendingText"
                 style="@style/MovieTextStyle2"
                 android:text="@string/seeMore"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/trendingRv"
                 app:layout_constraintTop_toBottomOf="@+id/popularRv" />
 
