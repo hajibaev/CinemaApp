@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.cloud.server.Utils
+import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.databinding.StorageItemBinding
-import com.example.mymovieapp.models.movie.SeriesUi
-import com.example.mymovieapp.ui.adapters.diffCallBack.TvDiffCallBack
+import com.example.mymovieapp.app.models.movie.SeriesUi
+import com.example.mymovieapp.app.utils.extensions.makeToast
+import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClickListener
 import com.squareup.picasso.Picasso
 
 class TvStorageAdapter(
     private val context: Context,
-    private val listener: RecyclerFavOnClickListener
+    private val listener: RecyclerFavOnClickListener,
 ) : ListAdapter<SeriesUi, TvStorageAdapter.ViewHolder>(TvDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,16 +48,15 @@ class TvStorageAdapter(
         fun bind(movie: SeriesUi) = movie.apply {
             with(binding) {
                 Picasso.get().load(Utils.IMAGE_PATH + posterPath).into(imagePoster)
-                buttonBookmark.setOnClickListener {
+                buttonBookmark.setOnDownEffectClickListener { it.isClickable = false
                     listener.onTvClearItemClick(getItem(adapterPosition))
                 }
-                storage.setOnClickListener {
+                storage.setOnDownEffectClickListener { try {
                     listener.onItemClick(getItem(adapterPosition))
+                    } catch (e: Exception) { makeToast(("You have already deleted this movie"), context) }
                 }
-                votecount.text = String.format(
-                    context.resources.getString(R.string.movieStorage_voteCont),
-                    voteCount.toString()
-                )
+
+                votecount.text = String.format(context.resources.getString(R.string.movieStorage_voteCont), voteCount.toString())
                 textGenres.text = originalLanguage
                 textTitle.text = originalName
                 textReleaseDate.text = firstAirDate

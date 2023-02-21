@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bac_movie"
-    tools:context=".ui.person.details_screen.PersonDetailsFragment">
+    tools:context=".ui.actors.person_details_screen.PersonDetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

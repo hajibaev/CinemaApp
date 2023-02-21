@@ -5,7 +5,6 @@ class TvSeriesDetailsDomain(
     val backdropPath: String,
     val episodeRunTime: List<Int>,
     val firstAirDate: String,
-    val genres: List<GenresDomain>,
     val homepage: String,
     val id: Int,
     val inProduction: Boolean,

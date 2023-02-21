@@ -2,11 +2,10 @@ package com.example.mymovieapp.ui.adapters.person
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
-import com.example.mymovieapp.models.person.PersonPresentation
+import com.example.mymovieapp.app.models.person.PersonPresentation
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.diffCallBack.PersonListDiffCallback
 import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
@@ -32,14 +31,7 @@ class PersonItemAdapter(
 
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.bindPerson(person = personsList[position])
-        holder.view.setOnClickListener {
-            listener.onItemClick(item = personsList[position])
-
-        }
-        holder.itemView.startAnimation(
-            AnimationUtils.loadAnimation
-                (holder.itemView.context, R.anim.animation)
-        )
+        holder.view.setOnClickListener { listener.onItemClick(item = personsList[position]) }
     }
 
     override fun getItemCount() = personsList.size

@@ -1,20 +1,18 @@
 package com.example.data.cloud.mappers.movie
 
-import com.example.data.cloud.models.movie.GenresCloud
 import com.example.data.cloud.models.movie.TvSeriesDetailsCloud
-import com.example.data.models.movie.GenresData
-import com.example.data.models.movie.TvSeriesDetailsData
-import com.example.domain.Maps
+import com.example.data.data.models.movie.TvSeriesDetailsData
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapTvDetailsCloudToData(private val mapper: Maps<List<GenresCloud>, List<GenresData>>) :
-    Maps<TvSeriesDetailsCloud, TvSeriesDetailsData> {
+class MapTvDetailsCloudToData @Inject constructor() :
+    Mapper<TvSeriesDetailsCloud, TvSeriesDetailsData> {
     override fun map(from: TvSeriesDetailsCloud) = from.run {
         TvSeriesDetailsData(
             adult = adult,
             backdropPath = backdropPath,
             episodeRunTime = episodeRunTime.map { episodeRunTime -> episodeRunTime },
             firstAirDate = firstAirDate,
-            genres = mapper.map(genres),
             homepage = homepage,
             id = id,
             inProduction = inProduction,

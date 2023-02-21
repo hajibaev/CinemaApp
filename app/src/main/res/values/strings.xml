@@ -13,12 +13,6 @@
 
     <string name="favourite_transition">favourite_transition</string>
 
-    <style name="buttonRow">
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-    </style>
-
     <string name="search">Search cinema</string>
     <string name="actors">Actors</string>
 
@@ -28,6 +22,11 @@
     <string name="adventure_text">Coming Soon</string>
     <string name="trending_category">Trending Movies</string>
     <string name="family_text">Family Movies</string>
+    <style name="buttonRow">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
 
     <string name="action">Action Movies</string>
     <string name="adventure">Adventure Movies</string>

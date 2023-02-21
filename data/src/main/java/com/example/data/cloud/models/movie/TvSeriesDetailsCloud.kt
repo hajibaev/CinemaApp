@@ -7,7 +7,6 @@ data class TvSeriesDetailsCloud(
     @SerializedName("backdrop_path") val backdropPath: String,
     @SerializedName("episode_run_time") val episodeRunTime: List<Int>,
     @SerializedName("first_air_date") val firstAirDate: String,
-    @SerializedName("genres") val genres: List<GenresCloud>,
     @SerializedName("homepage") val homepage: String,
     @SerializedName("id") val id: Int,
     @SerializedName("in_production") val inProduction: Boolean,

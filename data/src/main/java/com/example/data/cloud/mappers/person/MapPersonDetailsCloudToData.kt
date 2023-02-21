@@ -1,10 +1,12 @@
 package com.example.data.cloud.mappers.person
 
 import com.example.data.cloud.models.person.PersonDetailsCloud
-import com.example.data.models.person.PersonDetailsData
-import com.example.domain.Maps
+import com.example.data.data.models.person.PersonDetailsData
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapPersonDetailsCloudToData : Maps<PersonDetailsCloud, PersonDetailsData> {
+class MapPersonDetailsCloudToData @Inject constructor() :
+    Mapper<PersonDetailsCloud, PersonDetailsData> {
     override fun map(from: PersonDetailsCloud) = from.run {
         PersonDetailsData(
             known_for_department = known_for_department,

@@ -1,10 +1,11 @@
 package com.example.data.cloud.mappers.movie
 
 import com.example.data.cloud.models.movie.MovieCloud
-import com.example.data.models.movie.MovieData
-import com.example.domain.Maps
+import com.example.data.data.models.movie.MovieData
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapMovieCloudToData : Maps<MovieCloud, MovieData> {
+class MapMovieCloudToData @Inject constructor() : Mapper<MovieCloud, MovieData> {
     override fun map(from: MovieCloud) = from.run {
         MovieData(
             posterPath = posterPath,

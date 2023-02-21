@@ -1,10 +1,11 @@
 package com.example.data.cloud.mappers.movie
 
 import com.example.data.cloud.models.movie.CastCloud
-import com.example.data.models.movie.CastData
-import com.example.domain.Maps
+import com.example.data.data.models.movie.CastData
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapCastCloudToData : Maps<CastCloud, CastData> {
+class MapCastCloudToData @Inject constructor() : Mapper<CastCloud, CastData> {
     override fun map(from: CastCloud) = from.run {
         CastData(
             adult = adult,

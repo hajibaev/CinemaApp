@@ -6,13 +6,14 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
-import com.example.mymovieapp.models.movie.SeriesUi
+import com.example.mymovieapp.app.models.movie.SeriesUi
+import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.diffCallBack.TvDiffCallBack
 import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
 
 class TvAdapter(
     private val objectViewType: Int,
-    private val listener: RecyclerOnClickListener
+    private val listener: RvClickListener<SeriesUi>
 ) : RecyclerView.Adapter<RvViewHolder>() {
 
     var moviesList = listOf<SeriesUi>()
@@ -26,6 +27,7 @@ class TvAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvViewHolder {
         val layout = when (viewType) {
             PORTRAIT_TYPE -> R.layout.object_portrait_item
+            GENRES_ITEM -> R.layout.object_portrait_item
             HORIZONTAL_TYPE -> R.layout.object_horizontal
             else -> throw RuntimeException("Unknown view type: $viewType")
         }
@@ -38,7 +40,7 @@ class TvAdapter(
             listener.onItemClick(moviesList[position])
         }
         holder.view.setOnLongClickListener {
-            listener.onLongItemClick(moviesList[position])
+            listener.onLongClick(moviesList[position])
             true
         }
         holder.bindTvMovie(tv = moviesList[position])
@@ -55,16 +57,14 @@ class TvAdapter(
     override fun getItemViewType(position: Int): Int {
         return if (objectViewType == PORTRAIT_TYPE) {
             PORTRAIT_TYPE
-        } else HORIZONTAL_TYPE
+        } else if (objectViewType == HORIZONTAL_TYPE) {
+            HORIZONTAL_TYPE
+        } else GENRES_ITEM
     }
 
     companion object {
-        const val PORTRAIT_TYPE = 1
-        const val HORIZONTAL_TYPE = 0
-    }
-
-    interface RecyclerOnClickListener {
-        fun onItemClick(movie: SeriesUi)
-        fun onLongItemClick(movie: SeriesUi)
+        const val PORTRAIT_TYPE = 0
+        const val HORIZONTAL_TYPE = 1
+        const val GENRES_ITEM = 2
     }
 }

@@ -3,7 +3,6 @@ package com.example.domain.models.movie
 class MovieDetailsDomain(
     val backdrop_path: String?,
     val budget: Int,
-    val actors: List<GenresDomain>,
     val movieId: Int,
     val originalLanguage: String,
     val originalTitle: String,

@@ -1,13 +1,13 @@
 package com.example.data.cloud.source.handler
 
-import com.example.domain.DataRequestState
-import com.example.domain.Maps
+import com.example.domain.base.Mapper
+import com.example.domain.state.DataRequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
 
-class ResponseHandlerImpl(
-) : ResponseHandler {
+class ResponseHandlerImpl @Inject constructor() : ResponseHandler {
     override suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): DataRequestState<T> {
         runCatching { withContext(Dispatchers.IO) { apiCall() } }.onSuccess { response ->
             if (response.isSuccessful) {
@@ -25,7 +25,7 @@ class ResponseHandlerImpl(
     }
 
     override suspend fun <T, K> safeApiMapperCall(
-        mapper: Maps<T, K>,
+        mapper: Mapper<T, K>,
         apiCall: suspend () -> Response<T>,
     ): DataRequestState<K> {
         runCatching { withContext(Dispatchers.IO) { apiCall() } }.onSuccess { response ->

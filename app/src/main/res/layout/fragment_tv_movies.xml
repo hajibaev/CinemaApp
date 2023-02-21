@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bac_movie"
-    tools:context=".ui.tv_screen.tv_screen.TvMoviesFragment"
+    tools:context=".ui.series.tv_screen.TvMoviesFragment"
     tools:ignore="ScrollViewCount">
 
 

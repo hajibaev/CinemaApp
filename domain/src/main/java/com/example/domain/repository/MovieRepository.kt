@@ -1,6 +1,5 @@
 package com.example.domain.repository
 
-import com.example.domain.DataRequestState
 import com.example.domain.models.movie.*
 import kotlinx.coroutines.flow.Flow
 
@@ -13,6 +12,7 @@ interface MovieRepository {
     fun getSearchMovies(query: String): Flow<MoviesResponseDomain>
     fun getRecommendationsMovies(movieId: Int): Flow<MoviesResponseDomain>
     fun getSimilarMovies(movieId: Int): Flow<MoviesResponseDomain>
+    fun getMoviesGenres(page: Int, genres: String): Flow<MoviesResponseDomain>
 
     // Tv Movies
     suspend fun getDetails(movieId: Int): Flow<MovieDetailsDomain>

@@ -1,24 +1,23 @@
 package com.example.data.cloud.source.movie
 
-import com.example.data.cloud.api.MovieApi
+import com.example.data.cloud.server.MovieApi
 import com.example.data.cloud.models.movie.*
-import com.example.data.cloud.source.handler.ResponseHandler
-import com.example.data.models.movie.*
-import com.example.domain.Maps
+import com.example.data.data.models.movie.*
+import com.example.domain.base.Mapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class MoviesCloudDataImpl(
+class MoviesCloudDataImpl @Inject constructor(
     private val api: MovieApi,
-    private val mapListMovieCloudToData: Maps<MoviesResponseCloud, MoviesData>,
-    private val mapDetailsCloudToData: Maps<MovieDetailsCloud, MovieDetailsData>,
-    private val mapCreditsResponseCloudToData: Maps<CreditsResponseCloud, CreditsResponseData>,
-    private val mapTvResponseCloudToData: Maps<TvSeriesResponseCloud, TvSeriesResponseData>,
-    private val mapTvDetailsCloudToData: Maps<TvSeriesDetailsCloud, TvSeriesDetailsData>,
-    private val responseHandler: ResponseHandler,
+    private val mapListMovieCloudToData: Mapper<MoviesResponseCloud, MoviesData>,
+    private val mapDetailsCloudToData: Mapper<MovieDetailsCloud, MovieDetailsData>,
+    private val mapCreditsResponseCloudToData: Mapper<CreditsResponseCloud, CreditsResponseData>,
+    private val mapTvResponseCloudToData: Mapper<TvSeriesResponseCloud, TvSeriesResponseData>,
+    private val mapTvDetailsCloudToData: Mapper<TvSeriesDetailsCloud, TvSeriesDetailsData>,
 ) : MoviesCloudDataSource {
 
     override fun getAllPopularMovies(page: Int): Flow<MoviesData> = flow {
@@ -43,7 +42,7 @@ class MoviesCloudDataImpl(
     }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(Dispatchers.Default)
 
-    override  fun getAllSearchMovies(query: String): Flow<MoviesData> = flow {
+    override fun getAllSearchMovies(query: String): Flow<MoviesData> = flow {
         emit(api.getSearchMovies(query = query))
     }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(Dispatchers.Default)
@@ -75,6 +74,12 @@ class MoviesCloudDataImpl(
     }.flowOn(Dispatchers.IO)
         .map { it.body()!! }.map(mapDetailsCloudToData::map)
         .flowOn(Dispatchers.Default)
+
+    override fun getAllMovieGenres(page: Int, genres: String): Flow<MoviesData> = flow {
+        emit(api.getMovieGenres(page = page, genres = genres))
+    }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapListMovieCloudToData::map)
+        .flowOn(Dispatchers.Default)
+
 
     // Tv Movies
     override fun getAllTrendingTvSeries(page: Int): Flow<TvSeriesResponseData> = flow {

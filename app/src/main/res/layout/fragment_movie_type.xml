@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bac_movie"
-    tools:context=".ui.see_all_screen.fragments.MovieTypeFragment">
+    app:layoutDescription="@xml/fragment_movie_type_scene2"
+    tools:context=".ui.movie.see_all_screen.MovieSeeAllScreenFragment">
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_105sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/popular"
+        app:layout_constraintBottom_toTopOf="@id/scrollView" />
+
+
+    <ImageView
+        android:id="@+id/up_button"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:paddingVertical="10dp"
+        android:src="@drawable/genres"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/quicksand_bold"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/up_button"
+        tools:text="Movie Movie" />
+
+    <View
+        android:id="@+id/line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -19,12 +63,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.03" />
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/is_empty_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +79,7 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading"
         app:lottie_renderMode="automatic" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
@@ -43,18 +90,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/line_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movies_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="6dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/pageConstraint"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +134,8 @@
                     android:id="@+id/prev_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/divider"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/prev_btn"
@@ -100,8 +147,9 @@
                     android:id="@+id/current_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/greenPrimaryColor"
-                    android:textSize="22sp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/pagecolor"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/next_page_text"
                     app:layout_constraintStart_toEndOf="@+id/prev_page_text"
@@ -111,7 +159,8 @@
                     android:id="@+id/next_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/divider"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/prev_btn"
@@ -136,4 +185,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

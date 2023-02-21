@@ -1,21 +1,22 @@
 package com.example.data.storage.repository
 
 import com.example.data.cloud.source.storage.StorageCloudDataSource
-import com.example.data.models.movie.MovieData
-import com.example.data.models.movie.SeriesData
-import com.example.domain.Maps
+import com.example.data.data.models.movie.MovieData
+import com.example.data.data.models.movie.SeriesData
+import com.example.domain.base.Mapper
 import com.example.domain.models.movie.MovieDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.repository.MovieStorageRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class StorageRepositoryImpl(
+class StorageRepositoryImpl @Inject constructor(
     private val storage: StorageCloudDataSource,
-    private val mapperMovieDomainToData: Maps<MovieDomain, MovieData>,
-    private val mapMovieDataToDomain: Maps<MovieData, MovieDomain>,
-    private val mapperSeriesDomainToData: Maps<SeriesDomain, SeriesData>,
-    private val mapSeriesDataToDomain: Maps<SeriesData, SeriesDomain>,
+    private val mapperMovieDomainToData: Mapper<MovieDomain, MovieData>,
+    private val mapMovieDataToDomain: Mapper<MovieData, MovieDomain>,
+    private val mapperSeriesDomainToData: Mapper<SeriesDomain, SeriesData>,
+    private val mapSeriesDataToDomain: Mapper<SeriesData, SeriesDomain>,
 ) : MovieStorageRepository {
 
     override suspend fun save(movie: MovieDomain) =

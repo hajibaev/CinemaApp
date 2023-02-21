@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bac_movie"
-    tools:context=".ui.person.persons_screen.PersonFragment">
+    tools:context=".ui.actors.persons_screen.PersonFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/is_empty_loading"
@@ -68,7 +68,8 @@
                     android:id="@+id/prev_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/divider"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/prev_btn"
@@ -80,8 +81,9 @@
                     android:id="@+id/current_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/greenPrimaryColor"
-                    android:textSize="22sp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/pagecolor"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +93,8 @@
                     android:id="@+id/next_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/divider"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/prev_btn"

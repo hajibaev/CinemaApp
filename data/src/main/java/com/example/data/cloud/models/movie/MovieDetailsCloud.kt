@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class MovieDetailsCloud(
     @SerializedName("backdrop_path") val backdrop_path: String?,
     @SerializedName("budget") val budget: Int,
-    @SerializedName("genres") val actors: List<GenresCloud>,
     @SerializedName("id") val movieId: Int,
     @SerializedName("original_language") val originalLanguage: String,
     @SerializedName("original_title") val originalTitle: String,

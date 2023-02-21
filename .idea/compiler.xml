@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="MyMovieApp.app" target="11" />
       <module name="MyMovieApp.data" target="11" />
+      <module name="MyMovieApp.ui-core" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

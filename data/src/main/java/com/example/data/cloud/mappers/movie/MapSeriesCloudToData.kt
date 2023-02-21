@@ -1,10 +1,11 @@
 package com.example.data.cloud.mappers.movie
 
 import com.example.data.cloud.models.movie.SeriesCloud
-import com.example.data.models.movie.SeriesData
-import com.example.domain.Maps
+import com.example.data.data.models.movie.SeriesData
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapSeriesCloudToData : Maps<SeriesCloud, SeriesData> {
+class MapSeriesCloudToData @Inject constructor() : Mapper<SeriesCloud, SeriesData> {
     override fun map(from: SeriesCloud) = from.run {
         SeriesData(
             backdropPath = backdropPath,

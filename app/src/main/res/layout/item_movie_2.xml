@@ -19,9 +19,20 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="-146dp"
             app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="16dp"
-            app:strokeColor="@color/white"
-            app:strokeWidth="1dp">
+            app:cardCornerRadius="6dp"
+            app:strokeColor="@color/white">
+
+
+            <View
+                android:id="@+id/outline"
+                android:layout_width="165dp"
+                android:layout_height="230dp"
+                android:background="@drawable/ic_item_outline_4dp"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_picture"
+                app:layout_constraintEnd_toEndOf="@+id/profile_picture"
+                app:layout_constraintStart_toStartOf="@+id/profile_picture"
+                app:layout_constraintTop_toTopOf="@+id/profile_picture" />
 
             <ImageView
                 android:id="@+id/profile_picture"
@@ -46,6 +57,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bsd_bg"
             android:orientation="vertical">
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/image_view"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:src="@drawable/img_intro_two"/>-->
 
             <ImageView
                 android:id="@+id/close_btn"

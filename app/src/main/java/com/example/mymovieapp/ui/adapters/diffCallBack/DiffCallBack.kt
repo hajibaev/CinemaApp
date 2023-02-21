@@ -1,7 +1,7 @@
 package com.example.mymovieapp.ui.adapters.diffCallBack
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.mymovieapp.models.movie.MovieUi
+import com.example.mymovieapp.app.models.movie.MovieUi
 
 class DiffCallBack(
     private val oldList: List<MovieUi>,

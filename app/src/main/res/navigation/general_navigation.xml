@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.example.mymovieapp.ui.movie.details_screen.MovieDetailsFragment"
+        android:name="com.example.mymovieapp.ui.movie.movie_details_screen.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movie"
-            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+            app:argType="com.example.mymovieapp.app.models.movie.MovieUi" />
         <action
             android:id="@+id/action_movieDetailsFragment_to_nav_movies"
             app:destination="@id/nav_movies" />
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/nav_person"
-        android:name="com.example.mymovieapp.ui.person.persons_screen.PersonFragment"
+        android:name="com.example.mymovieapp.ui.actors.persons_screen.PersonFragment"
         android:label="fragment_person"
         tools:layout="@layout/fragment_person">
         <action
@@ -69,12 +69,12 @@
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
-        android:name="com.example.mymovieapp.ui.person.details_screen.PersonDetailsFragment"
+        android:name="com.example.mymovieapp.ui.actors.person_details_screen.PersonDetailsFragment"
         android:label="fragment_person_details"
         tools:layout="@layout/fragment_person_details">
         <argument
             android:name="person"
-            app:argType="com.example.mymovieapp.models.person.PersonPresentation" />
+            app:argType="com.example.mymovieapp.app.models.person.PersonPresentation" />
         <action
             android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
@@ -92,6 +92,7 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+
         <action
             android:id="@+id/action_nav_movies_to_movieTypeFragment"
             app:destination="@id/movieTypeFragment"
@@ -101,11 +102,11 @@
             app:popExitAnim="@anim/to_right_out" />
         <argument
             android:name="id"
-            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+            app:argType="com.example.mymovieapp.app.models.movie.MovieUi" />
     </fragment>
     <fragment
         android:id="@+id/nav_tv_movies"
-        android:name="com.example.mymovieapp.ui.tv_screen.tv_screen.TvMoviesFragment"
+        android:name="com.example.mymovieapp.ui.series.tv_screen.TvMoviesFragment"
         android:label="fragment_tv_movies"
         tools:layout="@layout/fragment_tv_movies">
         <action
@@ -122,49 +123,52 @@
             app:exitAnim="@anim/to_right_out"
             app:popEnterAnim="@anim/to_left_in"
             app:popExitAnim="@anim/to_right_out" />
+
         <argument
             android:name="movie"
-            app:argType="com.example.mymovieapp.models.movie.MovieUi" />
+            app:argType="com.example.mymovieapp.app.models.movie.MovieUi" />
     </fragment>
     <fragment
         android:id="@+id/movieTypeFragment"
-        android:name="com.example.mymovieapp.ui.see_all_screen.fragments.MovieTypeFragment"
+        android:name="com.example.mymovieapp.ui.movie.see_all_screen.MovieSeeAllScreenFragment"
         android:label="fragment_movie_type"
         tools:layout="@layout/fragment_movie_type">
 
         <action
             android:id="@+id/action_movieTypeFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <argument
             android:name="movieType"
-            app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllMovieType" />
+            app:argType="com.example.mymovieapp.ui.type.SeeAllMovieType" />
     </fragment>
     <fragment
         android:id="@+id/tvTypeFragment"
-        android:name="com.example.mymovieapp.ui.see_all_screen.fragments.TvTypeFragment"
+        android:name="com.example.mymovieapp.ui.series.see_all_screen.SeriesSeeAllScreenFragment"
         android:label="fragment_tv_type"
         tools:layout="@layout/fragment_tv_type">
 
         <action
             android:id="@+id/action_tvTypeFragment_to_tvDetailsFragment"
-            app:destination="@id/tvDetailsFragment" />
+            app:destination="@id/tvDetailsFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <argument
             android:name="tvType"
-            app:argType="com.example.mymovieapp.ui.see_all_screen.SeeAllTvType" />
+            app:argType="com.example.mymovieapp.ui.type.SeeAllTvType" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailsFragment"
-        android:name="com.example.mymovieapp.ui.tv_screen.details_screen.TvDetailsFragment"
+        android:name="com.example.mymovieapp.ui.series.tv_details_screen.TvDetailsFragment"
         android:label="fragment_tv_details"
         tools:layout="@layout/fragment_tv_details">
         <argument
             android:name="tv"
-            app:argType="com.example.mymovieapp.models.movie.SeriesUi" />
+            app:argType="com.example.mymovieapp.app.models.movie.SeriesUi" />
     </fragment>
-    <fragment
-        android:id="@+id/moviePracticeFragment"
-        android:name="com.example.mymovieapp.ui.adaper_practice.screen.MoviePracticeFragment"
-        android:label="fragment_movie_practice"
-        tools:layout="@layout/fragment_movie_practice" />
-
 </navigation>

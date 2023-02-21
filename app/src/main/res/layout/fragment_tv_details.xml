@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bac_movie"
     app:layoutDescription="@xml/fragment_movie_details_scene"
-    tools:context=".ui.tv_screen.details_screen.TvDetailsFragment">
+    tools:context=".ui.series.tv_details_screen.TvDetailsFragment">
 
 
     <com.airbnb.lottie.LottieAnimationView

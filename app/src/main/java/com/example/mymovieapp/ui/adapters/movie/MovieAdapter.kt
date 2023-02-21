@@ -6,13 +6,14 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
-import com.example.mymovieapp.models.movie.MovieUi
+import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.diffCallBack.DiffCallBack
 import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
 
 class MovieAdapter(
     private val objectViewType: Int,
-    private val listener: RecyclerOnClickListener
+    private val listener: RvClickListener<MovieUi>
 ) : RecyclerView.Adapter<RvViewHolder>() {
 
     var moviesList = listOf<MovieUi>()
@@ -38,7 +39,7 @@ class MovieAdapter(
             listener.onItemClick(moviesList[position])
         }
         holder.view.setOnLongClickListener {
-            listener.onLongItemClick(moviesList[position])
+            listener.onLongClick(moviesList[position])
             true
         }
         holder.itemView.startAnimation(
@@ -59,10 +60,5 @@ class MovieAdapter(
     companion object {
         const val PORTRAIT_TYPE = 1
         const val HORIZONTAL_TYPE = 0
-    }
-
-    interface RecyclerOnClickListener {
-        fun onItemClick(movie: MovieUi)
-        fun onLongItemClick(movie: MovieUi)
     }
 }

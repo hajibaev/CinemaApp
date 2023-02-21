@@ -1,10 +1,11 @@
 package com.example.data.storage.movie.mappers
 
-import com.example.data.models.movie.MovieData
+import com.example.data.data.models.movie.MovieData
 import com.example.data.storage.movie.MovieStorage
-import com.example.domain.Maps
+import com.example.domain.base.Mapper
+import javax.inject.Inject
 
-class MapMovieDataToStorage : Maps<MovieData, MovieStorage> {
+class MapMovieDataToStorage @Inject constructor() : Mapper<MovieData, MovieStorage> {
     override fun map(from: MovieData) = from.run {
         MovieStorage(
             posterPath = posterPath,

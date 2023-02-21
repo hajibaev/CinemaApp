@@ -1,25 +1,26 @@
 package com.example.data.cloud.source.storage
 
-import com.example.data.models.movie.MovieData
-import com.example.data.models.movie.SeriesData
+import com.example.data.data.models.movie.MovieData
+import com.example.data.data.models.movie.SeriesData
 import com.example.data.storage.movie.MovieStorage
 import com.example.data.storage.movie.room.MovieDao
 import com.example.data.storage.tv.models.TvStorage
 import com.example.data.storage.tv.room.TvDao
-import com.example.domain.Maps
+import com.example.domain.base.Mapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MovieSourceCloudDataImpl(
+class MovieSourceCloudDataImpl @Inject constructor(
     private val dao: MovieDao,
     private val tvDao: TvDao,
-    private val mapperMovieDataToStorage: Maps<MovieData, MovieStorage>,
-    private val mapperListMovieStorageToData: Maps<List<MovieStorage>, List<MovieData>>,
-    private val mapperSeriesDataToStorage: Maps<SeriesData, TvStorage>,
-    private val mapperListTvStorageToData: Maps<List<TvStorage>, List<SeriesData>>,
+    private val mapperMovieDataToStorage: Mapper<MovieData, MovieStorage>,
+    private val mapperListMovieStorageToData: Mapper<List<MovieStorage>, List<MovieData>>,
+    private val mapperSeriesDataToStorage: Mapper<SeriesData, TvStorage>,
+    private val mapperListTvStorageToData: Mapper<List<TvStorage>, List<SeriesData>>,
 ) : StorageCloudDataSource {
 
     override suspend fun save(movie: MovieData) =

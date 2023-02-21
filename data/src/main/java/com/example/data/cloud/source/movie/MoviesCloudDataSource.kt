@@ -1,6 +1,6 @@
 package com.example.data.cloud.source.movie
 
-import com.example.data.models.movie.*
+import com.example.data.data.models.movie.*
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesCloudDataSource {
@@ -14,6 +14,7 @@ interface MoviesCloudDataSource {
     fun getAllTrendingTodayMovies(page: Int): Flow<MoviesData>
     suspend fun getAllActors(movieId: Int): Flow<CreditsResponseData>
     suspend fun getAllDetails(movieId: Int): Flow<MovieDetailsData>
+    fun getAllMovieGenres(page: Int, genres: String): Flow<MoviesData>
 
     // Tv Movies
     fun getAllTrendingTvSeries(page: Int): Flow<TvSeriesResponseData>

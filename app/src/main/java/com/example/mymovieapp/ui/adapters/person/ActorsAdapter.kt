@@ -6,24 +6,23 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.cloud.server.Utils
+import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
-import com.example.mymovieapp.models.movie.CastUi
+import com.example.mymovieapp.app.models.movie.CastUi
 import com.example.mymovieapp.ui.adapters.diffCallBack.ActorsDiffCallBack
 import com.squareup.picasso.Picasso
 
 class ActorsAdapters(private val listener: RvClickListener) :
     RecyclerView.Adapter<ActorsAdapters.ViewHolder>() {
 
-    var fixedSize: Boolean = true
-
     var personsList = listOf<CastUi>()
         set(value) {
-            val callback = ActorsDiffCallBack(value, personsList)
+            val callback = ActorsDiffCallBack(personsList, value)
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
             field = value
         }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -42,8 +41,7 @@ class ActorsAdapters(private val listener: RvClickListener) :
         )
     }
 
-    override fun getItemCount(): Int =
-        if (fixedSize) personsList.size.coerceAtMost(6) else personsList.size
+    override fun getItemCount(): Int = personsList.size
 
     interface RvClickListener {
         fun onPersonItemClick(person: CastUi)
@@ -62,3 +60,8 @@ class ActorsAdapters(private val listener: RvClickListener) :
         }
     }
 }
+
+
+
+
+

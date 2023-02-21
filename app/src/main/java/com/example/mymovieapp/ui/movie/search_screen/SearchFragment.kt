@@ -4,22 +4,26 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
+import com.broadcast.myapplication.adapter.animations.AddableItemAnimator
+import com.broadcast.myapplication.adapter.animations.custom.SimpleCommonAnimator
+import com.broadcast.myapplication.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.mymovieapp.R
-import com.example.mymovieapp.base.BaseFragment
+import com.example.mymovieapp.app.base.BaseFragment
+import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.utils.extensions.launchWhenViewStarted
+import com.example.mymovieapp.app.utils.extensions.makeToast
+import com.example.mymovieapp.app.utils.extensions.showView
 import com.example.mymovieapp.databinding.FragmentSearchBinding
-import com.example.mymovieapp.models.movie.MovieUi
+import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
-import com.example.mymovieapp.utils.extensions.launchWhenViewStarted
-import com.example.mymovieapp.utils.extensions.makeToast
-import com.example.mymovieapp.utils.extensions.showView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
-    FragmentSearchBinding::inflate
-), MovieAdapter.RecyclerOnClickListener {
+class SearchFragment :
+    BaseFragment<FragmentSearchBinding, SearchViewModel>(FragmentSearchBinding::inflate),
+    RvClickListener<MovieUi> {
     override val viewModel: SearchViewModel by viewModels()
 
 
@@ -28,16 +32,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         search()
+        adapterAnim()
         setUi()
     }
 
-    private fun observe(keyword: String) = with(viewModel) {
-        launchWhenViewStarted {
-            searchMovie(keyword).observe { moviesAdapter.moviesList = it.movies }
-            requireBinding().searchPb.visibility = View.GONE
-            error.onEach {
-                makeToast(it, requireContext())
-            }
+    private fun observe(query: String) = launchWhenViewStarted {
+        viewModel.searchMovie().observe { moviesAdapter.moviesList = it.movies }
+        viewModel.newTryEmitQuery(query)
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
         }
     }
 
@@ -48,12 +51,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     private fun search() = requireBinding().searchView.apply {
         setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                observe(query.toString())
+                observe(query!!)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                observe(query.toString())
+                observe(newText!!)
                 return true
             }
         })
@@ -62,13 +65,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
         }
     }
 
-    override fun onItemClick(movie: MovieUi) = viewModel.launchMovieDetails(movie)
-
-    override fun onLongItemClick(movie: MovieUi) {
-        viewModel.saveMovie(movie)
-        makeToast("Фильм (${movie.movieTitle}) Сохранён", requireContext())
+    private fun adapterAnim() = with(requireBinding()) {
+        searchRv.itemAnimator = AddableItemAnimator(SimpleCommonAnimator()).also { anim ->
+            anim.addViewTypeAnimation(
+                R.layout.object_portrait_item,
+                SlideInTopCommonAnimator()
+            )
+            anim.addDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
+            anim.removeDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
+        }
     }
 
+
+    override fun onItemClick(movie: MovieUi) {
+        viewModel.launchMovieDetails(movie)
+    }
 
     override fun onStart() {
         super.onStart()
@@ -76,4 +87,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}
+    override fun onLongClick(item: MovieUi) {
+        viewModel.saveMovie(item)
+        showSuccessSnackBar("Movie ${item.movieTitle} saved")
+    }
 }

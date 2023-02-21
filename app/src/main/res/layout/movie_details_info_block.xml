@@ -150,7 +150,7 @@
                     android:id="@+id/viewConstraint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/rvs_constraint_layout"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -334,7 +334,7 @@
                     <TextView
                         android:id="@+id/actorsText"
                         style="@style/MovieDetailsTextStyle"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="12dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="2dp"
                         android:text="Cast"
@@ -373,15 +373,6 @@
                         android:background="@color/divider"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cast_size_text" />
-
-                    <TextView
-                        android:id="@+id/cast_size_text"
-                        style="@style/MovieDetailsTextStyle"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="@dimen/_30sdp"
-                        android:text="Show more"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/actorsRv" />
 
 
@@ -395,7 +386,7 @@
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         app:layout_constraintStart_toStartOf="@id/actorsText"
-                        app:layout_constraintTop_toBottomOf="@id/cast_size_text" />
+                        app:layout_constraintTop_toBottomOf="@id/view2" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/similarMoviesRv"
