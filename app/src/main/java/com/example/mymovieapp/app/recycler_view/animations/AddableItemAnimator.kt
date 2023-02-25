@@ -56,5 +56,4 @@ class AddableItemAnimator : BaseItemAnimator {
     fun addViewTypeAnimation(viewType: Int, animator: CommonItemAnimator) {
         animationMap[viewType] = animator
     }
-
 }

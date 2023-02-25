@@ -11,10 +11,10 @@ import com.broadcast.myapplication.adapter.animations.custom.SlideInLeftCommonAn
 import com.broadcast.myapplication.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.base.BaseFragment
-import com.example.mymovieapp.databinding.FragmentTvTypeBinding
 import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.utils.extensions.*
+import com.example.mymovieapp.databinding.FragmentTvTypeBinding
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.TvAdapter
 import com.example.mymovieapp.ui.series.tv_screen.TvMoviesFragmentViewModel
@@ -46,6 +46,17 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
     private val mysteryAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
     private val westernAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
 
+    private val crimeMoviesAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val actionAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val documentaryAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val kidsAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val newsAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val realityAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val fantasyAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val soapAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val talkAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+    private val politicsAdapter by lazy { TvAdapter(TvAdapter.PORTRAIT_TYPE, this) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeType(args.tvType)
@@ -67,6 +78,17 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             SeeAllTvType.HISTORY -> observeHistoryRv()
             SeeAllTvType.WESTERN -> observeWesternRv()
             SeeAllTvType.MYSTERY -> observeMysteryRv()
+            SeeAllTvType.CRIME -> observeCrimeRv()
+            SeeAllTvType.ACTION -> observeActionRv()
+            SeeAllTvType.DOCUMENTARY -> observeDocumentaryRv()
+            SeeAllTvType.KIDS -> observeKidsRv()
+            SeeAllTvType.NEWS -> observeNewsRv()
+            SeeAllTvType.REALITY -> observeRealityRv()
+            SeeAllTvType.FANTASY -> observeFantasyRv()
+            SeeAllTvType.SOAP -> observeSoapRv()
+            SeeAllTvType.TALK -> observeTalkRv()
+            SeeAllTvType.POLITICS -> observePoliticsRv()
+
         }
         viewModel.error.onEach {
             makeToast(it, requireContext())
@@ -89,16 +111,107 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
     }
 
     private fun setupClickers() = with(requireBinding()) {
+        includeBookInfoToolbarBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
         viewModel.apply {
-            nextBtn.setOnDownEffectClickListener {
+            nextBtn.setOnDownEffectClick {
                 nextPage()
                 scrollView.fullScroll(ScrollView.FOCUS_UP)
             }
-            prevBtn.setOnDownEffectClickListener {
+            prevBtn.setOnDownEffectClick {
                 previousPage()
                 scrollView.fullScroll(ScrollView.FOCUS_UP)
             }
         }
+    }
+
+    private fun observePoliticsRv() = launchWhenViewResumed {
+        viewModel.politicsMovies.observe {
+            politicsAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.politics))
+        requireBinding().moviesRv.adapter = politicsAdapter
+    }
+
+    private fun observeTalkRv() = launchWhenViewResumed {
+        viewModel.talkMovies.observe {
+            talkAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.talk))
+        requireBinding().moviesRv.adapter = talkAdapter
+    }
+
+    private fun observeSoapRv() = launchWhenViewResumed {
+        viewModel.soapMovies.observe {
+            soapAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.soap))
+        requireBinding().moviesRv.adapter = soapAdapter
+    }
+
+    private fun observeFantasyRv() = launchWhenViewResumed {
+        viewModel.fantasyMovies.observe {
+            fantasyAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.fantasy))
+        requireBinding().moviesRv.adapter = fantasyAdapter
+    }
+
+    private fun observeRealityRv() = launchWhenViewResumed {
+        viewModel.realityMovies.observe {
+            realityAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.reality))
+        requireBinding().moviesRv.adapter = realityAdapter
+    }
+
+    private fun observeNewsRv() = launchWhenViewResumed {
+        viewModel.newsMovies.observe {
+            newsAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.news))
+        requireBinding().moviesRv.adapter = newsAdapter
+    }
+
+    private fun observeKidsRv() = launchWhenViewResumed {
+        viewModel.kidsMovies.observe {
+            kidsAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.kids))
+        requireBinding().moviesRv.adapter = kidsAdapter
+    }
+
+    private fun observeDocumentaryRv() = launchWhenViewResumed {
+        viewModel.documentaryMovies.observe {
+            documentaryAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.documentary))
+        requireBinding().moviesRv.adapter = documentaryAdapter
+    }
+
+    private fun observeActionRv() = launchWhenViewResumed {
+        viewModel.actionMovies.observe {
+            actionAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.action))
+        requireBinding().moviesRv.adapter = actionAdapter
+    }
+
+    private fun observeCrimeRv() = launchWhenViewResumed {
+        viewModel.crimeMovies.observe {
+            crimeMoviesAdapter.moviesList = it.results
+            screenVisibility()
+        }
+        toolbarTitle(getString(R.string.Crime))
+        requireBinding().moviesRv.adapter = crimeMoviesAdapter
     }
 
     private fun observeTopRatedRv() = launchWhenViewResumed {
@@ -106,6 +219,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             topRatedRv.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.tv_topreted_text))
         requireBinding().moviesRv.adapter = topRatedRv
     }
 
@@ -114,6 +228,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             airingTodayRv.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.tv_airing_today_rv))
         requireBinding().moviesRv.adapter = airingTodayRv
     }
 
@@ -122,6 +237,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             onTheAirRv.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.tv_on_the_air_text))
         requireBinding().moviesRv.adapter = onTheAirRv
     }
 
@@ -130,6 +246,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             popularRv.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.tv_popular_text))
         requireBinding().moviesRv.adapter = popularRv
     }
 
@@ -138,6 +255,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             trendingRv.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.tv_trending_text))
         requireBinding().moviesRv.adapter = trendingRv
     }
 
@@ -146,6 +264,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             familyAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.family_text))
         requireBinding().moviesRv.adapter = familyAdapter
     }
 
@@ -155,6 +274,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             animeAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.animation))
         requireBinding().moviesRv.adapter = animeAdapter
     }
 
@@ -164,6 +284,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             dramaAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.drama))
         requireBinding().moviesRv.adapter = dramaAdapter
     }
 
@@ -171,6 +292,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
         viewModel.comedyMovies.observe {
             comedyAdapter.moviesList = it.results
         }
+        toolbarTitle(getString(R.string.comedy))
         requireBinding().moviesRv.adapter = comedyAdapter
     }
 
@@ -179,6 +301,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             historyAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.history))
         requireBinding().moviesRv.adapter = historyAdapter
     }
 
@@ -187,6 +310,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             westernAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.western))
         requireBinding().moviesRv.adapter = westernAdapter
     }
 
@@ -195,6 +319,7 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
             mysteryAdapter.moviesList = it.results
             screenVisibility()
         }
+        toolbarTitle(getString(R.string.mystery))
         requireBinding().moviesRv.adapter = mysteryAdapter
     }
 
@@ -224,8 +349,10 @@ class SeriesSeeAllScreenFragment : BaseFragment<FragmentTvTypeBinding, TvMoviesF
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
-    override fun onItemClick(item: SeriesUi) {
-        viewModel.launchFromTvTypeToDetails(item)
+    override fun onItemClick(item: SeriesUi) = viewModel.launchFromTvTypeToDetails(item)
+
+    private fun toolbarTitle(name: String) = with(requireBinding()) {
+        includeBookInfoToolbarBlock.toolbarBookTitle.text = name
     }
 
     override fun onLongClick(item: SeriesUi) {

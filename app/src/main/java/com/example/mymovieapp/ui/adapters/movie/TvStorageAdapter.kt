@@ -12,8 +12,8 @@ import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.databinding.StorageItemBinding
 import com.example.mymovieapp.app.models.movie.SeriesUi
-import com.example.mymovieapp.app.utils.extensions.makeToast
-import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
+import com.example.ui_core.custom.snackbar.SnackBar
 import com.squareup.picasso.Picasso
 
 class TvStorageAdapter(
@@ -29,10 +29,10 @@ class TvStorageAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnDownEffectClick {
             listener.onTvClearItemClick(getItem(position))
         }
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnDownEffectClick {
             listener.onItemClick(getItem(position))
         }
         holder.bind(getItem(position))
@@ -48,14 +48,11 @@ class TvStorageAdapter(
         fun bind(movie: SeriesUi) = movie.apply {
             with(binding) {
                 Picasso.get().load(Utils.IMAGE_PATH + posterPath).into(imagePoster)
-                buttonBookmark.setOnDownEffectClickListener { it.isClickable = false
-                    listener.onTvClearItemClick(getItem(adapterPosition))
-                }
-                storage.setOnDownEffectClickListener { try {
-                    listener.onItemClick(getItem(adapterPosition))
-                    } catch (e: Exception) { makeToast(("You have already deleted this movie"), context) }
-                }
-
+                buttonBookmark.setOnDownEffectClick { it.isClickable = false
+                    listener.onTvClearItemClick(getItem(adapterPosition)) }
+                storage.setOnDownEffectClick {
+                    try { listener.onItemClick(getItem(adapterPosition))
+                    } catch (e: Exception) { showErrorSnackbar("You have already deleted this movie") } }
                 votecount.text = String.format(context.resources.getString(R.string.movieStorage_voteCont), voteCount.toString())
                 textGenres.text = originalLanguage
                 textTitle.text = originalName
@@ -63,6 +60,14 @@ class TvStorageAdapter(
                 voteaverage.rating = voteAverage.toFloat()
             }
         }
+
+        fun showErrorSnackbar(message: String) =
+            SnackBar
+                .Builder(binding.root)
+                .error()
+                .message(message)
+                .build()
+                .show()
     }
 }
 

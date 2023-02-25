@@ -10,6 +10,7 @@
     <color name="bac_movie">#FF161616</color>
     <color name="backgroundColor">#E5E5E5</color>
     <color name="blue">#2962FF</color>
+    <color name="azaColor">#878787</color>
 
     <color name="black_smoke">#1D2023</color>
     <color name="black_30_alpha">#4C000000</color>
@@ -27,7 +28,7 @@
     <color name="yellw">#FFD600</color>
     <color name="grey">#A7A7A9</color>
     <color name="shimmerColor">#FFB8B8B8</color>
-    <color name="colorAccent">#FF0057</color>
+    <color name="colorAccent">#FF007F</color>
     <color name="app_background">#FFFFFF</color>
     <color name="header">#212121</color>
     <color name="blueberry_light">#FF45B6FC</color>
@@ -74,6 +75,7 @@
     <color name="black_transparent_1">#66000000</color>
     <color name="transparent">#00000000</color>
     <color name="black_transparent_light">#7E000000</color>
+    <color name="shimmer_color">#EEEFF4</color>
 
     <color name="pagecolor">#21E807</color>
 

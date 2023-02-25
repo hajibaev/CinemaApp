@@ -9,24 +9,31 @@ import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.person.PersonPresentation
+import com.example.mymovieapp.app.utils.extensions.hideView
+import com.example.mymovieapp.databinding.FragmentPersonDetailsBinding
+import com.example.mymovieapp.databinding.StorageItemBinding
+import com.example.ui_core.custom.snackbar.SnackBar
 import com.squareup.picasso.Picasso
 import com.vaibhavlakhera.circularprogressview.CircularProgressView
 
 class RvViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val image = view.findViewById<ImageView>(R.id.posterImage)
+    val textPerson = view.findViewById<TextView>(R.id.personMoviesText)
     private val progressView = view.findViewById<CircularProgressView>(R.id.progressView)
-    private val rating = view.findViewById<TextView>(R.id.rating_text)
-
 
     fun bindMovie(movie: MovieUi) = bind(movie.posterPath, movie.voteAverage)
-
-
     fun bindTvMovie(tv: SeriesUi) = bind(tv.posterPath, tv.voteAverage)
-
 
     fun bindPerson(person: PersonPresentation) =
         bindPerson(person.profile_path, popularity = person.popularity)
 
+    fun showErrorSnackbar(message: String) =
+        SnackBar
+            .Builder(view)
+            .error()
+            .message(message)
+            .build()
+            .show()
 
     private fun bind(posterPath: String?, popularity: Double) {
         Picasso.get().load(IMAGE_PATH + posterPath).into(image)

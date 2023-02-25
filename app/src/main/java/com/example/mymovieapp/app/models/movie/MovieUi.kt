@@ -5,7 +5,7 @@ import com.broadcast.myapplication.adapter.Item
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MovieUi(
+class MovieUi(
     val posterPath: String?,
     val adult: Boolean,
     val overview: String,
@@ -20,4 +20,5 @@ data class MovieUi(
     val voteCount: Int,
     val isHasVideo: Boolean,
     val voteAverage: Double,
+    val minimumAge: Int,
 ) : Parcelable, Item

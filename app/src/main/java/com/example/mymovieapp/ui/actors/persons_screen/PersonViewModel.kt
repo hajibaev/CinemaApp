@@ -8,7 +8,6 @@ import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.models.person.PersonPresentation
 import com.example.mymovieapp.app.models.person.PersonsPresentation
-import com.example.mymovieapp.ui.actors.persons_screen.router.FragmentPersonRouter
 import com.example.mymovieapp.app.utils.ResourceProvider
 import com.example.mymovieapp.app.utils.extensions.changeResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +21,6 @@ class PersonViewModel @Inject constructor(
     private val personRepository: PersonRepository,
     private val mapPersonResponseFromDomain: Mapper<PersonsDomain, PersonsPresentation>,
     private val resourceProvider: ResourceProvider,
-    private val router: FragmentPersonRouter
 ) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)
@@ -52,5 +50,10 @@ class PersonViewModel @Inject constructor(
     fun previousPage() = personResponsePage.tryEmit(_personResponseState.value.previousPage)
 
     fun launchPersonDetails(person: PersonPresentation) =
-        navigate(PersonFragmentDirections.actionPersonFragmentToPersonDetailsFragment(person))
+        navigate(
+            PersonFragmentDirections.actionPersonFragmentToPersonDetailsFragment(
+                person.id,
+                person.known_for.toTypedArray()
+            )
+        )
 }

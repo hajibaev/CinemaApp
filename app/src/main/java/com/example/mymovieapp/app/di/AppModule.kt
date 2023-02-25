@@ -1,9 +1,9 @@
 package com.example.mymovieapp.app.di
 
 import android.content.Context
+import com.example.domain.helper.DispatchersProvider
 import com.example.mymovieapp.app.utils.ResourceProvider
 import com.example.mymovieapp.app.utils.communication.NavigationCommunication
-import com.example.mymovieapp.app.utils.dispachers.Dispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDispatchers(): Dispatchers = Dispatchers.Base()
+    fun provideDispatchers(): DispatchersProvider = DispatchersProvider.Base()
 
     @Provides
     fun provideResourceProvider(

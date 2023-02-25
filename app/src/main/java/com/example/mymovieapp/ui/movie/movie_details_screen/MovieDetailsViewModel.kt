@@ -9,10 +9,7 @@ import com.example.domain.models.movie.MoviesResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
-import com.example.mymovieapp.app.models.movie.CreditsResponseUi
-import com.example.mymovieapp.app.models.movie.MovieDetailsUi
-import com.example.mymovieapp.app.models.movie.MovieUi
-import com.example.mymovieapp.app.models.movie.MoviesResponseUi
+import com.example.mymovieapp.app.models.movie.*
 import com.example.mymovieapp.app.utils.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -69,6 +66,13 @@ class MovieDetailsViewModel constructor(
     fun saveMovie(movie: MovieUi) = viewModelScope.launch {
         storageRepository.save(mapMovieUiToDomain.map(movie))
     }
+
+    fun goActorsDetails(castUi: CastUi) = navigate(
+        MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(
+            castUi.id,
+            arrayOf(null)
+        )
+    )
 
     fun changeMovieId(movieId: Int) = movieIdFlow.tryEmit(movieId)
 }

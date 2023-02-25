@@ -16,6 +16,13 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_nav_movies"
             app:destination="@id/nav_movies" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
     </fragment>
 
     <fragment
@@ -72,12 +79,20 @@
         android:name="com.example.mymovieapp.ui.actors.person_details_screen.PersonDetailsFragment"
         android:label="fragment_person_details"
         tools:layout="@layout/fragment_person_details">
-        <argument
-            android:name="person"
-            app:argType="com.example.mymovieapp.app.models.person.PersonPresentation" />
         <action
             android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="films"
+            app:argType="com.example.mymovieapp.app.models.movie.MovieUi[]" />
+
     </fragment>
 
     <fragment
@@ -170,5 +185,13 @@
         <argument
             android:name="tv"
             app:argType="com.example.mymovieapp.app.models.movie.SeriesUi" />
+        <action
+            android:id="@+id/action_tvDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
+
 </navigation>

@@ -1,121 +1,128 @@
 <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bac_movie"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="@string/now_playing_category"
-            android:textColor="@color/shimmerColor"
-            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/adventure_text"
-            android:textColor="@color/shimmerColor"
-            android:textSize="20sp" />
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:text="@string/now_playing_category"
+                android:textColor="@color/shimmer_color"
+                android:textSize="20sp" />
 
-            <include layout="@layout/shimmer_item" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <include layout="@layout/shimmer_item" />
+                <include layout="@layout/shimmer_item" />
 
-            <include layout="@layout/shimmer_item" />
+                <include layout="@layout/shimmer_item" />
 
-            <include layout="@layout/shimmer_item" />
+                <include layout="@layout/shimmer_item" />
 
-            <include layout="@layout/shimmer_item" />
+                <include layout="@layout/shimmer_item" />
 
-            <include layout="@layout/shimmer_item" />
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/adventure_text"
+                android:textColor="@color/shimmer_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/top_rated_category"
+                android:textColor="@color/shimmer_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/now_playing_category"
+                android:textColor="@color/shimmer_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+                <include layout="@layout/shimmer_item" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/top_rated_category"
-            android:textColor="@color/shimmerColor"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/now_playing_category"
-            android:textColor="@color/shimmerColor"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-            <include layout="@layout/shimmer_item" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </com.facebook.shimmer.ShimmerFrameLayout>

@@ -3,12 +3,13 @@ package com.example.mymovieapp.ui.adapters.person
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.CastUi
+import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
+import com.example.mymovieapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.mymovieapp.ui.adapters.diffCallBack.ActorsDiffCallBack
 import com.squareup.picasso.Picasso
 
@@ -31,14 +32,11 @@ class ActorsAdapters(private val listener: RvClickListener) :
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnDownEffectClick {
             listener.onPersonItemClick(personsList[position])
         }
         holder.bind(personsList[position])
-        holder.itemView.startAnimation(
-            AnimationUtils.loadAnimation
-                (holder.itemView.context, R.anim.slide_in_right)
-        )
+        holder.itemView.startSlideInLeftAnim()
     }
 
     override fun getItemCount(): Int = personsList.size

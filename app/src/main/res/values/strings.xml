@@ -11,17 +11,26 @@
         <item>Tv Shows</item>
     </string-array>
 
+    <style name="BottomCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">45dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="android:topRightRadius">0dp</item>
+        <item name="cornerSizeBottomLeft">45dp</item>
+    </style>
+
     <string name="favourite_transition">favourite_transition</string>
 
     <string name="search">Search cinema</string>
     <string name="actors">Actors</string>
 
     <string name="popular_category">Popular Movies</string>
-    <string name="top_rated_category">Top Movies</string>
+    <string name="top_rated_category">Top Rated</string>
     <string name="now_playing_category">Now Playing</string>
     <string name="adventure_text">Coming Soon</string>
     <string name="trending_category">Trending Movies</string>
     <string name="family_text">Family Movies</string>
+
     <style name="buttonRow">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">match_parent</item>
@@ -29,6 +38,12 @@
     </style>
 
     <string name="action">Action Movies</string>
+    <string name="kids">Kids Movies</string>
+    <string name="news">News Movies</string>
+    <string name="soap">Soap Movies</string>
+    <string name="reality">Reality Movies</string>
+    <string name="talk">Talk Movies</string>
+    <string name="politics">Politics Movies</string>
     <string name="adventure">Adventure Movies</string>
     <string name="animation">Animation Movies</string>
     <string name="comedy">Comedy Movies</string>
@@ -46,7 +61,7 @@
     <string name="thriller">Thriller Movie</string>
     <string name="war">War Movie</string>
     <string name="western">Western Movie</string>
-
+    <string name="setting">Settings</string>
     <string name="tv_trending_text">Tv Trending Movies</string>
     <string name="tv_topreted_text">Tv Top Movies</string>
     <string name="tv_on_the_air_text">Tv On The Air</string>
@@ -63,6 +78,13 @@
         <item name="cornerSizeTopRight">0dp</item>
     </style>
 
+    <style name="poppins_semi_bold_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="genres_rv">
         <item name="android:layout_width">0dp</item>
@@ -118,13 +140,12 @@
     </style>
 
     <style name="MovieTextStyle">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/quicksand_bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">6dp</item>
     </style>
 
     <style name="MovieTextStyle2" parent="MovieTextStyle">
@@ -134,12 +155,27 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
+    <style name="see_more" parent="MovieTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#3980FD</item>
+
+    </style>
+
 
     <style name="MovieDetailsTextStyle.Italic" parent="MovieDetailsTextStyle">
-        <!--        <item name="android:textStyle">normal</item>-->
         <item name="fontFamily">@font/poppins_light</item>
         <item name="android:textSize">15sp</item>
     </style>
+
+    <string name="actor_name">Name</string>
+    <string name="actor_gender">Gender</string>
+    <string name="actor_popularity">Popularity</string>
+    <string name="actor_profession">Professionals</string>
+    <string name="actor_birthday">Date of Birth</string>
+    <string name="actor_death_day">Date of death</string>
+    <string name="actor_birth_place">Place of birth</string>
+    <string name="actor_biography">Biography</string>
+    <string name="movie_genre">Movies</string>
 
     <style name="text_popular">
         <item name="android:layout_width">wrap_content</item>

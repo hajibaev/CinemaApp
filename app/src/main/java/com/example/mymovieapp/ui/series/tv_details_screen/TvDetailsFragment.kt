@@ -8,18 +8,19 @@ import com.bumptech.glide.Glide
 import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.base.BaseFragment
+import com.example.mymovieapp.app.models.movie.CastUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
 import com.example.mymovieapp.app.utils.blur.BlurTransformation
 import com.example.mymovieapp.app.utils.extensions.hideView
 import com.example.mymovieapp.app.utils.extensions.launchWhenViewStarted
-import com.example.mymovieapp.app.utils.extensions.makeToast
-import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
 import com.example.mymovieapp.app.utils.motion.MotionListener
 import com.example.mymovieapp.app.utils.motion.MotionState
 import com.example.mymovieapp.databinding.FragmentTvDetailsBinding
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.TvAdapter
+import com.example.mymovieapp.ui.adapters.person.ActorsAdapters
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +30,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TvDetailsFragment : BaseFragment<FragmentTvDetailsBinding, TvDetailsViewModel>(
     FragmentTvDetailsBinding::inflate
-), RvClickListener<SeriesUi> {
+), RvClickListener<SeriesUi>, ActorsAdapters.RvClickListener {
 
     private val tvId: Int by lazy { TvDetailsFragmentArgs.fromBundle(requireArguments()).tv.id }
     private val similarAdapter by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
@@ -41,6 +42,8 @@ class TvDetailsFragment : BaseFragment<FragmentTvDetailsBinding, TvDetailsViewMo
         viewModelFactory.create(tvId = tvId)
     }
     private val motionListener = MotionListener(::setToolbarState)
+
+    private val personAdapter by lazy { ActorsAdapters(this) }
 
     private fun setupViews() = with(requireBinding()) {
         root.addTransitionListener(motionListener)
@@ -70,6 +73,7 @@ class TvDetailsFragment : BaseFragment<FragmentTvDetailsBinding, TvDetailsViewMo
         includeBookInfoBlock.apply {
             recommendMoviesRv.adapter = recommendAdapter
             similarMoviesRv.adapter = similarAdapter
+            actorsRv.adapter = personAdapter
         }
     }
 
@@ -77,17 +81,18 @@ class TvDetailsFragment : BaseFragment<FragmentTvDetailsBinding, TvDetailsViewMo
         launchWhenViewStarted {
             movieFlow.observe(::setMovieUi)
             similarMoviesFlow.observe { similarAdapter.moviesList = it.results }
+            actorsFlow.observe { personAdapter.personsList = it.cast }
             recommendMoviesFlow.observe { recommendAdapter.moviesList = it.results }
         }
         error.onEach {
-            makeToast(it, requireContext())
+            showErrorSnackbar(it)
             requireBinding().isEmptyLoading.visibility = VISIBLE
         }
     }
 
     private fun setupClickers() = with(requireBinding()) {
-        includeBookInfoToolbarBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
-        includeBookInfoPosterBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
+        includeBookInfoToolbarBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
+        includeBookInfoPosterBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
     }
 
 
@@ -128,4 +133,7 @@ class TvDetailsFragment : BaseFragment<FragmentTvDetailsBinding, TvDetailsViewMo
         viewModel.saveTv(item)
         showSuccessSnackBar("Movie ${item.originalName} saved")
     }
+
+    override fun onPersonItemClick(person: CastUi) = viewModel.goActorsDetails(person)
+
 }

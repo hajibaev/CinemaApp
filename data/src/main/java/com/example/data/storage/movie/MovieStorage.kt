@@ -1,9 +1,9 @@
 package com.example.data.storage.movie
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
+import androidx.room.Database
 import com.example.data.storage.TypeConverter
+import com.example.data.storage.movie.room.MovieDao
 
 @Entity(tableName = "movieTable")
 class MovieStorage(
@@ -24,5 +24,13 @@ class MovieStorage(
     val voteCount: Int,
     val isHasVideo: Boolean,
     val voteAverage: Double,
-//    var isFavorite: Boolean = false
+    val minimumAge: Int,
 )
+
+
+//
+//@Database(entities = [MovieStorage::class], version = 3, exportSchema = false)
+//@TypeConverters(TypeConverter::class)
+//abstract class Database : RoomDatabase() {
+//    abstract fun movieDao(): MovieDao
+//}

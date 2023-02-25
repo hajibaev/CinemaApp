@@ -2,11 +2,11 @@ package com.example.mymovieapp.ui.adapters.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.utils.extensions.startItemAnim
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.diffCallBack.DiffCallBack
 import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
@@ -36,17 +36,17 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.view.setOnClickListener {
-            listener.onItemClick(moviesList[position])
+            try { listener.onItemClick(moviesList[position]) }
+            catch (e: Exception) { holder.showErrorSnackbar("Movies not ready yet") }
         }
+
         holder.view.setOnLongClickListener {
             listener.onLongClick(moviesList[position])
             true
         }
-        holder.itemView.startAnimation(
-            AnimationUtils.loadAnimation
-                (holder.itemView.context, R.anim.item_anim)
-        )
-        holder.bindMovie(movie = moviesList[position])
+//        holder.itemView.startItemAnim()
+        try { holder.bindMovie(movie = moviesList[position])
+        } catch (e: Exception) {  }
     }
 
     override fun getItemCount() = moviesList.size

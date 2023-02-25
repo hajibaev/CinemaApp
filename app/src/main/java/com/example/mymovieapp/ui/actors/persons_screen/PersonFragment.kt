@@ -75,11 +75,11 @@ class PersonFragment : BaseFragment<FragmentPersonBinding, PersonViewModel>(
 
     private fun setupUiAndClickers() {
         requireBinding().apply {
-            nextBtn.setOnDownEffectClickListener() {
+            nextBtn.setOnDownEffectClick() {
                 viewModel.nextPage()
                 mainScrollView.fullScroll(ScrollView.FOCUS_UP)
             }
-            prevBtn.setOnDownEffectClickListener {
+            prevBtn.setOnDownEffectClick {
                 viewModel.previousPage()
                 mainScrollView.fullScroll(ScrollView.FOCUS_UP)
             }

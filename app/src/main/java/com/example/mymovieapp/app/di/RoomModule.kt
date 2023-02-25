@@ -2,7 +2,7 @@ package com.example.mymovieapp.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.storage.movie.room.Database
+import com.example.data.storage.movie.room.MovieDatabase
 import com.example.data.storage.tv.room.TvDatabase
 import dagger.Module
 import dagger.Provides
@@ -11,8 +11,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private const val DB_NAME = "movie_item.db"
-private const val TV_NAME = "tv_item.db"
+private const val DB_NAME = "movie.db"
+private const val TV_NAME = "tv.db"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -20,15 +20,15 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): Database = Room.databaseBuilder(
+    fun provideDatabase(@ApplicationContext context: Context): MovieDatabase = Room.databaseBuilder(
         context,
-        Database::class.java,
+        MovieDatabase::class.java,
         DB_NAME
     ).build()
 
     @Provides
     @Singleton
-    fun provideMovieDao(database: Database) = database.movieDao()
+    fun provideMovieDao(database: MovieDatabase) = database.movieDao()
 
 
     @Provides

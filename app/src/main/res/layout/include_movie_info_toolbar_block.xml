@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/general"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/bac_movie"
@@ -30,12 +31,17 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:ellipsize="none"
+            android:ellipsize="marquee"
             android:fadingEdgeLength="60dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
             android:requiresFadingEdge="horizontal"
+            android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:transitionName="toolbarMovieTitle"
             tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 

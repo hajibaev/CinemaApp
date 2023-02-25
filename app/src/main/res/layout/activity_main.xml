@@ -20,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/general_navigation" />
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_bottom_nav_view"
         style="@style/TopCornerRadius"
         android:layout_width="match_parent"
@@ -36,6 +36,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/main_bottom_nav_view"-->
+    <!--        style="@style/TopCornerRadius"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom"-->
+    <!--        android:background="@drawable/bottomnav"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:itemIconTint="@drawable/nav_item_color_state"-->
+    <!--        app:itemTextColor="@drawable/nav_item_color_state"-->
+    <!--        app:labelVisibilityMode="unlabeled"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:menu="@menu/menu" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

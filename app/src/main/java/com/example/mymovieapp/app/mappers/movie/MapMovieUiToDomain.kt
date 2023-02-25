@@ -5,7 +5,7 @@ import com.example.domain.models.movie.MovieDomain
 import com.example.mymovieapp.app.models.movie.MovieUi
 import javax.inject.Inject
 
-class MapMovieUiToDomain @Inject constructor(): Mapper<MovieUi, MovieDomain> {
+class MapMovieUiToDomain @Inject constructor() : Mapper<MovieUi, MovieDomain> {
     override fun map(from: MovieUi) = from.run {
         MovieDomain(
             posterPath = posterPath,
@@ -22,6 +22,7 @@ class MapMovieUiToDomain @Inject constructor(): Mapper<MovieUi, MovieDomain> {
             voteCount = voteCount,
             isHasVideo = isHasVideo,
             voteAverage = voteAverage,
+            minimumAge = minimumAge
         )
     }
 }

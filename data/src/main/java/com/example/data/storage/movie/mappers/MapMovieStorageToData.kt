@@ -22,6 +22,7 @@ class MapMovieStorageToData @Inject constructor() : Mapper<MovieStorage, MovieDa
             voteCount = voteCount,
             isHasVideo = isHasVideo,
             voteAverage = voteAverage,
+            minimumAge = minimumAge
         )
     }
 }

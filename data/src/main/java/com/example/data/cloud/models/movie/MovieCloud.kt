@@ -17,4 +17,5 @@ data class MovieCloud(
     @SerializedName("vote_count") val voteCount: Int,
     @SerializedName("video") val isHasVideo: Boolean,
     @SerializedName("vote_average") val voteAverage: Double,
+    @SerializedName("minimum_age") val minimumAge: Int,
 )

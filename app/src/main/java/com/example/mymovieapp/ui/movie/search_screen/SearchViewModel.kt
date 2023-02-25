@@ -9,7 +9,6 @@ import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.MoviesResponseUi
-import com.example.mymovieapp.ui.movie.movies_screen.router.FragmentBaseMovieRouter
 import com.example.mymovieapp.app.utils.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +23,6 @@ class SearchViewModel @Inject constructor(
     private val mapMoviesResponse: Mapper<MoviesResponseDomain, MoviesResponseUi>,
     private val repository: MovieRepository,
     private val resourceProvider: ResourceProvider,
-    private val router: FragmentBaseMovieRouter
 ) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)

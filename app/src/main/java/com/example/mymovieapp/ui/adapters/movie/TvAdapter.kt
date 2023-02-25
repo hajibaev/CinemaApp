@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.SeriesUi
+import com.example.mymovieapp.app.utils.extensions.startItemAnim
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.diffCallBack.TvDiffCallBack
 import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
@@ -37,19 +38,16 @@ class TvAdapter(
 
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.view.setOnClickListener {
-            listener.onItemClick(moviesList[position])
+            try { listener.onItemClick(moviesList[position]) }
+            catch (e: Exception) { holder.showErrorSnackbar("Movies not ready yet") }
         }
         holder.view.setOnLongClickListener {
             listener.onLongClick(moviesList[position])
             true
         }
-        holder.bindTvMovie(tv = moviesList[position])
-        holder.itemView.startAnimation(
-            AnimationUtils.loadAnimation(
-                holder.itemView.context,
-                R.anim.item_anim
-            )
-        )
+        try { holder.bindTvMovie(tv = moviesList[position])
+        } catch (e: Exception) { }
+        holder.itemView.startItemAnim()
     }
 
     override fun getItemCount() = moviesList.size

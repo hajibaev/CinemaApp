@@ -6,6 +6,7 @@
     android:layout_marginStart="14dp"
     android:layout_marginTop="10dp"
     app:cardCornerRadius="12dp"
+    android:background="@color/bac_movie"
     app:cardElevation="10dp"
     app:strokeWidth="1dp">
 
@@ -16,7 +17,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/shimmerColor"
+            android:background="@color/shimmer_color"
             android:scaleType="centerCrop" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

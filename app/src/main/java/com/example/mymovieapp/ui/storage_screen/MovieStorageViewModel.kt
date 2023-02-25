@@ -8,8 +8,6 @@ import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
-import com.example.mymovieapp.ui.movie.movies_screen.router.FragmentBaseMovieRouter
-import com.example.mymovieapp.ui.series.tv_screen.router.FragmentTvRouter
 import com.example.mymovieapp.app.utils.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +21,6 @@ class MovieStorageViewModel @Inject constructor(
     private val mapMovieFromDomain: Mapper<List<MovieDomain>, List<MovieUi>>,
     private val mapSeriesDomainToUi: Mapper<List<SeriesDomain>, List<SeriesUi>>,
     private val resourceProvider: ResourceProvider,
-    private val tvRouter: FragmentTvRouter,
-    private val movieRouter: FragmentBaseMovieRouter
 ) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)

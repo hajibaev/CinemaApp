@@ -22,6 +22,7 @@ class MapMovieDomainToUi @Inject constructor(): Mapper<MovieDomain, MovieUi> {
             voteCount = voteCount,
             isHasVideo = isHasVideo,
             voteAverage = voteAverage,
+            minimumAge = minimumAge
         )
     }
 }

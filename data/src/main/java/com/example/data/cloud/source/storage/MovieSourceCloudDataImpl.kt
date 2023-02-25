@@ -7,7 +7,7 @@ import com.example.data.storage.movie.room.MovieDao
 import com.example.data.storage.tv.models.TvStorage
 import com.example.data.storage.tv.room.TvDao
 import com.example.domain.base.Mapper
-import kotlinx.coroutines.Dispatchers
+import com.example.domain.helper.DispatchersProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -17,43 +17,45 @@ import javax.inject.Inject
 class MovieSourceCloudDataImpl @Inject constructor(
     private val dao: MovieDao,
     private val tvDao: TvDao,
+    private val dispatchers: DispatchersProvider,
     private val mapperMovieDataToStorage: Mapper<MovieData, MovieStorage>,
     private val mapperListMovieStorageToData: Mapper<List<MovieStorage>, List<MovieData>>,
     private val mapperSeriesDataToStorage: Mapper<SeriesData, TvStorage>,
     private val mapperListTvStorageToData: Mapper<List<TvStorage>, List<SeriesData>>,
 ) : StorageCloudDataSource {
 
-    override suspend fun save(movie: MovieData) =
-        withContext(Dispatchers.IO) {
+    override suspend fun save(movie: MovieData) {
+        withContext(dispatchers.io()) {
             dao.saveMovie(mapperMovieDataToStorage.map(movie))
         }
+    }
 
     override suspend fun delete(movieId: Int) =
-        withContext(Dispatchers.IO) {
+        withContext(dispatchers.io()) {
             dao.deleteMovieFromSaveStorage(movieId)
         }
 
     override fun getStorageMovies(): Flow<List<MovieData>> =
         dao.getStorageMovies()
-            .flowOn(Dispatchers.IO)
+            .flowOn(dispatchers.io())
             .map(mapperListMovieStorageToData::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchers.default())
 
     override suspend fun saveTv(tv: SeriesData) =
-        withContext(Dispatchers.IO) {
+        withContext((dispatchers.io())) {
             tvDao.saveTv(mapperSeriesDataToStorage.map(tv))
         }
 
     override suspend fun deleteTV(id: Int) =
-        withContext(Dispatchers.IO) {
+        withContext((dispatchers.io())) {
             tvDao.deleteTVFromSaveStorage(id)
         }
 
     override fun getTvStorage(): Flow<List<SeriesData>> =
         tvDao.getTvStorage()
-            .flowOn(Dispatchers.IO)
+            .flowOn(dispatchers.io())
             .map(mapperListTvStorageToData::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchers.default())
 
 }
 

@@ -1,9 +1,8 @@
 package com.example.mymovieapp.ui.movie.movie_details_screen
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.bumptech.glide.Glide
@@ -14,10 +13,7 @@ import com.example.mymovieapp.app.models.movie.CastUi
 import com.example.mymovieapp.app.models.movie.MovieDetailsUi
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.utils.blur.BlurTransformation
-import com.example.mymovieapp.app.utils.extensions.hideView
-import com.example.mymovieapp.app.utils.extensions.launchWhenViewStarted
-import com.example.mymovieapp.app.utils.extensions.makeToast
-import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.mymovieapp.app.utils.extensions.*
 import com.example.mymovieapp.app.utils.motion.MotionListener
 import com.example.mymovieapp.app.utils.motion.MotionState
 import com.example.mymovieapp.databinding.FragmentMovieDetailsBinding
@@ -25,12 +21,13 @@ import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter.Companion.HORIZONTAL_TYPE
 import com.example.mymovieapp.ui.adapters.person.ActorsAdapters
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class MovieDetailsFragment :
@@ -39,6 +36,8 @@ class MovieDetailsFragment :
     ActorsAdapters.RvClickListener {
 
     private val movieId by lazy { MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.movieId }
+
+    private var screenWidth: Float = 0f
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsViewModelFactory.Factory
@@ -61,7 +60,7 @@ class MovieDetailsFragment :
         when (state) {
             MotionState.COLLAPSED -> {
                 viewModel.updateMotionPosition(COLLAPSED)
-                requireBinding().includeBookInfoBlock.nestedScroolView.smoothScrollTo(0, 0)
+                requireBinding().includeBookInfoBlock.general.smoothScrollTo(0, 0)
             }
             MotionState.EXPANDED -> viewModel.updateMotionPosition(EXPANDED)
             else -> Unit
@@ -78,8 +77,8 @@ class MovieDetailsFragment :
     }
 
     private fun setupClickers() = with(requireBinding()) {
-        includeBookInfoToolbarBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
-        includeBookInfoPosterBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
+        includeBookInfoToolbarBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
+        includeBookInfoPosterBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
     }
 
     private fun setupAdapters() = with(requireBinding()) {
@@ -97,19 +96,26 @@ class MovieDetailsFragment :
             similarMoviesFlow.observe { similarMoviesAdapter.moviesList = it.movies }
             recommendMoviesFlow.observe { recommendMoviesAdapter.moviesList = it.movies }
         }
-        error.onEach {
-            makeToast(it, requireContext())
-        }
+        error.onEach { showErrorSnackbar(it) }
     }
 
     private fun setMovieUi(movie: MovieDetailsUi) {
+        val screenWidth = 0f
+        val animationSpeed = 1f
         with(requireBinding()) {
-            includeBookInfoToolbarBlock.toolbarBookTitle.text = movie.originalTitle
+            with(includeBookInfoToolbarBlock) {
+                toolbarBookTitle.text = movie.originalTitle
+                toolbarBookTitle.isSelected = true
+                toolbarBookTitle.translationX = -screenWidth
+                val duration = (200 * animationSpeed).toLong()
+                ObjectAnimator.ofFloat(toolbarBookTitle, "translationX", 0f).setDuration(duration)
+                    .start()
+            }
             with(includeBookInfoPosterBlock) {
                 Picasso.get().load(Utils.IMAGE_PATH + movie.posterPath)
                     .into(moviePoster)
                 Glide.with(requireContext()).asBitmap()
-                    .load(Utils.IMAGE_PATH + movie.posterPath)
+                    .load(Utils.IMAGE_PATH + movie.backdrop_path)
                     .transform(BlurTransformation(requireContext()))
                     .into(bookBlurBackgroundPoster)
                 moviemovieTitle.text = movie.originalTitle
@@ -134,8 +140,8 @@ class MovieDetailsFragment :
         viewModel.changeMovieId(item.movieId)
     }
 
-    override fun onPersonItemClick(person: CastUi) =
-        showWarningSnackbar("Not yet ready to show")
+    override fun onPersonItemClick(person: CastUi) = viewModel.goActorsDetails(person)
+
 
     override fun onStart() {
         super.onStart()

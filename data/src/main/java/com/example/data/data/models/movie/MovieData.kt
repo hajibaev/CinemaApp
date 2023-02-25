@@ -15,4 +15,5 @@ class MovieData(
     val voteCount: Int,
     val isHasVideo: Boolean,
     val voteAverage: Double,
+    val minimumAge: Int,
 )

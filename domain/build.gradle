@@ -16,3 +16,24 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+//
+//apply plugin: 'kotlin'
+//
+//dependencies {
+//    //Kotlin
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.21"
+//    implementation 'androidx.paging:paging-common-ktx:3.1.1'
+//
+//    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+//
+//
+//    //Mockito
+//    testImplementation 'org.mockito:mockito-core:3.10.0'
+//    testImplementation "org.mockito:mockito-inline:3.10.0"
+//
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+//
+//
+//    //Junit
+//    testImplementation 'junit:junit:4.13.2'
+//}

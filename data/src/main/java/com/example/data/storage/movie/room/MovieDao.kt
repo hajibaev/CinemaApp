@@ -17,8 +17,4 @@ interface MovieDao {
 
     @Query("DELETE FROM movieTable WHERE movieId =:movieId")
     fun deleteMovieFromSaveStorage(movieId: Int)
-
-
-    @Query("SELECT * FROM movieTable WHERE movieId == :movieId")
-     fun getMovie(movieId: Int): Flow<MovieStorage>
 }

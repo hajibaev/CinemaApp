@@ -12,38 +12,52 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/backgroundLayout"
-            android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:layout_margin="2dp"
-            android:backgroundTint="#E5E5E5"
-            android:elevation="18dp"
-            android:src="@drawable/bg"
-            app:cardCornerRadius="100dp"
-            app:layout_constraintStart_toStartOf="@id/const_layout"
-            app:layout_constraintTop_toTopOf="@id/const_layout">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/personImageCast"
+            android:layout_width="82dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/backgroundLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:backgroundTint="@color/black"
-                android:elevation="16dp"
-                app:cardCornerRadius="100dp">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/backgroundLayout"-->
+        <!--            android:layout_width="@dimen/_65sdp"-->
+        <!--            android:layout_height="@dimen/_65sdp"-->
+        <!--            android:layout_margin="2dp"-->
+        <!--            android:backgroundTint="#E5E5E5"-->
+        <!--            android:elevation="18dp"-->
+        <!--            android:src="@drawable/bg"-->
+        <!--            app:cardCornerRadius="100dp"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/const_layout"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/const_layout">-->
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/personImageCast"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:src="@drawable/foto"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.cardview.widget.CardView>
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/backgroundLayout2"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_margin="2dp"-->
+        <!--                android:backgroundTint="@color/black"-->
+        <!--                android:elevation="16dp"-->
+        <!--                app:cardCornerRadius="100dp">-->
 
-        </androidx.cardview.widget.CardView>
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/personImageCast"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:layout_margin="1dp"-->
+        <!--                    android:src="@drawable/foto"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+        <!--            </androidx.cardview.widget.CardView>-->
+
+        <!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidline"
@@ -60,10 +74,10 @@
             android:backgroundTint="@color/bac_movie"
             app:cardCornerRadius="@dimen/_26sdp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/backgroundLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/personImageCast"
             app:layout_constraintEnd_toEndOf="@+id/const_layout"
-            app:layout_constraintStart_toEndOf="@+id/backgroundLayout"
-            app:layout_constraintTop_toTopOf="@+id/backgroundLayout">
+            app:layout_constraintStart_toEndOf="@+id/personImageCast"
+            app:layout_constraintTop_toTopOf="@+id/personImageCast">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -75,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/quicksand_medium"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/secondary_background"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/quicksand_medium"
                     android:text="cast: "
                     android:textColor="@color/text_default"
                     android:textSize="16sp"
@@ -100,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/quicksand_medium"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/secondary_background"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/cast"
@@ -122,8 +137,8 @@
             android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/const_layout"
             app:layout_constraintEnd_toEndOf="@+id/const_layout"
-            app:layout_constraintStart_toEndOf="@+id/backgroundLayout"
-            app:layout_constraintTop_toBottomOf="@+id/backgroundLayout" />
+            app:layout_constraintStart_toEndOf="@+id/personImageCast"
+            app:layout_constraintTop_toBottomOf="@+id/personImageCast" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

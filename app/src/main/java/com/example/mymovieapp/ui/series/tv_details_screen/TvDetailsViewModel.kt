@@ -2,16 +2,16 @@ package com.example.mymovieapp.ui.series.tv_details_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
+import com.example.domain.models.movie.CreditsResponseDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
-import com.example.mymovieapp.app.models.movie.SeriesUi
-import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
-import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi
+import com.example.mymovieapp.app.models.movie.*
 import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.ui.movie.movie_details_screen.MovieDetailsFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -23,6 +23,7 @@ class TvDetailsViewModel constructor(
     private val mapMovieDetailsDomainToUi: Mapper<TvSeriesDetailsDomain, TvSeriesDetailsUi>,
     private val mapTvSeriesResponseDomainToUi: Mapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
     private val saveMapper: Mapper<SeriesUi, SeriesDomain>,
+    private val mapCreditsResponseDomainToUi: Mapper<CreditsResponseDomain, CreditsResponseUi>,
     private val resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
 
@@ -39,6 +40,13 @@ class TvDetailsViewModel constructor(
     val movieFlow = tvFlow.flatMapLatest {
         movieRepository.getTvSeriesDetails(it)
     }.map(mapMovieDetailsDomainToUi::map)
+        .flowOn(Dispatchers.Default)
+        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val actorsFlow = tvFlow.flatMapLatest {
+        movieRepository.getTvActors(it)
+    }.map(mapCreditsResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
@@ -61,6 +69,12 @@ class TvDetailsViewModel constructor(
         storageRepository.tvSave(saveMapper.map(tv))
     }
 
+    fun goActorsDetails(castUi: CastUi) = navigate(
+        TvDetailsFragmentDirections.actionTvDetailsFragmentToPersonDetailsFragment(
+            castUi.id,
+            arrayOf(null)
+        )
+    )
 
 
     fun changeMovieId(movieId: Int) = tvFlow.tryEmit(movieId)

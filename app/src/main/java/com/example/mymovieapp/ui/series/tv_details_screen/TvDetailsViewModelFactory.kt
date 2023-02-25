@@ -3,11 +3,13 @@ package com.example.mymovieapp.ui.series.tv_details_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.Mapper
+import com.example.domain.models.movie.CreditsResponseDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
+import com.example.mymovieapp.app.models.movie.CreditsResponseUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
 import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi
@@ -26,6 +28,7 @@ class TvDetailsViewModelFactory @AssistedInject constructor(
     private val mapMovieDetailsDomainToUi: Mapper<TvSeriesDetailsDomain, TvSeriesDetailsUi>,
     private val mapTvSeriesResponseDomainToUi: Mapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
     private val saveMapper: Mapper<SeriesUi, SeriesDomain>,
+    private val mapCreditsResponseDomainToUi: Mapper<CreditsResponseDomain, CreditsResponseUi>,
     private val resourceProvider: ResourceProvider,
 ) : ViewModelProvider.Factory {
 
@@ -38,7 +41,8 @@ class TvDetailsViewModelFactory @AssistedInject constructor(
             movieRepository = movieRepository,
             mapTvSeriesResponseDomainToUi = mapTvSeriesResponseDomainToUi,
             saveMapper = saveMapper,
-            resourceProvider = resourceProvider
+            resourceProvider = resourceProvider,
+            mapCreditsResponseDomainToUi = mapCreditsResponseDomainToUi
         ) as T
     }
 

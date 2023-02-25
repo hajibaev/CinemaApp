@@ -4,17 +4,20 @@ import com.example.data.data.models.movie.*
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesCloudDataSource {
-    fun getAllPopularMovies(page: Int): Flow<MoviesData>
-    fun getAllNowPlayingMovies(page: Int): Flow<MoviesData>
-    fun getAllUpcomingMovies(page: Int): Flow<MoviesData>
-    fun getAllTopRatedMovies(page: Int): Flow<MoviesData>
-     fun getAllSearchMovies(query: String): Flow<MoviesData>
+    fun getAllPopularMovies(page: Int, genres: String): Flow<MoviesData>
+    fun getAllNowPlayingMovies(page: Int, genres: String): Flow<MoviesData>
+    fun getAllUpcomingMovies(page: Int, genres: String): Flow<MoviesData>
+    fun getAllTopRatedMovies(page: Int, genres: String): Flow<MoviesData>
+    fun getAllSearchMovies(query: String): Flow<MoviesData>
     fun getAllSimilarMovies(movieId: Int): Flow<MoviesData>
     fun getAllRecommendationsMovies(movieId: Int): Flow<MoviesData>
-    fun getAllTrendingTodayMovies(page: Int): Flow<MoviesData>
-    suspend fun getAllActors(movieId: Int): Flow<CreditsResponseData>
+    fun getAllTrendingTodayMovies(page: Int, genres: String): Flow<MoviesData>
     suspend fun getAllDetails(movieId: Int): Flow<MovieDetailsData>
     fun getAllMovieGenres(page: Int, genres: String): Flow<MoviesData>
+
+    // Cart
+    suspend fun getAllActors(movieId: Int): Flow<CreditsResponseData>
+    suspend fun getAllTvActors(tvId: Int): Flow<CreditsResponseData>
 
     // Tv Movies
     fun getAllTrendingTvSeries(page: Int): Flow<TvSeriesResponseData>

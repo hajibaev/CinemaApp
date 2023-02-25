@@ -41,6 +41,20 @@ fun View.hideView() {
     this.visibility = View.GONE
 }
 
+fun View.startSlideInRightAnim() {
+    this.startAnimation(
+        AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.slide_in_right
+        )
+    )
+}
+
+fun View.downEffect(): View {
+    PushDownAnim.setPushDownAnimTo(this)
+    return this
+}
+
 fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
     this.observe(owner) {
         it?.let(observer)
@@ -48,7 +62,7 @@ fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Un
 }
 
 
-fun View.setOnDownEffectClickListener(onClickListener: View.OnClickListener): View {
+fun View.setOnDownEffectClick(onClickListener: View.OnClickListener): View {
     PushDownAnim.setPushDownAnimTo(this).setOnClickListener(onClickListener)
     return this
 }
@@ -58,6 +72,16 @@ fun View.startSlideInLeftAnim() {
         AnimationUtils.loadAnimation(
             this.context,
             R.anim.slide_in_left_anim
+        )
+    )
+}
+
+
+fun View.startItemAnim() {
+    this.startAnimation(
+        AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.item_anim
         )
     )
 }

@@ -28,6 +28,7 @@ interface MovieApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
+        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(POPULAR)
@@ -35,6 +36,7 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
+        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(NOW_PLAIN)
@@ -42,25 +44,35 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
+        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(UPCOMING)
     suspend fun getUpcomingMovies(
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
-        @Query("page") @IntRange(from = 1) page: Int
+        @Query("page") @IntRange(from = 1) page: Int,
+        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(TOP_RATED)
     suspend fun getTopRatedMovies(
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
-        @Query("page") @IntRange(from = 1) page: Int
+        @Query("page") @IntRange(from = 1) page: Int,
+        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET("movie/{movie_id}/credits")
     suspend fun getMovieCredits(
         @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "en",
+    ): Response<CreditsResponseCloud>
+
+    @GET("tv/{tv_id}/credits")
+    suspend fun getTvCredits(
+        @Path("tv_id") tvId: Int,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "en",
     ): Response<CreditsResponseCloud>
@@ -85,7 +97,7 @@ interface MovieApi {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "en",
-        @Query("page") @IntRange(from = 1) page: Int = 1
+        @Query("page") page: Int = 1
     ): Response<MoviesResponseCloud>
 
     @GET(RECOMMENDATIONS)
@@ -93,7 +105,7 @@ interface MovieApi {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "en",
-        @Query("page") @IntRange(from = 1) page: Int = 1
+        @Query("page") page: Int = 1
     ): Response<MoviesResponseCloud>
 
 

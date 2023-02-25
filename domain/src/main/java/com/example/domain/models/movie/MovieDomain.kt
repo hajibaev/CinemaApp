@@ -15,5 +15,5 @@ class MovieDomain(
     val voteCount: Int,
     val isHasVideo: Boolean,
     val voteAverage: Double,
-//    var isFavorite: Boolean = false
+    val minimumAge: Int,
 )

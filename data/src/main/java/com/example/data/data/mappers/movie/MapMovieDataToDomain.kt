@@ -22,6 +22,7 @@ class MapMovieDataToDomain @Inject constructor() : Mapper<MovieData, MovieDomain
             voteCount = voteCount,
             isHasVideo = isHasVideo,
             voteAverage = voteAverage,
+            minimumAge = minimumAge
         )
     }
 }

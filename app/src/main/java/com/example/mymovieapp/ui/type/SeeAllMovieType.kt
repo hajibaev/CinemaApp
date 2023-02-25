@@ -10,13 +10,25 @@ enum class SeeAllMovieType : Parcelable {
     NOW_PLAYING,
     UPCOMING,
     TRENDING,
-    DRAMATYPE,
-    FAMILYTYPE,
+    ACTION,
+    ADVENTURE,
+    ANIMATION,
     COMEDY,
+    CRIME,
     DOCUMENTARY,
+    DRAMA,
+    FAMILY,
+    FANTASY,
     HISTORY,
+    HORROR,
+    MUSIC,
     MYSTERY,
-    WESTERN,
+    ROMANCE,
+    SCIENCEFICTION,
+    TV_MOVIE,
+    THRILLER,
+    WAR,
+    WESTERN
 }
 
 @Parcelize
@@ -33,4 +45,14 @@ enum class SeeAllTvType : Parcelable {
     HISTORY,
     MYSTERY,
     WESTERN,
+    CRIME,
+    ACTION,
+    DOCUMENTARY,
+    KIDS,
+    NEWS,
+    REALITY,
+    FANTASY,
+    SOAP,
+    TALK,
+    POLITICS
 }

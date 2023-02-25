@@ -22,6 +22,7 @@ class MapMovieCloudToData @Inject constructor() : Mapper<MovieCloud, MovieData> 
             voteCount = voteCount,
             isHasVideo = isHasVideo,
             voteAverage = voteAverage,
+            minimumAge = minimumAge
         )
     }
 }

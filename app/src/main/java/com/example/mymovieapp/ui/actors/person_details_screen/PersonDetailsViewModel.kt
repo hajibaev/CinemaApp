@@ -10,7 +10,6 @@ import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
 import com.example.mymovieapp.app.utils.ResourceProvider
-import com.example.mymovieapp.ui.actors.persons_screen.router.FragmentPersonRouter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,8 +21,12 @@ class PersonDetailsViewModel constructor(
     private val saveMapper: Mapper<MovieUi, MovieDomain>,
     private val mapPersonDetailsDomainToUi: Mapper<PersonDetailsDomain, PersonDetailsPresentation>,
     private val resourceProvider: ResourceProvider,
-    private val router: FragmentPersonRouter
 ) : BaseViewModel() {
+
+    private var _motionPosition = MutableStateFlow(0f)
+    val motionPosition get() = _motionPosition.asStateFlow()
+    fun updateMotionPosition(position: Float) = _motionPosition.tryEmit(position)
+
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
