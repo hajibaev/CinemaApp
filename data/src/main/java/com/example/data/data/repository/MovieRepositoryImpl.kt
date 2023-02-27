@@ -2,8 +2,10 @@ package com.example.data.data.repository
 
 import com.example.data.cloud.source.movie.MoviesCloudDataSource
 import com.example.data.data.models.movie.*
+import com.example.data.data.models.person.CreditsResponseData
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.*
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -20,28 +22,28 @@ class MovieRepositoryImpl @Inject constructor(
     private val mapTvDetailsDataToDomain: Mapper<TvSeriesDetailsData, TvSeriesDetailsDomain>,
 ) : MovieRepository {
 
-    override fun getPopularMovies(page: Int, genres: String): Flow<MoviesResponseDomain> =
-        moviesCloudDataSource.getAllPopularMovies(page = page, genres = genres)
+    override fun getPopularMovies(page: Int): Flow<MoviesResponseDomain> =
+        moviesCloudDataSource.getAllPopularMovies(page = page)
             .map(mapMoviesDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override fun getNowPlayingMovies(page: Int, genres: String): Flow<MoviesResponseDomain> =
-        moviesCloudDataSource.getAllNowPlayingMovies(page = page, genres = genres)
+    override fun getNowPlayingMovies(page: Int): Flow<MoviesResponseDomain> =
+        moviesCloudDataSource.getAllNowPlayingMovies(page = page)
             .map(mapMoviesDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override fun getUpcomingMovies(page: Int, genres: String): Flow<MoviesResponseDomain> =
-        moviesCloudDataSource.getAllUpcomingMovies(page = page, genres = genres)
+    override fun getUpcomingMovies(page: Int): Flow<MoviesResponseDomain> =
+        moviesCloudDataSource.getAllUpcomingMovies(page = page)
             .map(mapMoviesDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override fun getTopRatedMovies(page: Int, genres: String): Flow<MoviesResponseDomain> =
-        moviesCloudDataSource.getAllTopRatedMovies(page = page, genres = genres)
+    override fun getTopRatedMovies(page: Int): Flow<MoviesResponseDomain> =
+        moviesCloudDataSource.getAllTopRatedMovies(page = page)
             .map(mapMoviesDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override fun getTrendingMovies(page: Int, genres: String): Flow<MoviesResponseDomain> =
-        moviesCloudDataSource.getAllTrendingTodayMovies(page = page, genres = genres)
+    override fun getTrendingMovies(page: Int): Flow<MoviesResponseDomain> =
+        moviesCloudDataSource.getAllTrendingTodayMovies(page = page)
             .map(mapMoviesDataToDomain::map)
             .flowOn(Dispatchers.Default)
 
@@ -69,12 +71,12 @@ class MovieRepositoryImpl @Inject constructor(
         moviesCloudDataSource.getAllDetails(movieId = movieId).map(mapMovieDetailsToDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override suspend fun getActors(movieId: Int): Flow<CreditsResponseDomain> =
+    override  fun getActors(movieId: Int): Flow<CreditsResponseDomain> =
         moviesCloudDataSource.getAllActors(movieId = movieId)
             .map(mapCreditsResponseDataDomain::map)
             .flowOn(Dispatchers.Default)
 
-    override suspend fun getTvActors(tvId: Int): Flow<CreditsResponseDomain> =
+    override  fun getTvActors(tvId: Int): Flow<CreditsResponseDomain> =
         moviesCloudDataSource.getAllTvActors(tvId = tvId)
             .map(mapCreditsResponseDataDomain::map)
             .flowOn(Dispatchers.Default)

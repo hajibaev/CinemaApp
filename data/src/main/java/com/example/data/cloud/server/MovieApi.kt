@@ -2,6 +2,7 @@ package com.example.data.cloud.server
 
 import androidx.annotation.IntRange
 import com.example.data.cloud.models.movie.*
+import com.example.data.cloud.models.person.CreditsResponseCloud
 import com.example.data.cloud.utils.Endpoints.Movie.AIRING_TODAY_TV
 import com.example.data.cloud.utils.Endpoints.Movie.MOVIE_DETAILS
 import com.example.data.cloud.utils.Endpoints.Movie.NOW_PLAIN
@@ -28,7 +29,6 @@ interface MovieApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
-        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(POPULAR)
@@ -36,7 +36,6 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
-        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(NOW_PLAIN)
@@ -44,7 +43,6 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
-        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(UPCOMING)
@@ -52,7 +50,6 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
-        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET(TOP_RATED)
@@ -60,7 +57,6 @@ interface MovieApi {
         @Query("api_key") api_key: String = API_KEY,
         @Query("language") language: String = "en",
         @Query("page") @IntRange(from = 1) page: Int,
-        @Query("with_genres") genres: String
     ): Response<MoviesResponseCloud>
 
     @GET("movie/{movie_id}/credits")

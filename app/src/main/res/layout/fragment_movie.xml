@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bac_movie"
     android:orientation="vertical"
     tools:context=".ui.movie.movies_screen.MovieFragment">
 
@@ -55,81 +54,81 @@
                 android:id="@+id/trending"
                 layout="@layout/include_movies_item" />
 
-            <include
-                android:id="@+id/drama"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/drama"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/crime"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/crime"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/animation"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/animation"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/comedy"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/comedy"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/history"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/history"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/mystery"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/mystery"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/western"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/western"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/action"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/action"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/adventure"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/adventure"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/documentary"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/documentary"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/family"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/family"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/fantasy"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/fantasy"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/horror"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/horror"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/music"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/music"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/romance"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/romance"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/sciencefiction"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/sciencefiction"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/tv"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/tv"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/thriller"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/thriller"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/war"
-                layout="@layout/include_movies_item" />
+            <!--            <include-->
+            <!--                android:id="@+id/war"-->
+            <!--                layout="@layout/include_movies_item" />-->
 
         </LinearLayout>
     </ScrollView>

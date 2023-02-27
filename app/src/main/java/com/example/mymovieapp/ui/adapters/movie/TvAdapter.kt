@@ -38,15 +38,13 @@ class TvAdapter(
 
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.view.setOnClickListener {
-            try { listener.onItemClick(moviesList[position]) }
-            catch (e: Exception) { holder.showErrorSnackbar("Movies not ready yet") }
+            listener.onItemClick(moviesList[position])
         }
         holder.view.setOnLongClickListener {
             listener.onLongClick(moviesList[position])
             true
         }
-        try { holder.bindTvMovie(tv = moviesList[position])
-        } catch (e: Exception) { }
+        holder.bindTvMovie(tv = moviesList[position])
         holder.itemView.startItemAnim()
     }
 

@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.*
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
-import com.example.mymovieapp.app.models.movie.CreditsResponseUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.movie.MovieDetailsUi
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.MoviesResponseUi

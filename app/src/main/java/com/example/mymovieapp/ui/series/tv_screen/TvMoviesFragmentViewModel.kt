@@ -36,6 +36,12 @@ class TvMoviesFragmentViewModel @Inject constructor(
     val movieResponseState get() = _movieResponseState.asStateFlow()
     private val pageToResponseFlow = MutableStateFlow(_movieResponseState.value.page)
 
+    private val genresFLow = MutableStateFlow("")
+
+    private val pageAndGenresFlow = pageToResponseFlow.combine(genresFLow) { page, genres ->
+        Pair(page, genres)
+    }
+
     val tvTrending = pageToResponseFlow.flatMapLatest {
         repository.getTrendingTvSeries(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
@@ -43,14 +49,12 @@ class TvMoviesFragmentViewModel @Inject constructor(
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-
     val tvTopRated = pageToResponseFlow.flatMapLatest {
         repository.getTopRatedTvSeries(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
 
     val tvOnTheAir = pageToResponseFlow.flatMapLatest {
         repository.getOnTheAirTvSeries(it).map(mapTvResponse::map)
@@ -73,125 +77,13 @@ class TvMoviesFragmentViewModel @Inject constructor(
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    val anime = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, ANIMATION).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    val crimeMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, CRIME).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val comedyMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, COMEDY).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val historyMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, HISTORY).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val mysteryMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, MYSTERY).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val westernMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, WESTERN).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val dramaMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, DRAMA).map(mapTvResponse::map)
-    }.flowOn(Dispatchers.Default)
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val actionMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, ACTIONTV)
+    val allGenres = pageAndGenresFlow.flatMapLatest {
+        repository.getFantasyMovies(it.first, it.second)
     }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.page, value.total_pages) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val documentaryMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, DOCUMENTARY)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val familyMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, FAMILY)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val kidsMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, KIDS)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val newsMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, NEWS)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val realityMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, REALITY)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val fantasyMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, FANTASYTV)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val soapMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, SOAP)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val talkMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, TALK)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-    val politicsMovies = pageToResponseFlow.flatMapLatest {
-        repository.getFantasyMovies(it, POLITICS)
-    }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.page, value.total_pages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
 
     fun saveMovie(tv: SeriesUi) = viewModelScope.launch {
         storageRepository.tvSave(saveMapper.map(tv))
@@ -201,13 +93,14 @@ class TvMoviesFragmentViewModel @Inject constructor(
         TvMoviesFragmentDirections.actionNavTvMoviesToTvTypeFragment(seeAllTvType)
     )
 
-    fun launchTvDetails(seriesUi: SeriesUi) = navigate(
-        TvMoviesFragmentDirections.actionNavTvMoviesToTvDetailsFragment(seriesUi)
+    fun launchTvDetails(tvId: Int) = navigate(
+        TvMoviesFragmentDirections.actionNavTvMoviesToTvDetailsFragment(tvId)
     )
 
-    fun launchFromTvTypeToDetails(seriesUi: SeriesUi) = navigate(
-        SeriesSeeAllScreenFragmentDirections.actionTvTypeFragmentToTvDetailsFragment(seriesUi)
+    fun launchFromTvTypeToDetails(tvId: Int) = navigate(
+        SeriesSeeAllScreenFragmentDirections.actionTvTypeFragmentToTvDetailsFragment(tvId)
     )
+    fun genresTryEmit(newGenres: String) = genresFLow.tryEmit(newGenres)
 
     fun nextPage() = pageToResponseFlow.tryEmit(_movieResponseState.value.nextPage)
 
@@ -239,7 +132,6 @@ class TvMoviesFragmentViewModel @Inject constructor(
         const val THRILLER = "53"
         const val WAR = "10752"
         const val WESTERN = "37"
-
         const val KIDS = "10762"
         const val NEWS = "10763"
         const val REALITY = "10764"
@@ -250,23 +142,4 @@ class TvMoviesFragmentViewModel @Inject constructor(
 
     }
 
-//    Action          28
-//    Adventure       12
-//    Animation       16
-//    Comedy          35
-//    Crime           80
-//    Documentary     99
-//    Drama           18
-//    Family          10751
-//    Fantasy         14
-//    History         36
-//    Horror          23
-//    Music           104402
-//    Mystery         9648
-//    Romance         10749
-//    Science Fiction 8748
-//    TV Movie        10770
-//    Thriller        533
-//    War             10752
-//    Western         37
 }

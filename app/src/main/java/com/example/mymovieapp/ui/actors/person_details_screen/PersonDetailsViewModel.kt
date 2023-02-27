@@ -3,11 +3,14 @@ package com.example.mymovieapp.ui.actors.person_details_screen
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.person.PersonDetailsDomain
+import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.domain.repository.PersonRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
 import com.example.mymovieapp.app.utils.ResourceProvider
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +36,7 @@ class PersonDetailsViewModel constructor(
 
     private val personIdFlow = MutableStateFlow(personId)
 
+
     val personFlow = personIdFlow.flatMapLatest {
         repository.getPersonDetails(it)
     }.map(mapPersonDetailsDomainToUi::map)
@@ -44,6 +48,11 @@ class PersonDetailsViewModel constructor(
         storageRepository.save(saveMapper.map(movie))
     }
 
-    fun launchMovieDetails(movie: MovieUi) = navigate(
-        PersonDetailsFragmentDirections.actionPersonDetailsFragmentToMovieDetailsFragment(movie))
+    fun launchMovieDetails(movieId: Int) = navigate(
+        PersonDetailsFragmentDirections.actionPersonDetailsFragmentToMovieDetailsFragment(movieId)
+    )
+
+    fun launchTvDetails(tvId: Int) = navigate(
+        PersonDetailsFragmentDirections.actionPersonDetailsFragmentToTvDetailsFragment(tvId)
+    )
 }

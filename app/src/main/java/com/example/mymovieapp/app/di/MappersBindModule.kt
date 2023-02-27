@@ -1,21 +1,23 @@
 package com.example.mymovieapp.app.di
 
 import com.example.data.cloud.mappers.movie.*
-import com.example.data.cloud.mappers.person.*
+import com.example.data.cloud.mappers.person.MapCrewCloudToData
+import com.example.data.cloud.mappers.person.MapPersonCloudToData
+import com.example.data.cloud.mappers.person.MapPersonDetailsCloudToData
+import com.example.data.cloud.mappers.person.MapPersonsCloudToData
 import com.example.data.cloud.mappers.video.MapTrailerCloudToData
 import com.example.data.cloud.mappers.video.MapVideoCloudToData
 import com.example.data.cloud.models.movie.*
-import com.example.data.cloud.models.person.PersonCloud
-import com.example.data.cloud.models.person.PersonDetailsCloud
-import com.example.data.cloud.models.person.PersonsCloud
+import com.example.data.cloud.models.person.*
 import com.example.data.cloud.models.video.TrailerCloud
 import com.example.data.cloud.models.video.VideoCloud
 import com.example.data.data.mappers.movie.*
-import com.example.data.data.mappers.person.*
+import com.example.data.data.mappers.person.MapCrewDataToDomain
+import com.example.data.data.mappers.person.MapPersonDataToDomain
+import com.example.data.data.mappers.person.MapPersonDetailsDataToDomain
+import com.example.data.data.mappers.person.MapPersonsDataToDomain
 import com.example.data.data.models.movie.*
-import com.example.data.data.models.person.PersonData
-import com.example.data.data.models.person.PersonDetailsData
-import com.example.data.data.models.person.PersonsData
+import com.example.data.data.models.person.*
 import com.example.data.data.models.video.TrailerData
 import com.example.data.data.models.video.VideoData
 import com.example.data.storage.movie.MovieStorage
@@ -27,19 +29,18 @@ import com.example.data.storage.tv.mappers.MapTvStorageToDataMaps
 import com.example.data.storage.tv.models.TvStorage
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.*
-import com.example.domain.models.person.PersonDetailsDomain
-import com.example.domain.models.person.PersonDomain
-import com.example.domain.models.person.PersonsDomain
+import com.example.domain.models.person.*
 import com.example.domain.models.video.TrailerDomain
 import com.example.domain.models.video.VideosDomain
 import com.example.movieapp.data.mappers.video.MapTrailerDataToDomain
 import com.example.movieapp.data.mappers.video.MapVideoDataToDomain
 import com.example.mymovieapp.app.mappers.movie.*
-import com.example.mymovieapp.app.mappers.person.*
+import com.example.mymovieapp.app.mappers.person.MapCrewDomainToUi
+import com.example.mymovieapp.app.mappers.person.MapPersonDetailsDomainToUi
+import com.example.mymovieapp.app.mappers.person.MapPersonDomainToUi
+import com.example.mymovieapp.app.mappers.person.MapPersonsDomainToUi
 import com.example.mymovieapp.app.models.movie.*
-import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
-import com.example.mymovieapp.app.models.person.PersonPresentation
-import com.example.mymovieapp.app.models.person.PersonsPresentation
+import com.example.mymovieapp.app.models.person.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -71,6 +72,15 @@ abstract class MappersBindModule {
 
     @Binds
     abstract fun bindMapFromMovieCloudToData(impl: MapMovieCloudToData): Mapper<MovieCloud, MovieData>
+
+    @Binds
+    abstract fun bindMapCrewCloudToData(impl: MapCrewCloudToData): Mapper<CrewCloud, CrewData>
+
+    @Binds
+    abstract fun bindMapCrewDomainToUi(impl: MapCrewDomainToUi): Mapper<CrewDomain, CrewUi>
+
+    @Binds
+    abstract fun bindMapCrewDataToDomain(impl: MapCrewDataToDomain): Mapper<CrewData, CrewDomain>
 
     @Binds
     abstract fun bindMapFromMovieDetailsCloudToData(impl: MapMovieDetailsCloudToData): Mapper<MovieDetailsCloud, MovieDetailsData>

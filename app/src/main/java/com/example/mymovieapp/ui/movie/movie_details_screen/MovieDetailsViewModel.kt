@@ -2,7 +2,7 @@ package com.example.mymovieapp.ui.movie.movie_details_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CreditsResponseDomain
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.movie.MovieDetailsDomain
 import com.example.domain.models.movie.MovieDomain
 import com.example.domain.models.movie.MoviesResponseDomain
@@ -10,6 +10,9 @@ import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.*
+import com.example.mymovieapp.app.models.person.CastUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
+import com.example.mymovieapp.app.models.person.CrewUi
 import com.example.mymovieapp.app.utils.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -70,7 +73,14 @@ class MovieDetailsViewModel constructor(
     fun goActorsDetails(castUi: CastUi) = navigate(
         MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(
             castUi.id,
-            arrayOf(null)
+            null
+        )
+    )
+
+    fun goFromCrewToActorsDetails(crewUi: CrewUi) = navigate(
+        MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(
+            crewUi.id,
+            null
         )
     )
 

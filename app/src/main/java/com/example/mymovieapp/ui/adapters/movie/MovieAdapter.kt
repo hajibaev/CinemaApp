@@ -36,17 +36,15 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.view.setOnClickListener {
-            try { listener.onItemClick(moviesList[position]) }
-            catch (e: Exception) { holder.showErrorSnackbar("Movies not ready yet") }
+            listener.onItemClick(moviesList[position])
         }
 
         holder.view.setOnLongClickListener {
             listener.onLongClick(moviesList[position])
             true
         }
-//        holder.itemView.startItemAnim()
-        try { holder.bindMovie(movie = moviesList[position])
-        } catch (e: Exception) {  }
+        holder.itemView.startItemAnim()
+        holder.bindMovie(movie = moviesList[position])
     }
 
     override fun getItemCount() = moviesList.size

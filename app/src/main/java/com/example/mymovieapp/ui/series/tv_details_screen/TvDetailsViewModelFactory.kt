@@ -3,13 +3,13 @@ package com.example.mymovieapp.ui.series.tv_details_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CreditsResponseDomain
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
-import com.example.mymovieapp.app.models.movie.CreditsResponseUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
 import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi

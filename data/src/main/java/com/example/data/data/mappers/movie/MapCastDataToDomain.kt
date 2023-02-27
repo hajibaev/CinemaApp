@@ -1,8 +1,8 @@
 package com.example.data.data.mappers.movie
 
-import com.example.data.data.models.movie.CastData
+import com.example.data.data.models.person.CastData
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CastDomain
+import com.example.domain.models.person.CastDomain
 import javax.inject.Inject
 
 class MapCastDataToDomain @Inject constructor() : Mapper<CastData, CastDomain> {

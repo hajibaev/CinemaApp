@@ -55,73 +55,73 @@
                 android:id="@+id/airing_today"
                 layout="@layout/include_movies_item" />
 
-            <include
-                android:id="@+id/crime"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/crime"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/animation"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/animation"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/drama"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/drama"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/comedy"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/comedy"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/history"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/history"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/mystery"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/mystery"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/western"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/western"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/action"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/action"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/documentary"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/documentary"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/family"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/family"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/kids"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/kids"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/news"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/news"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/reality"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/reality"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/fantasy"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/fantasy"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/soap"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/soap"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/talk"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/talk"-->
+<!--                layout="@layout/include_movies_item" />-->
 
-            <include
-                android:id="@+id/politics"
-                layout="@layout/include_movies_item" />
+<!--            <include-->
+<!--                android:id="@+id/politics"-->
+<!--                layout="@layout/include_movies_item" />-->
 
         </LinearLayout>
     </ScrollView>

@@ -6,6 +6,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import com.broadcast.myapplication.adapter.animations.AddableItemAnimator
+import com.broadcast.myapplication.adapter.animations.custom.SimpleCommonAnimator
 import com.broadcast.myapplication.adapter.animations.custom.SlideInLeftCommonAnimator
 import com.broadcast.myapplication.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.mymovieapp.R
@@ -87,7 +88,7 @@ class StorageFragment : BaseFragment<FragmentStorageBinding, MovieStorageViewMod
     override fun onReady(savedInstanceState: Bundle?) {}
 
     override fun onItemClick(seriesUi: SeriesUi) {
-        viewModel.launchTvDetails(seriesUi)
+        viewModel.launchTvDetails(seriesUi.id)
     }
 
     override fun onTvClearItemClick(seriesUi: SeriesUi) {
@@ -101,7 +102,7 @@ class StorageFragment : BaseFragment<FragmentStorageBinding, MovieStorageViewMod
     }
 
     override fun onItemClick(item: MovieUi) {
-        viewModel.launchMovieDetails(item)
+        viewModel.launchMovieDetails(item.movieId)
     }
 
     override fun onLongClick(item: MovieUi) {

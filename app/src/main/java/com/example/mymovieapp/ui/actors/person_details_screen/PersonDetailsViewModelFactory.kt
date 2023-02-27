@@ -4,10 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.person.PersonDetailsDomain
+import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.domain.repository.PersonRepository
 import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
 import com.example.mymovieapp.app.utils.ResourceProvider
 import dagger.assisted.Assisted
@@ -29,6 +32,7 @@ class PersonDetailsViewModelFactory @AssistedInject constructor(
         require(modelClass == PersonDetailsViewModel::class.java)
         return PersonDetailsViewModel(
             personId = personId,
+
             repository = repository,
             storageRepository = storageRepository,
             saveMapper = saveMapper,

@@ -1,22 +1,22 @@
 package com.example.data.data.mappers.movie
 
-import com.example.data.data.models.movie.CastData
-import com.example.data.data.models.movie.CreditsResponseData
-import com.example.data.data.models.movie.MovieData
+import com.example.data.data.models.person.CastData
+import com.example.data.data.models.person.CreditsResponseData
+import com.example.data.data.models.person.CrewData
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CastDomain
-import com.example.domain.models.movie.CreditsResponseDomain
-import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.person.CastDomain
+import com.example.domain.models.person.CreditsResponseDomain
+import com.example.domain.models.person.CrewDomain
 import javax.inject.Inject
 
 class MapCreditsResponseDataToDomain @Inject constructor(
     private val mapListCastDataToDomain: Mapper<List<CastData>, List<CastDomain>>,
-//    private val mapListMovieDataToDomain: Mapper<List<MovieData>, List<MovieDomain>>,
+    private val mapListCrewDataToDomain: Mapper<List<CrewData>, List<CrewDomain>>,
 ) : Mapper<CreditsResponseData, CreditsResponseDomain> {
     override fun map(from: CreditsResponseData) = from.run {
         CreditsResponseDomain(
             cast = mapListCastDataToDomain.map(cast),
-//            crew = mapListMovieDataToDomain.map(crew),
+            crew = mapListCrewDataToDomain.map(crew),
             id = id
         )
     }

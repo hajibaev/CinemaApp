@@ -10,9 +10,6 @@
         android:name="com.example.mymovieapp.ui.movie.movie_details_screen.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details">
-        <argument
-            android:name="movie"
-            app:argType="com.example.mymovieapp.app.models.movie.MovieUi" />
         <action
             android:id="@+id/action_movieDetailsFragment_to_nav_movies"
             app:destination="@id/nav_movies" />
@@ -23,6 +20,9 @@
             app:exitAnim="@anim/to_right_out"
             app:popEnterAnim="@anim/to_left_in"
             app:popExitAnim="@anim/to_right_out" />
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -37,6 +37,16 @@
             app:exitAnim="@anim/to_right_out"
             app:popEnterAnim="@anim/to_left_in"
             app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_nav_search_to_movieTypeFragment"
+            app:destination="@id/movieTypeFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_nav_search_to_tvTypeFragment"
+            app:destination="@id/tvTypeFragment" />
     </fragment>
 
     <fragment
@@ -89,9 +99,15 @@
         <argument
             android:name="id"
             app:argType="integer" />
+
+        <action
+            android:id="@+id/action_personDetailsFragment_to_tvDetailsFragment"
+            app:destination="@id/tvDetailsFragment" />
         <argument
-            android:name="films"
-            app:argType="com.example.mymovieapp.app.models.movie.MovieUi[]" />
+            android:name="movie"
+            app:argType="com.example.mymovieapp.app.models.movie.MovieUi[]"
+            app:nullable="true" />
+
 
     </fragment>
 
@@ -182,9 +198,6 @@
         android:name="com.example.mymovieapp.ui.series.tv_details_screen.TvDetailsFragment"
         android:label="fragment_tv_details"
         tools:layout="@layout/fragment_tv_details">
-        <argument
-            android:name="tv"
-            app:argType="com.example.mymovieapp.app.models.movie.SeriesUi" />
         <action
             android:id="@+id/action_tvDetailsFragment_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment"
@@ -192,6 +205,9 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <argument
+            android:name="tvId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

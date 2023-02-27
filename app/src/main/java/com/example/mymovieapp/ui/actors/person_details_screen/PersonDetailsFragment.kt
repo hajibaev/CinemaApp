@@ -3,22 +3,20 @@ package com.example.mymovieapp.ui.actors.person_details_screen
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.data.cloud.utils.Utils.IMAGE_PATH
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.base.BaseFragment
 import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.models.person.CrewUi
 import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
-import com.example.mymovieapp.app.utils.extensions.hideView
-import com.example.mymovieapp.app.utils.extensions.launchWhenViewStarted
-import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
-import com.example.mymovieapp.app.utils.extensions.showView
+import com.example.mymovieapp.app.utils.extensions.*
 import com.example.mymovieapp.app.utils.motion.MotionListener
 import com.example.mymovieapp.app.utils.motion.MotionState
 import com.example.mymovieapp.databinding.FragmentPersonDetailsBinding
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,11 +27,10 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding, PersonD
 
     private val movieAdapter by lazy { MovieAdapter(MovieAdapter.HORIZONTAL_TYPE, this) }
     private val actorsIds by lazy { PersonDetailsFragmentArgs.fromBundle(requireArguments()).id }
+    private val known_for by lazy { PersonDetailsFragmentArgs.fromBundle(requireArguments()).movie }
 
-    //
-    private val known_for by lazy {
-        PersonDetailsFragmentArgs.fromBundle(requireArguments()).films
-    }
+    private val args by navArgs<PersonDetailsFragmentArgs>()
+
 
     @Inject
     lateinit var viewModelFactory: PersonDetailsViewModelFactory.Factory
@@ -46,6 +43,10 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding, PersonD
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setupViews()
+        if (known_for != null) {
+            movieAdapter.moviesList = known_for!!.toList()
+            requireBinding().personMoviesRv.adapter = movieAdapter
+        }
     }
 
     private fun setupViews() = with(requireBinding()) {
@@ -66,17 +67,16 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding, PersonD
     private fun observeViewModel() = with(viewModel) {
         launchWhenViewStarted {
             personFlow.observe(::observePersonUi)
-            movieAdapter.moviesList = known_for.toList()
-            requireBinding().personMoviesRv.adapter = movieAdapter
-            requireBinding().personMoviesRv.showView()
-            requireBinding().personMoviesText.showView()
         }
     }
 
     private fun observePersonUi(person: PersonDetailsPresentation) = with(requireBinding()) {
         includeUserInfoToolbarBlock.upButton.setOnDownEffectClick { viewModel.navigateBack() }
         includeUserInfoBlueToolbarBlock.backiccon.setOnDownEffectClick() { viewModel.navigateBack() }
-        Picasso.get().load(IMAGE_PATH + person.profile_path).into(userImage)
+        requireContext().showRoundedImage(
+            imageUrl = IMAGE_PATH + person.profile_path,
+            imageView = userImage
+        )
         includeUserInfoToolbarBlock.userToolbarNameText.text = person.name
         birthday.text = person.birthday
         profession.text = person.known_for_department
@@ -88,7 +88,7 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding, PersonD
         birthPlace.text = person.place_of_birth
     }
 
-    override fun onItemClick(movie: MovieUi)  =viewModel.launchMovieDetails(movie)
+    override fun onItemClick(movie: MovieUi) = viewModel.launchMovieDetails(movie.movieId)
 
 
     override fun onStart() {

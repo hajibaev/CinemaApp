@@ -2,7 +2,7 @@ package com.example.mymovieapp.ui.series.tv_details_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CreditsResponseDomain
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
@@ -10,8 +10,10 @@ import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.*
+import com.example.mymovieapp.app.models.person.CastUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
+import com.example.mymovieapp.app.models.person.CrewUi
 import com.example.mymovieapp.app.utils.ResourceProvider
-import com.example.mymovieapp.ui.movie.movie_details_screen.MovieDetailsFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -72,7 +74,14 @@ class TvDetailsViewModel constructor(
     fun goActorsDetails(castUi: CastUi) = navigate(
         TvDetailsFragmentDirections.actionTvDetailsFragmentToPersonDetailsFragment(
             castUi.id,
-            arrayOf(null)
+            null
+        )
+    )
+
+    fun goFromCrewToActorsDetails(crew: CrewUi) = navigate(
+        TvDetailsFragmentDirections.actionTvDetailsFragmentToPersonDetailsFragment(
+            crew.id,
+            null
         )
     )
 

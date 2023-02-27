@@ -1,22 +1,22 @@
 package com.example.mymovieapp.app.mappers.movie
 
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CastDomain
-import com.example.domain.models.movie.CreditsResponseDomain
-import com.example.domain.models.movie.MovieDomain
-import com.example.mymovieapp.app.models.movie.CastUi
-import com.example.mymovieapp.app.models.movie.CreditsResponseUi
-import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.domain.models.person.CastDomain
+import com.example.domain.models.person.CreditsResponseDomain
+import com.example.domain.models.person.CrewDomain
+import com.example.mymovieapp.app.models.person.CastUi
+import com.example.mymovieapp.app.models.person.CreditsResponseUi
+import com.example.mymovieapp.app.models.person.CrewUi
 import javax.inject.Inject
 
 class MapCreditsResponseDomainToUi @Inject constructor(
     private val mapListCastDomainToUi: Mapper<List<CastDomain>, List<CastUi>>,
-//    private val mapListMovieDomainToUi: Mapper<List<MovieDomain>, List<MovieUi>>,
+    private val mapListCrewDomainToUi: Mapper<List<CrewDomain>, List<CrewUi>>,
 ) : Mapper<CreditsResponseDomain, CreditsResponseUi> {
     override fun map(from: CreditsResponseDomain) = from.run {
         CreditsResponseUi(
             cast = mapListCastDomainToUi.map(cast),
-//            crew = mapListMovieDomainToUi.map(crew),
+            crew = mapListCrewDomainToUi.map(crew),
             id = id
         )
     }

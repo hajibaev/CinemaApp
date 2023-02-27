@@ -14,6 +14,7 @@ import com.example.mymovieapp.databinding.StorageItemBinding
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
+import com.example.mymovieapp.app.utils.extensions.showRoundedImage
 import com.example.ui_core.custom.snackbar.SnackBar
 import com.squareup.picasso.Picasso
 
@@ -33,7 +34,7 @@ class MovieStorageAdapter(
         holder.itemView.setOnDownEffectClick {
             listener.onItemClick(getItem(position))
         }
-        holder.itemView.setOnDownEffectClick {
+        holder.itemView.setOnClickListener {
             listener.onLongClick(getItem(position))
         }
         holder.bind(getItem(position))
@@ -43,12 +44,11 @@ class MovieStorageAdapter(
         private val binding = StorageItemBinding.bind(itemView)
         fun bind(movie: MovieUi) = movie.apply {
             with(binding) {
-                Picasso.get().load(Utils.IMAGE_PATH + posterPath).into(imagePoster)
                 buttonBookmark.setOnDownEffectClick {
                     it.isClickable = false
                     listener.onLongClick(getItem(adapterPosition))
                 }
-                storage.setOnDownEffectClick {
+                storage.setOnClickListener {
                     try { listener.onItemClick(getItem(adapterPosition))
                     } catch (e: Exception) { showErrorSnackbar("You have already deleted this movie") } }
                 votecount.text = String.format(context.resources.getString(R.string.movieStorage_voteCont), voteCount.toString())
@@ -56,6 +56,10 @@ class MovieStorageAdapter(
                 textTitle.text = originalTitle
                 textReleaseDate.text = releaseDate
                 voteaverage.rating = voteAverage.toFloat()
+                view.context.showRoundedImage(
+                    imageUrl = Utils.IMAGE_PATH + posterPath,
+                    imageView = imagePoster
+                )
             }
         }
 

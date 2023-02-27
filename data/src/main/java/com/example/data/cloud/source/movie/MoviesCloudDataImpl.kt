@@ -1,11 +1,12 @@
 package com.example.data.cloud.source.movie
 
 import com.example.data.cloud.models.movie.*
+import com.example.data.cloud.models.person.CreditsResponseCloud
 import com.example.data.cloud.server.MovieApi
 import com.example.data.data.models.movie.*
+import com.example.data.data.models.person.CreditsResponseData
 import com.example.domain.base.Mapper
 import com.example.domain.helper.DispatchersProvider
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -22,25 +23,25 @@ class MoviesCloudDataImpl @Inject constructor(
     private val dispatchers: DispatchersProvider,
 ) : MoviesCloudDataSource {
 
-    override fun getAllPopularMovies(page: Int, genres: String): Flow<MoviesData> = flow {
-        emit(api.getPopularMovies(page = page, genres = genres))
+    override fun getAllPopularMovies(page: Int): Flow<MoviesData> = flow {
+        emit(api.getPopularMovies(page = page))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(dispatchers.default())
 
-    override fun getAllNowPlayingMovies(page: Int, genres: String): Flow<MoviesData> = flow {
-        emit(api.getNowPlainMovies(page = page, genres = genres))
-    }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
-        .flowOn(dispatchers.default())
-
-
-    override fun getAllUpcomingMovies(page: Int, genres: String): Flow<MoviesData> = flow {
-        emit(api.getUpcomingMovies(page = page, genres = genres))
+    override fun getAllNowPlayingMovies(page: Int): Flow<MoviesData> = flow {
+        emit(api.getNowPlainMovies(page = page))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(dispatchers.default())
 
 
-    override fun getAllTopRatedMovies(page: Int, genres: String): Flow<MoviesData> = flow {
-        emit(api.getTopRatedMovies(page = page, genres = genres))
+    override fun getAllUpcomingMovies(page: Int): Flow<MoviesData> = flow {
+        emit(api.getUpcomingMovies(page = page))
+    }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
+        .flowOn(dispatchers.default())
+
+
+    override fun getAllTopRatedMovies(page: Int): Flow<MoviesData> = flow {
+        emit(api.getTopRatedMovies(page = page))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(dispatchers.default())
 
@@ -61,17 +62,17 @@ class MoviesCloudDataImpl @Inject constructor(
         .flowOn(dispatchers.default())
 
 
-    override fun getAllTrendingTodayMovies(page: Int, genres: String): Flow<MoviesData> = flow {
-        emit(api.getTrendingTodayMovies(page = page, genres = genres))
+    override fun getAllTrendingTodayMovies(page: Int): Flow<MoviesData> = flow {
+        emit(api.getTrendingTodayMovies(page = page))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapListMovieCloudToData::map)
         .flowOn(dispatchers.default())
 
-    override suspend fun getAllActors(movieId: Int): Flow<CreditsResponseData> = flow {
+    override fun getAllActors(movieId: Int): Flow<CreditsResponseData> = flow {
         emit(api.getMovieCredits(movieId = movieId))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapCreditsResponseCloudToData::map)
         .flowOn(dispatchers.default())
 
-    override suspend fun getAllTvActors(tvId: Int): Flow<CreditsResponseData> = flow {
+    override fun getAllTvActors(tvId: Int): Flow<CreditsResponseData> = flow {
         emit(api.getTvCredits(tvId = tvId))
     }.flowOn(dispatchers.io()).map { it.body()!! }.map(mapCreditsResponseCloudToData::map)
         .flowOn(dispatchers.default())

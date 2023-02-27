@@ -19,7 +19,9 @@ import com.example.mymovieapp.databinding.FragmentMovieTypeBinding
 import com.example.mymovieapp.ui.adapters.click.RvClickListener
 import com.example.mymovieapp.ui.adapters.movie.MovieAdapter
 import com.example.mymovieapp.ui.movie.movies_screen.MovieViewModels
+import com.example.mymovieapp.ui.movie.search_screen.SearchViewModel
 import com.example.mymovieapp.ui.see_more_sort_dialog.SettingsFragment
+import com.example.mymovieapp.ui.series.tv_screen.TvMoviesFragmentViewModel
 import com.example.mymovieapp.ui.type.SeeAllMovieType
 import com.example.ui_core.modal_page.ModalPage
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,7 +35,6 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
     FragmentMovieTypeBinding::inflate
 ), RvClickListener<MovieUi> {
     override val viewModel by viewModels<MovieViewModels>()
-
     private val args by navArgs<MovieSeeAllScreenFragmentArgs>()
 
     private val popularAdapter by lazy { MovieAdapter(MovieAdapter.PORTRAIT_TYPE, this) }
@@ -65,11 +66,11 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         super.onViewCreated(view, savedInstanceState)
         observeType()
         setupClickers()
+        observe()
     }
 
     private fun setupClickers() = with(requireBinding()) {
         includeBookInfoToolbarBlock.backIcon.setOnDownEffectClick { viewModel.navigateBack() }
-//        sortOptions.setOnDownEffectClickListener { showSettingModalPage() }
         viewModel.apply {
             nextBtn.setOnDownEffectClick {
                 nextPage()
@@ -84,178 +85,154 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         }
     }
 
+
+    private fun observe() = with(viewModel) {
+        launchWhenViewStarted {
+            allGenres.observe {
+                dramaAdapter.moviesList = it.movies
+                familyAdapter.moviesList = it.movies
+                documentaryAdapter.moviesList = it.movies
+                comedyAdapter.moviesList = it.movies
+                historyAdapter.moviesList = it.movies
+                mysteryAdapter.moviesList = it.movies
+                westernAdapter.moviesList = it.movies
+                actionAdapter.moviesList = it.movies
+                adventureAdapter.moviesList = it.movies
+                animationAdapter.moviesList = it.movies
+                crimeAdapter.moviesList = it.movies
+                fantasyAdapter.moviesList = it.movies
+                horrorAdapter.moviesList = it.movies
+                musicAdapter.moviesList = it.movies
+                romanceAdapter.moviesList = it.movies
+                sciencefictionAdapter.moviesList = it.movies
+                tvAdapter.moviesList = it.movies
+                thrillerAdapter.moviesList = it.movies
+                warAdapter.moviesList = it.movies
+                uiVisibility()
+            }
+        }
+    }
+
     private fun observeType() = with(viewModel) {
         requireBinding().apply {
             when (args.movieType) {
-                SeeAllMovieType.TOP_RATED -> observeRatingMovies()
-                SeeAllMovieType.NOW_PLAYING -> observeRelevanceMovies()
-                SeeAllMovieType.UPCOMING -> observePublishedAtMovies()
-                SeeAllMovieType.POPULAR -> observePopularMovies()
-                SeeAllMovieType.TRENDING -> observeTrendingMovies()
-                SeeAllMovieType.DRAMA -> observeDramaMovies()
-                SeeAllMovieType.FAMILY -> observeFamilyMovies()
-                SeeAllMovieType.COMEDY -> observeComedyMovies()
-                SeeAllMovieType.DOCUMENTARY -> observeDocumentaryMovies()
-                SeeAllMovieType.HISTORY -> observeHistoryMovies()
-                SeeAllMovieType.MYSTERY -> observeMysteryMovies()
-                SeeAllMovieType.WESTERN -> observeWesternMovies()
-                SeeAllMovieType.ACTION -> observeActionMovies()
-                SeeAllMovieType.ADVENTURE -> observeAdventureMovies()
-                SeeAllMovieType.ANIMATION -> observeAnimationMovies()
-                SeeAllMovieType.CRIME -> observeCrimeMovies()
-                SeeAllMovieType.FANTASY -> observeFantasyMovies()
-                SeeAllMovieType.HORROR -> observeHorrorMovies()
-                SeeAllMovieType.MUSIC -> observeMusicMovies()
-                SeeAllMovieType.ROMANCE -> observeRomanceMovies()
-                SeeAllMovieType.SCIENCEFICTION -> observeSciencefictionMovies()
-                SeeAllMovieType.TV_MOVIE -> observeTvMovies()
-                SeeAllMovieType.THRILLER -> observeThrillerMovies()
-                SeeAllMovieType.WAR -> observeWarMovies()
+                SeeAllMovieType.TOP_RATED -> observeTopRated()
+                SeeAllMovieType.NOW_PLAYING -> observeNowPlaying()
+                SeeAllMovieType.UPCOMING -> observeUpcoming()
+                SeeAllMovieType.POPULAR -> observePopular()
+                SeeAllMovieType.TRENDING -> observeTrending()
+                SeeAllMovieType.DRAMA -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.DRAMA)
+                    requireBinding().moviesRv.adapter = dramaAdapter
+                    toolbarTitle(getString(R.string.drama))
+                }
+                SeeAllMovieType.FAMILY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.FAMILY)
+                    toolbarTitle(getString(R.string.family_text))
+                    requireBinding().moviesRv.adapter = familyAdapter
+                }
+                SeeAllMovieType.COMEDY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.COMEDY)
+                    toolbarTitle(getString(R.string.comedy))
+                    requireBinding().moviesRv.adapter = comedyAdapter
+                }
+                SeeAllMovieType.DOCUMENTARY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.DOCUMENTARY)
+                    toolbarTitle(getString(R.string.documentary))
+                    requireBinding().moviesRv.adapter = documentaryAdapter
+                }
+                SeeAllMovieType.HISTORY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.HISTORY)
+                    toolbarTitle(getString(R.string.history))
+                    requireBinding().moviesRv.adapter = historyAdapter
+                }
+                SeeAllMovieType.MYSTERY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.MYSTERY)
+                    toolbarTitle(getString(R.string.mystery))
+                    requireBinding().moviesRv.adapter = mysteryAdapter
+                }
+                SeeAllMovieType.WESTERN -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.WESTERN)
+                    toolbarTitle(getString(R.string.western))
+                    requireBinding().moviesRv.adapter = westernAdapter
+                }
+                SeeAllMovieType.ACTION -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.ACTION)
+                    toolbarTitle(getString(R.string.action))
+                    requireBinding().moviesRv.adapter = actionAdapter
+                }
+                SeeAllMovieType.ADVENTURE -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.ADVENTURE)
+                    toolbarTitle(getString(R.string.adventure))
+                    requireBinding().moviesRv.adapter = adventureAdapter
+                }
+                SeeAllMovieType.ANIMATION -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.ANIMATION)
+                    toolbarTitle(getString(R.string.animation))
+                    requireBinding().moviesRv.adapter = animationAdapter
+                }
+                SeeAllMovieType.CRIME -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.CRIME)
+                    toolbarTitle(getString(R.string.Crime))
+                    requireBinding().moviesRv.adapter = crimeAdapter
+                }
+                SeeAllMovieType.FANTASY -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.FANTASY)
+                    toolbarTitle(getString(R.string.fantasy))
+                    requireBinding().moviesRv.adapter = fantasyAdapter
+                }
+                SeeAllMovieType.HORROR -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.HORROR)
+                    toolbarTitle(getString(R.string.horror))
+                    requireBinding().moviesRv.adapter = horrorAdapter
+                }
+                SeeAllMovieType.MUSIC -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.MUSIC)
+                    toolbarTitle(getString(R.string.music))
+                    requireBinding().moviesRv.adapter = musicAdapter
+                }
+                SeeAllMovieType.ROMANCE -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.ROMANCE)
+                    toolbarTitle(getString(R.string.romance))
+                    requireBinding().moviesRv.adapter = romanceAdapter
+                }
+                SeeAllMovieType.SCIENCEFICTION -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.SCIENCEFICTION)
+                    toolbarTitle(getString(R.string.scienceFiction))
+                    requireBinding().moviesRv.adapter = sciencefictionAdapter
+                }
+                SeeAllMovieType.TV_MOVIE -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.TV_MOVIE)
+                    toolbarTitle(getString(R.string.tvMovie))
+                    requireBinding().moviesRv.adapter = tvAdapter
+                }
+                SeeAllMovieType.THRILLER -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.THRILLER)
+                    toolbarTitle(getString(R.string.thriller))
+                    requireBinding().moviesRv.adapter = thrillerAdapter
+                }
+                SeeAllMovieType.WAR -> {
+                    genresTryEmit(TvMoviesFragmentViewModel.WAR)
+                    toolbarTitle(getString(R.string.war))
+                    requireBinding().moviesRv.adapter = warAdapter
+                }
+
             }
             error.onEach { makeToast(it, requireContext()) }
             launchWhenViewResumed { movieResponseState.observe(::observeResponseState) }
         }
     }
 
-    private fun observePopularMovies() = launchWhenViewResumed {
-        viewModel.popularMovies.observe {
-            uiVisibility()
-            popularAdapter.moviesList = it.movies
-        }
-        requireBinding().moviesRv.adapter = popularAdapter
-        toolbarTitle(getString(R.string.popular_category))
-    }
-
-    private fun observeRatingMovies() = launchWhenViewResumed {
+    private fun observeTopRated() = launchWhenViewStarted {
         viewModel.topRatedMovies.observe {
-            uiVisibility()
-
             topRatedAdapter.moviesList = it.movies
+            uiVisibility()
         }
         requireBinding().moviesRv.adapter = topRatedAdapter
         toolbarTitle(getString(R.string.top_rated_category))
     }
 
-
-    private fun observePublishedAtMovies() = launchWhenViewResumed {
-        viewModel.upcomingMovies.observe {
-            uiVisibility()
-            upcomingAdapter.moviesList = it.movies
-        }
-        requireBinding().moviesRv.adapter = upcomingAdapter
-        toolbarTitle(getString(R.string.adventure_text))
-    }
-
-    private fun observeAdventureMovies() = launchWhenViewResumed {
-        viewModel.adventureMovies.observe {
-            adventureAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.adventure))
-        requireBinding().moviesRv.adapter = adventureAdapter
-    }
-
-    private fun observeDocumentaryMovies() = launchWhenViewResumed {
-        viewModel.documentaryMovies.observe {
-            documentaryAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.documentary))
-        requireBinding().moviesRv.adapter = documentaryAdapter
-    }
-
-    private fun observeActionMovies() = launchWhenViewResumed {
-        viewModel.actionMovies.observe {
-            actionAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.action))
-        requireBinding().moviesRv.adapter = actionAdapter
-    }
-
-    private fun observeCrimeMovies() = launchWhenViewResumed {
-        viewModel.crimeMovies.observe {
-            crimeAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.Crime))
-        requireBinding().moviesRv.adapter = crimeAdapter
-    }
-
-    private fun observeHorrorMovies() = launchWhenViewResumed {
-        viewModel.horrorMovies.observe {
-            horrorAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.horror))
-        requireBinding().moviesRv.adapter = horrorAdapter
-    }
-
-    private fun observeMusicMovies() = launchWhenViewResumed {
-        viewModel.musicMovies.observe {
-            musicAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.music))
-        requireBinding().moviesRv.adapter = musicAdapter
-    }
-
-    private fun observeFantasyMovies() = launchWhenViewResumed {
-        viewModel.fantasyMovies.observe {
-            fantasyAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.fantasy))
-        requireBinding().moviesRv.adapter = fantasyAdapter
-    }
-
-    private fun observeRomanceMovies() = launchWhenViewResumed {
-        viewModel.romanceMovies.observe {
-            romanceAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.romance))
-        requireBinding().moviesRv.adapter = romanceAdapter
-    }
-
-    private fun observeSciencefictionMovies() = launchWhenViewResumed {
-        viewModel.sciencefictionMovies.observe {
-            sciencefictionAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.scienceFiction))
-        requireBinding().moviesRv.adapter = sciencefictionAdapter
-    }
-
-    private fun observeTvMovies() = launchWhenViewResumed {
-        viewModel.tvMovies.observe {
-            tvAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.tvMovie))
-        requireBinding().moviesRv.adapter = tvAdapter
-    }
-
-    private fun observeThrillerMovies() = launchWhenViewResumed {
-        viewModel.thrillerMovies.observe {
-            thrillerAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.thriller))
-        requireBinding().moviesRv.adapter = thrillerAdapter
-    }
-
-    private fun observeWarMovies() = launchWhenViewResumed {
-        viewModel.warMovies.observe {
-            warAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.war))
-        requireBinding().moviesRv.adapter = warAdapter
-    }
-
-
-    private fun observeRelevanceMovies() = launchWhenViewResumed {
+    private fun observeNowPlaying() = launchWhenViewStarted {
         viewModel.nowPlayingMovies.observe {
             nowPlayingAdapter.moviesList = it.movies
             uiVisibility()
@@ -264,8 +241,25 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         toolbarTitle(getString(R.string.now_playing_category))
     }
 
+    private fun observeUpcoming() = launchWhenViewStarted {
+        viewModel.upcomingMovies.observe {
+            uiVisibility()
+            upcomingAdapter.moviesList = it.movies
+        }
+        requireBinding().moviesRv.adapter = upcomingAdapter
+        toolbarTitle(getString(R.string.adventure_text))
+    }
 
-    private fun observeTrendingMovies() = launchWhenViewResumed {
+    private fun observePopular() = launchWhenViewStarted {
+        viewModel.popularMovies.observe {
+            uiVisibility()
+            popularAdapter.moviesList = it.movies
+        }
+        requireBinding().moviesRv.adapter = popularAdapter
+        toolbarTitle(getString(R.string.popular_category))
+    }
+
+    private fun observeTrending() = launchWhenViewStarted {
         viewModel.trendingMovies.observe {
             trendingMoviesAdapter.moviesList = it.movies
             uiVisibility()
@@ -274,78 +268,12 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         toolbarTitle(getString(R.string.trending_category))
     }
 
-    private fun observeDramaMovies() = launchWhenViewResumed {
-        viewModel.dramaMovies.observe {
-            dramaAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        requireBinding().moviesRv.adapter = dramaAdapter
-        toolbarTitle(getString(R.string.drama))
-    }
-
-
-    private fun observeFamilyMovies() = launchWhenViewResumed {
-        viewModel.familyMovies.observe {
-            familyAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.family_text))
-        requireBinding().moviesRv.adapter = familyAdapter
-    }
-
-    private fun observeAnimationMovies() = launchWhenViewResumed {
-        viewModel.animationMovies.observe {
-            animationAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.animation))
-        requireBinding().moviesRv.adapter = animationAdapter
-    }
-
-    private fun observeComedyMovies() = launchWhenViewResumed {
-        viewModel.comedyMovies.observe {
-            comedyAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.comedy))
-        requireBinding().moviesRv.adapter = comedyAdapter
-    }
-
-    private fun observeHistoryMovies() = launchWhenViewResumed {
-        viewModel.historyMovies.observe {
-            historyAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.history))
-        requireBinding().moviesRv.adapter = historyAdapter
-    }
-
-    private fun observeMysteryMovies() = launchWhenViewResumed {
-        viewModel.mysteryMovies.observe {
-            mysteryAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.mystery))
-        requireBinding().moviesRv.adapter = mysteryAdapter
-    }
-
-    private fun observeWesternMovies() = launchWhenViewResumed {
-        viewModel.westernMovies.observe {
-            westernAdapter.moviesList = it.movies
-            uiVisibility()
-        }
-        toolbarTitle(getString(R.string.western))
-        requireBinding().moviesRv.adapter = westernAdapter
-    }
-
     private fun uiVisibility() = with(requireBinding()) {
+        lifecycleScope.launch {
+            pageConstraint.showView()
+            delay(400L)
+        }
         isEmptyLoading.hideView()
-
-//        lifecycleScope.launch {
-//            delay(400L)
-        pageConstraint.showView()
-//        }
-
     }
 
     private fun observeResponseState(state: ResponseState) = with(requireBinding()) {
@@ -387,12 +315,11 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_nav_view)
-            .hideView()
+        requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_nav_view).hideView()
     }
 
     override fun onItemClick(item: MovieUi) {
-        viewModel.launchFromMovieTypeToDetails(movie = item)
+        viewModel.launchFromMovieTypeToDetails(movieId = item.movieId)
     }
 
 
@@ -401,10 +328,6 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         viewModel.saveMovie(item)
         showSuccessSnackBar("Movie ${item.movieTitle} saved")
     }
-
-    private fun showSettingModalPage() =
-        SettingsFragment.newInstance(getString(R.string.setting), args.movieType)
-            .show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     private fun toolbarTitle(name: String) = with(requireBinding()) {
         includeBookInfoToolbarBlock.toolbarBookTitle.text = name

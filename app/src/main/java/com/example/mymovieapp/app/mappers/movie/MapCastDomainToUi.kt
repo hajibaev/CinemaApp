@@ -1,8 +1,8 @@
 package com.example.mymovieapp.app.mappers.movie
 
 import com.example.domain.base.Mapper
-import com.example.domain.models.movie.CastDomain
-import com.example.mymovieapp.app.models.movie.CastUi
+import com.example.domain.models.person.CastDomain
+import com.example.mymovieapp.app.models.person.CastUi
 import javax.inject.Inject
 
 class MapCastDomainToUi @Inject constructor() : Mapper<CastDomain, CastUi> {

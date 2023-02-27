@@ -46,12 +46,12 @@ class MovieStorageViewModel @Inject constructor(
         repository.tvDelete(tvId = tvId)
     }
 
-    fun launchTvDetails(seriesUi: SeriesUi) = navigate(
+    fun launchTvDetails(seriesUi: Int) = navigate(
         StorageFragmentDirections.actionNavStorageToTvDetailsFragment(seriesUi)
     )
 
-    fun launchMovieDetails(movieUi: MovieUi) = navigate(
-        StorageFragmentDirections.actionStorageFragmentToMovieDetailsFragment(movieUi)
+    fun launchMovieDetails(movieId:Int) = navigate(
+        StorageFragmentDirections.actionStorageFragmentToMovieDetailsFragment(movieId)
     )
 
 }

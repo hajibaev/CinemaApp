@@ -7,14 +7,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.cloud.utils.Utils
 import com.example.mymovieapp.R
-import com.example.mymovieapp.app.models.movie.CastUi
+import com.example.mymovieapp.app.models.person.CastUi
+import com.example.mymovieapp.app.models.person.CrewUi
 import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
+import com.example.mymovieapp.app.utils.extensions.showRoundedImage
 import com.example.mymovieapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.mymovieapp.ui.adapters.diffCallBack.ActorsDiffCallBack
-import com.squareup.picasso.Picasso
+import com.example.mymovieapp.ui.adapters.view_holdeer.RvViewHolder
 
 class ActorsAdapters(private val listener: RvClickListener) :
-    RecyclerView.Adapter<ActorsAdapters.ViewHolder>() {
+    RecyclerView.Adapter<RvViewHolder>() {
 
     var personsList = listOf<CastUi>()
         set(value) {
@@ -25,17 +27,19 @@ class ActorsAdapters(private val listener: RvClickListener) :
         }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvViewHolder =
+        RvViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.actors_item, parent, false)
         )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
         holder.itemView.setOnDownEffectClick {
-            listener.onPersonItemClick(personsList[position])
+            listener.onPersonItemClick(
+                personsList[position],
+            )
         }
-        holder.bind(personsList[position])
+        holder.bindCast(personsList[position])
         holder.itemView.startSlideInLeftAnim()
     }
 
@@ -43,19 +47,6 @@ class ActorsAdapters(private val listener: RvClickListener) :
 
     interface RvClickListener {
         fun onPersonItemClick(person: CastUi)
-    }
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = com.example.mymovieapp.databinding.ActorsItemBinding.bind(itemView)
-        fun bind(cast: CastUi) = cast.apply {
-            with(binding) {
-                if (cast.profilePath != null) {
-                    Picasso.get().load(Utils.IMAGE_PATH + profilePath).into(personImageCast)
-                }
-                name.text = cast.name
-                castText.text = cast.character
-            }
-        }
     }
 }
 

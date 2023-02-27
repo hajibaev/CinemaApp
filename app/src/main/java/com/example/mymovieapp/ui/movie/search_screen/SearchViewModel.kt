@@ -9,7 +9,11 @@ import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.MoviesResponseUi
+import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.extensions.changeResponseState
+import com.example.mymovieapp.ui.type.SeeAllMovieType
+import com.example.mymovieapp.ui.type.SeeAllTvType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -30,6 +34,18 @@ class SearchViewModel @Inject constructor(
 
     private val query = MutableStateFlow("")
 
+
+    private val pageToResponseFlow = MutableStateFlow(1)
+    private val genresFLow = MutableStateFlow("")
+
+    private val pageAndGenresFlow = genresFLow.combine(pageToResponseFlow) { genres, page ->
+        Pair(genres, page)
+    }
+
+    private val _movieResponseState = MutableStateFlow(ResponseState())
+    val movieResponseState get() = _movieResponseState.asStateFlow()
+
+
     fun searchMovie() = query.flatMapLatest {
         repository.getSearchMovies(query = it)
     }.map(mapMoviesResponse::map).flowOn(Dispatchers.Default)
@@ -42,7 +58,20 @@ class SearchViewModel @Inject constructor(
         storageRepository.save(movie = saveMapper.map(movie))
     }
 
-    fun launchMovieDetails(movie: MovieUi) = navigate(
-        SearchFragmentDirections.actionSearchFragmentToMovieDetailsFragment(movie)
+    fun genresTryEmit(newGenres: String) = genresFLow.tryEmit(newGenres)
+
+
+    fun launchMovieType(type: SeeAllMovieType) =
+        navigate(SearchFragmentDirections.actionNavSearchToMovieTypeFragment(type))
+
+    fun launchTvType(type: SeeAllTvType) =
+        navigate(SearchFragmentDirections.actionNavSearchToTvTypeFragment(type))
+
+    fun launchMovieDetails(movieId: Int) = navigate(
+        SearchFragmentDirections.actionSearchFragmentToMovieDetailsFragment(movieId)
     )
+
+    private fun settings(page: Int, totalPage: Int) = viewModelScope.launch {
+        _movieResponseState.emit(changeResponseState(page = page, totalPage = totalPage))
+    }
 }
