@@ -141,6 +141,7 @@ class MovieDetailsFragment :
             imageUrl = Utils.IMAGE_PATH + posterUrl,
             imageView = requireBinding().includeBookInfoPosterBlock.moviePoster
         )
+
         requireContext().showBlurImage(
             blurSize = BACKGROUND_IMAGE_BLUR_SIZE,
             imageUrl = Utils.IMAGE_PATH + backdrop_path,
@@ -151,6 +152,7 @@ class MovieDetailsFragment :
 
     override fun onItemClick(item: MovieUi) {
         viewModel.changeMovieId(item.movieId)
+        requireBinding().includeBookInfoBlock.nestedScrollView2.smoothScrollTo(0, 0)
     }
 
     override fun onPersonItemClick(person: CastUi) =

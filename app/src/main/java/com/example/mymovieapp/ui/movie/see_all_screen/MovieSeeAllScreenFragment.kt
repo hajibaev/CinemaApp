@@ -111,6 +111,12 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
                 uiVisibility()
             }
         }
+        launchWhenViewStarted {
+            allGenres.observe {
+
+                dramaAdapter.moviesList = it.movies
+            }
+        }
     }
 
     private fun observeType() = with(viewModel) {

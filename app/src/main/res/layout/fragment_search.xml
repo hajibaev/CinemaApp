@@ -86,7 +86,7 @@
                 android:id="@+id/genres_drama"
                 layout="@layout/item_genres" />
 
-            <include
+                <include
                 android:id="@+id/genres_family"
                 layout="@layout/item_genres" />
 

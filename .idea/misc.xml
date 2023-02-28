@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_search.xml" value="0.179" />
         <entry key="app/src/main/res/drawable-v24/ic_search_movie.xml" value="0.179" />
         <entry key="app/src/main/res/drawable-v24/ic_star.xml" value="0.179" />
+        <entry key="app/src/main/res/drawable-v24/ic_television_tv_svgrepo_com.xml" value="0.2145" />
         <entry key="app/src/main/res/drawable-v24/shimmer_bg.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/backs.xml" value="0.1825" />
         <entry key="app/src/main/res/drawable/bg.xml" value="0.1" />
@@ -33,6 +34,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_live_tv_24.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic_bookmark_vector.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.179" />
+        <entry key="app/src/main/res/drawable/ic_home_vector.xml" value="0.2145" />
         <entry key="app/src/main/res/drawable/ic_icons8_red_carpet_96.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable/ic_moviland_text_logo.xml" value="0.179" />
@@ -50,6 +52,7 @@
         <entry key="app/src/main/res/drawable/ic_search_vector.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic_serach_vector.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic_storage.xml" value="0.1455" />
+        <entry key="app/src/main/res/drawable/ic_tv_shows.xml" value="0.2145" />
         <entry key="app/src/main/res/drawable/ic_tv_vector.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic_vector.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/nav_item_color_state.xml" value="0.179" />

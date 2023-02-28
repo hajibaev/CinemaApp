@@ -6,7 +6,7 @@
         android:title="Movies" />
     <item
         android:id="@+id/nav_tv_movies"
-        android:icon="@drawable/ic_tv_vector"
+        android:icon="@drawable/ic_tv_shows"
         android:title="Tv Cinema" />
     <item
         android:id="@+id/nav_search"

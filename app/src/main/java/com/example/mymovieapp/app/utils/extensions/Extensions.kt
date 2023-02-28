@@ -1,20 +1,27 @@
 package com.example.mymovieapp.app.utils.extensions
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.DrawableRes
+import androidx.core.app.ActivityCompat.startPostponedEnterTransition
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.utils.blur.BlurTransformation
@@ -25,6 +32,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 
+fun RequestBuilder<Drawable>.doOnFinished(block: () -> Unit) =
+    addListener(object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            block()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            block()
+            return false
+        }
+
+    })
 
 fun <T> createMutableSharedFlowAsLiveData(): MutableSharedFlow<T> =
     MutableSharedFlow(1, 0, BufferOverflow.DROP_OLDEST)
@@ -82,21 +113,6 @@ fun Context.showRoundedImage(
         .apply(requestOptions)
         .into(imageView)
 }
-//
-//fun showRoundedImage(
-//    roundedSize: Int = 8.toDp,
-//    imageUrl: String,
-//    imageView: ImageView,
-//) {
-//    val requestOptions = RequestOptions()
-//        .transforms(CenterCrop(), RoundedCorners(roundedSize))
-//        .timeout(3000)
-//        .placeholder(shimmerDrawable())
-//    Glide.with(this)
-//        .load(imageUrl)
-//        .apply(requestOptions)
-//        .into(imageView)
-//}
 
 fun makeToast(message: String, context: Context) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
