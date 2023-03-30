@@ -9,11 +9,12 @@ import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
+import com.example.domain.repository.TvDetailsRepository
 import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
 import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -23,7 +24,7 @@ private const val TV_ID_KEY = "tv_id_key"
 
 class TvDetailsViewModelFactory @AssistedInject constructor(
     @Assisted(TV_ID_KEY) private val tvId: Int,
-    private val movieRepository: MovieRepository,
+    private val repository: TvDetailsRepository,
     private val storageRepository: MovieStorageRepository,
     private val mapMovieDetailsDomainToUi: Mapper<TvSeriesDetailsDomain, TvSeriesDetailsUi>,
     private val mapTvSeriesResponseDomainToUi: Mapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
@@ -38,7 +39,7 @@ class TvDetailsViewModelFactory @AssistedInject constructor(
             tvId = tvId,
             storageRepository = storageRepository,
             mapMovieDetailsDomainToUi = mapMovieDetailsDomainToUi,
-            movieRepository = movieRepository,
+            repository = repository,
             mapTvSeriesResponseDomainToUi = mapTvSeriesResponseDomainToUi,
             saveMapper = saveMapper,
             resourceProvider = resourceProvider,

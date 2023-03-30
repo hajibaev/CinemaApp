@@ -67,6 +67,7 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         observeType()
         setupClickers()
         observe()
+        adapterAnimation()
     }
 
     private fun setupClickers() = with(requireBinding()) {
@@ -74,12 +75,10 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
         viewModel.apply {
             nextBtn.setOnDownEffectClick {
                 nextPage()
-                adapterAnimation()
                 scrollView.fullScroll(ScrollView.FOCUS_UP)
             }
             prevBtn.setOnDownEffectClick {
                 previousPage()
-                adapterAnim()
                 scrollView.fullScroll(ScrollView.FOCUS_UP)
             }
         }
@@ -108,13 +107,8 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
                 tvAdapter.moviesList = it.movies
                 thrillerAdapter.moviesList = it.movies
                 warAdapter.moviesList = it.movies
-                uiVisibility()
-            }
-        }
-        launchWhenViewStarted {
-            allGenres.observe {
-
                 dramaAdapter.moviesList = it.movies
+                uiVisibility()
             }
         }
     }
@@ -302,17 +296,6 @@ class MovieSeeAllScreenFragment : BaseFragment<FragmentMovieTypeBinding, MovieVi
             anim.addViewTypeAnimation(
                 R.layout.object_portrait_item,
                 SimpleCommonAnimator()
-            )
-            anim.addDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
-            anim.removeDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
-        }
-    }
-
-    private fun adapterAnim() = with(requireBinding()) {
-        moviesRv.itemAnimator = AddableItemAnimator(SimpleCommonAnimator()).also { anim ->
-            anim.addViewTypeAnimation(
-                R.layout.object_portrait_item,
-                SlideInTopCommonAnimator()
             )
             anim.addDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
             anim.removeDuration = DEFAULT_ITEMS_ANIMATOR_DURATION

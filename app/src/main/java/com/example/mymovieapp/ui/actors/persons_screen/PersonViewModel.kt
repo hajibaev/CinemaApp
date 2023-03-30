@@ -8,7 +8,7 @@ import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.models.person.PersonPresentation
 import com.example.mymovieapp.app.models.person.PersonsPresentation
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import com.example.mymovieapp.app.utils.extensions.changeResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +32,7 @@ class PersonViewModel @Inject constructor(
     val personResponseState get() = _personResponseState.asStateFlow()
 
     val persons = personResponsePage.flatMapLatest {
-        personRepository.getPeopleMovies(it)
+        personRepository.fetchAllPeopleMovies(it)
     }.map(mapPersonResponseFromDomain::map).flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach {

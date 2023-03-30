@@ -2,8 +2,7 @@ package com.example.mymovieapp.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.storage.movie.room.MovieDatabase
-import com.example.data.storage.tv.room.TvDatabase
+import com.example.data.storage.room.MovieDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,18 +29,18 @@ object RoomModule {
     @Singleton
     fun provideMovieDao(database: MovieDatabase) = database.movieDao()
 
+//
+//    @Provides
+//    @Singleton
+//    fun provideTvDatabase(@ApplicationContext context: Context): TvDatabase = Room.databaseBuilder(
+//        context,
+//        TvDatabase::class.java,
+//        TV_NAME
+//    ).build()
 
     @Provides
     @Singleton
-    fun provideTvDatabase(@ApplicationContext context: Context): TvDatabase = Room.databaseBuilder(
-        context,
-        TvDatabase::class.java,
-        TV_NAME
-    ).build()
-
-    @Provides
-    @Singleton
-    fun provideTVDao(database: TvDatabase) = database.tvDao()
+    fun provideTVDao(database: MovieDatabase) = database.tvDao()
 
 
 }

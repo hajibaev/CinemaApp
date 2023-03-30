@@ -5,12 +5,8 @@ import com.example.data.cloud.mappers.person.MapCrewCloudToData
 import com.example.data.cloud.mappers.person.MapPersonCloudToData
 import com.example.data.cloud.mappers.person.MapPersonDetailsCloudToData
 import com.example.data.cloud.mappers.person.MapPersonsCloudToData
-import com.example.data.cloud.mappers.video.MapTrailerCloudToData
-import com.example.data.cloud.mappers.video.MapVideoCloudToData
 import com.example.data.cloud.models.movie.*
 import com.example.data.cloud.models.person.*
-import com.example.data.cloud.models.video.TrailerCloud
-import com.example.data.cloud.models.video.VideoCloud
 import com.example.data.data.mappers.movie.*
 import com.example.data.data.mappers.person.MapCrewDataToDomain
 import com.example.data.data.mappers.person.MapPersonDataToDomain
@@ -18,8 +14,6 @@ import com.example.data.data.mappers.person.MapPersonDetailsDataToDomain
 import com.example.data.data.mappers.person.MapPersonsDataToDomain
 import com.example.data.data.models.movie.*
 import com.example.data.data.models.person.*
-import com.example.data.data.models.video.TrailerData
-import com.example.data.data.models.video.VideoData
 import com.example.data.storage.movie.MovieStorage
 import com.example.data.storage.movie.mappers.MapMovieDataToStorage
 import com.example.data.storage.movie.mappers.MapMovieDomainToData
@@ -30,10 +24,6 @@ import com.example.data.storage.tv.models.TvStorage
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.*
 import com.example.domain.models.person.*
-import com.example.domain.models.video.TrailerDomain
-import com.example.domain.models.video.VideosDomain
-import com.example.movieapp.data.mappers.video.MapTrailerDataToDomain
-import com.example.movieapp.data.mappers.video.MapVideoDataToDomain
 import com.example.mymovieapp.app.mappers.movie.*
 import com.example.mymovieapp.app.mappers.person.MapCrewDomainToUi
 import com.example.mymovieapp.app.mappers.person.MapPersonDetailsDomainToUi
@@ -50,7 +40,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class MappersBindModule {
-
 
     @Binds
     abstract fun bindMapCastCloudToData(impl: MapCastCloudToData): Mapper<CastCloud, CastData>
@@ -98,12 +87,6 @@ abstract class MappersBindModule {
     abstract fun bindMapFromPersonsCloudToData(impl: MapPersonsCloudToData): Mapper<PersonsCloud, PersonsData>
 
     @Binds
-    abstract fun bindMapFromTrailerCloudToData(impl: MapTrailerCloudToData): Mapper<TrailerCloud, TrailerData>
-
-    @Binds
-    abstract fun bindMapFromVideoToData(impl: MapVideoCloudToData): Mapper<VideoCloud, VideoData>
-
-    @Binds
     abstract fun bindMapFromMovieDataToDomain(impl: MapMovieDataToDomain): Mapper<MovieData, MovieDomain>
 
     @Binds
@@ -120,12 +103,6 @@ abstract class MappersBindModule {
 
     @Binds
     abstract fun bindMapFromPersonsDataToDomain(impl: MapPersonsDataToDomain): Mapper<PersonsData, PersonsDomain>
-
-    @Binds
-    abstract fun bindMapFromVideoDataToDomain(impl: MapVideoDataToDomain): Mapper<VideoData, VideosDomain>
-
-    @Binds
-    abstract fun bindMapTrailerDataToDomain(impl: MapTrailerDataToDomain): Mapper<TrailerData, TrailerDomain>
 
     @Binds
     abstract fun bindMapFromDomainToData(impl: MapMovieDomainToData): Mapper<MovieDomain, MovieData>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.movie.see_all_screen.MovieSeeAllScreenFragment">
 
-
     <include
         android:id="@+id/include_book_info_toolbar_block"
         layout="@layout/include_movie_info_toolbar_block"

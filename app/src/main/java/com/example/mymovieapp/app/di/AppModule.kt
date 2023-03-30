@@ -2,7 +2,7 @@ package com.example.mymovieapp.app.di
 
 import android.content.Context
 import com.example.domain.helper.DispatchersProvider
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import com.example.mymovieapp.app.utils.communication.NavigationCommunication
 import dagger.Module
 import dagger.Provides

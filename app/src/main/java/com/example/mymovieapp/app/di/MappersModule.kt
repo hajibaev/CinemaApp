@@ -6,28 +6,24 @@ import com.example.data.cloud.mappers.movie.MapListSeriesCloudToData
 import com.example.data.cloud.mappers.person.MapListCrewCloudToData
 import com.example.data.cloud.mappers.person.MapListPersonCloudToData
 import com.example.data.cloud.mappers.person.MapListPersonDetailsCloudToData
-import com.example.data.cloud.mappers.video.MapListTrailerToData
 import com.example.data.cloud.models.movie.MovieCloud
 import com.example.data.cloud.models.movie.SeriesCloud
 import com.example.data.cloud.models.person.CastCloud
 import com.example.data.cloud.models.person.CrewCloud
 import com.example.data.cloud.models.person.PersonCloud
 import com.example.data.cloud.models.person.PersonDetailsCloud
-import com.example.data.cloud.models.video.TrailerCloud
 import com.example.data.data.mappers.movie.MapListCastDataToDomain
 import com.example.data.data.mappers.movie.MapListMovieDataToDomain
 import com.example.data.data.mappers.movie.MapListSeriesDataToDomain
 import com.example.data.data.mappers.person.MapListCrewDataToDomain
 import com.example.data.data.mappers.person.MapListPersonDataToDomain
 import com.example.data.data.mappers.person.MapListPersonDetailsDataToDomain
-import com.example.data.data.mappers.video.MapListTrailerDataToDomain
 import com.example.data.data.models.movie.MovieData
 import com.example.data.data.models.movie.SeriesData
 import com.example.data.data.models.person.CastData
 import com.example.data.data.models.person.CrewData
 import com.example.data.data.models.person.PersonData
 import com.example.data.data.models.person.PersonDetailsData
-import com.example.data.data.models.video.TrailerData
 import com.example.data.storage.movie.MovieStorage
 import com.example.data.storage.movie.mappers.MapListMovieStorageToData
 import com.example.data.storage.tv.mappers.MapListTvStorageToData
@@ -39,7 +35,6 @@ import com.example.domain.models.person.CastDomain
 import com.example.domain.models.person.CrewDomain
 import com.example.domain.models.person.PersonDetailsDomain
 import com.example.domain.models.person.PersonDomain
-import com.example.domain.models.video.TrailerDomain
 import com.example.mymovieapp.app.mappers.movie.MapListCastDomainToUi
 import com.example.mymovieapp.app.mappers.movie.MapListMovieDomainToUi
 import com.example.mymovieapp.app.mappers.movie.MapListSeriesDomainToUi
@@ -102,20 +97,12 @@ class MappersModule {
         MapListPersonCloudToData(mapper = mapper)
 
     @Provides
-    fun bindMapFromTrailerListToData(mapper: Mapper<TrailerCloud, TrailerData>): Mapper<List<TrailerCloud>, List<TrailerData>> =
-        MapListTrailerToData(mapper = mapper)
-
-    @Provides
     fun bindMapFromMovieListDataToDomain(mapper: Mapper<MovieData, MovieDomain>): Mapper<List<MovieData>, List<MovieDomain>> =
         MapListMovieDataToDomain(mapper = mapper)
 
     @Provides
     fun bindMapFromPersonDataListToDomain(mapper: Mapper<PersonData, PersonDomain>): Mapper<List<PersonData>, List<PersonDomain>> =
         MapListPersonDataToDomain(mapper = mapper)
-
-    @Provides
-    fun bindMapFromTrailerListDataToDomain(mapper: Mapper<TrailerData, TrailerDomain>): Mapper<List<TrailerData>, List<TrailerDomain>> =
-        MapListTrailerDataToDomain(mapper = mapper)
 
     @Provides
     fun bindMapMovieListToDomain(mapper: Mapper<MovieStorage, MovieData>): Mapper<List<MovieStorage>, List<MovieData>> =

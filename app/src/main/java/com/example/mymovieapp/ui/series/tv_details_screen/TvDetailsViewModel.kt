@@ -2,25 +2,27 @@ package com.example.mymovieapp.ui.series.tv_details_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
-import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesDetailsDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
-import com.example.domain.repository.MovieRepository
+import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.repository.MovieStorageRepository
+import com.example.domain.repository.TvDetailsRepository
 import com.example.mymovieapp.app.base.BaseViewModel
-import com.example.mymovieapp.app.models.movie.*
+import com.example.mymovieapp.app.models.movie.SeriesUi
+import com.example.mymovieapp.app.models.movie.TvSeriesDetailsUi
+import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi
 import com.example.mymovieapp.app.models.person.CastUi
 import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.person.CrewUi
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class TvDetailsViewModel constructor(
-    private val tvId: Int,
-    private val movieRepository: MovieRepository,
+    tvId: Int,
+    private val repository: TvDetailsRepository,
     private val storageRepository: MovieStorageRepository,
     private val mapMovieDetailsDomainToUi: Mapper<TvSeriesDetailsDomain, TvSeriesDetailsUi>,
     private val mapTvSeriesResponseDomainToUi: Mapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
@@ -40,28 +42,28 @@ class TvDetailsViewModel constructor(
     private val tvFlow = MutableStateFlow(tvId)
 
     val movieFlow = tvFlow.flatMapLatest {
-        movieRepository.getTvSeriesDetails(it)
+        repository.fetchAllTvDetails(it)
     }.map(mapMovieDetailsDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val actorsFlow = tvFlow.flatMapLatest {
-        movieRepository.getTvActors(it)
+        repository.fetchAllCredits(it)
     }.map(mapCreditsResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val similarMoviesFlow = tvFlow.flatMapLatest {
-        movieRepository.getTvSimilar(it)
+        repository.fetchAllSimilar(it)
     }.map(mapTvSeriesResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val recommendMoviesFlow = tvFlow.flatMapLatest {
-        movieRepository.getTvRecommendations(it)
+        repository.fetchAllRecommendations(it)
     }.map(mapTvSeriesResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }

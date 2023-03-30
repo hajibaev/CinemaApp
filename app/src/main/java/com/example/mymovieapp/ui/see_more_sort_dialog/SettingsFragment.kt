@@ -5,20 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mymovieapp.app.utils.extensions.setOnDownEffectClick
 import com.example.mymovieapp.databinding.FragmentSettingsBinding
-import com.example.mymovieapp.ui.movie.movies_screen.MovieViewModels
 import com.example.mymovieapp.ui.movie.search_screen.SearchFragmentDirections
-import com.example.mymovieapp.ui.series.tv_screen.TvMoviesFragmentViewModel
 import com.example.mymovieapp.ui.type.SeeAllMovieType
 import com.example.mymovieapp.ui.type.SeeAllTvType
 import com.example.ui_core.custom.snackbar.SnackBar
 import com.example.ui_core.modal_page.ModalPage
-import com.example.ui_core.modal_page.findModalPage
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.example.ui_core.modal_page.dismissModalPage
 
 class SettingsFragment : DialogFragment() {
 
@@ -60,15 +55,6 @@ class SettingsFragment : DialogFragment() {
     }
 
 
-    fun showWarningSnackbar(message: String) =
-        SnackBar
-            .Builder(binding.root)
-            .warning()
-            .message(message)
-            .build()
-            .show()
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -87,12 +73,6 @@ class SettingsFragment : DialogFragment() {
                 .title(title)
                 .build()
         }
-    }
-}
-
-fun Fragment.dismissModalPage() {
-    findModalPage()?.let {
-        (it as BottomSheetDialogFragment).dismiss()
     }
 }
 

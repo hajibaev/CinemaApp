@@ -1,6 +1,6 @@
 package com.example.data.storage.repository
 
-import com.example.data.cloud.source.storage.StorageCloudDataSource
+import com.example.data.cloud.source.storage.StorageDataSource
 import com.example.data.data.models.movie.MovieData
 import com.example.data.data.models.movie.SeriesData
 import com.example.domain.base.Mapper
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class StorageRepositoryImpl @Inject constructor(
-    private val storage: StorageCloudDataSource,
+    private val storage: StorageDataSource,
     private val mapperMovieDomainToData: Mapper<MovieDomain, MovieData>,
     private val mapMovieDataToDomain: Mapper<MovieData, MovieDomain>,
     private val mapperSeriesDomainToData: Mapper<SeriesDomain, SeriesData>,

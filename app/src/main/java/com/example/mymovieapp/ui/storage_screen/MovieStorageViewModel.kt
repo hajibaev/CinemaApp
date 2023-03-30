@@ -8,7 +8,7 @@ import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.SeriesUi
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

@@ -4,14 +4,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.SeriesDomain
 import com.example.domain.models.movie.TvSeriesResponseDomain
-import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
+import com.example.domain.repository.TvRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.ResponseState
 import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.movie.TvSeriesResponseUi
-import com.example.mymovieapp.app.utils.ResourceProvider
 import com.example.mymovieapp.app.utils.extensions.changeResponseState
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import com.example.mymovieapp.ui.series.see_all_screen.SeriesSeeAllScreenFragmentDirections
 import com.example.mymovieapp.ui.type.SeeAllTvType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TvMoviesFragmentViewModel @Inject constructor(
-    private val repository: MovieRepository,
+    private val repository: TvRepository,
     private val storageRepository: MovieStorageRepository,
     private val mapTvResponse: Mapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
     private val saveMapper: Mapper<SeriesUi, SeriesDomain>,
@@ -43,35 +43,35 @@ class TvMoviesFragmentViewModel @Inject constructor(
     }
 
     val tvTrending = pageToResponseFlow.flatMapLatest {
-        repository.getTrendingTvSeries(it).map(mapTvResponse::map)
+        repository.fetchAllTrending(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val tvTopRated = pageToResponseFlow.flatMapLatest {
-        repository.getTopRatedTvSeries(it).map(mapTvResponse::map)
+        repository.fetchAllTopRated(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val tvOnTheAir = pageToResponseFlow.flatMapLatest {
-        repository.getOnTheAirTvSeries(it).map(mapTvResponse::map)
+        repository.fetchAllOnTheAir(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val tvPopular = pageToResponseFlow.flatMapLatest {
-        repository.getPopularTvSeries(it).map(mapTvResponse::map)
+        repository.fetchAllPopular(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val tvAiringToday = pageToResponseFlow.flatMapLatest {
-        repository.getAiringTodayTvSeries(it).map(mapTvResponse::map)
+        repository.fetchAllAiringToday(it).map(mapTvResponse::map)
     }.flowOn(Dispatchers.Default)
         .onEach { value -> settings(value.page, value.total_pages) }
         .catch { t: Throwable -> _error.emit(resourceProvider.handleException(t)) }
@@ -79,7 +79,7 @@ class TvMoviesFragmentViewModel @Inject constructor(
 
 
     val allGenres = pageAndGenresFlow.flatMapLatest {
-        repository.getFantasyMovies(it.first, it.second)
+        repository.fetchAllTvGenres(it.first, it.second)
     }.map(mapTvResponse::map).flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.page, value.total_pages) }
@@ -100,6 +100,7 @@ class TvMoviesFragmentViewModel @Inject constructor(
     fun launchFromTvTypeToDetails(tvId: Int) = navigate(
         SeriesSeeAllScreenFragmentDirections.actionTvTypeFragmentToTvDetailsFragment(tvId)
     )
+
     fun genresTryEmit(newGenres: String) = genresFLow.tryEmit(newGenres)
 
     fun nextPage() = pageToResponseFlow.tryEmit(_movieResponseState.value.nextPage)

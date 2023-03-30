@@ -2,25 +2,27 @@ package com.example.mymovieapp.ui.movie.movie_details_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
-import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.movie.MovieDetailsDomain
 import com.example.domain.models.movie.MovieDomain
 import com.example.domain.models.movie.MoviesResponseDomain
-import com.example.domain.repository.MovieRepository
+import com.example.domain.models.person.CreditsResponseDomain
+import com.example.domain.repository.MovieDetailsRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.mymovieapp.app.base.BaseViewModel
-import com.example.mymovieapp.app.models.movie.*
+import com.example.mymovieapp.app.models.movie.MovieDetailsUi
+import com.example.mymovieapp.app.models.movie.MovieUi
+import com.example.mymovieapp.app.models.movie.MoviesResponseUi
 import com.example.mymovieapp.app.models.person.CastUi
 import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.person.CrewUi
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel constructor(
-    private val movieId: Int,
-    private val movieRepository: MovieRepository,
+    movieId: Int,
+    private val repository: MovieDetailsRepository,
     private val storageRepository: MovieStorageRepository,
     private val mapMovieDetailsDomainToUi: Mapper<MovieDetailsDomain, MovieDetailsUi>,
     private val mapMovieResponseDomainToUi: Mapper<MoviesResponseDomain, MoviesResponseUi>,
@@ -38,28 +40,28 @@ class MovieDetailsViewModel constructor(
     private val movieIdFlow = MutableStateFlow(movieId)
 
     val similarMoviesFlow = movieIdFlow.flatMapLatest {
-        movieRepository.getSimilarMovies(it)
+        repository.fetchAllSimilar(it)
     }.map(mapMovieResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val movieFlow = movieIdFlow.flatMapLatest {
-        movieRepository.getDetails(it)
+        repository.fetchAllMovieDetails(it)
     }.map(mapMovieDetailsDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val actorsFlow = movieIdFlow.flatMapLatest {
-        movieRepository.getActors(it)
+        repository.fetchAllCredits(it)
     }.map(mapCreditsResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val recommendMoviesFlow = movieIdFlow.flatMapLatest {
-        movieRepository.getRecommendationsMovies(it)
+        repository.fetchAllRecommendations(it)
     }.map(mapMovieResponseDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }

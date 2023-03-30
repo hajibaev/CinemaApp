@@ -3,16 +3,13 @@ package com.example.mymovieapp.ui.actors.person_details_screen
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.Mapper
 import com.example.domain.models.movie.MovieDomain
-import com.example.domain.models.person.CreditsResponseDomain
 import com.example.domain.models.person.PersonDetailsDomain
-import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieStorageRepository
 import com.example.domain.repository.PersonRepository
 import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
-import com.example.mymovieapp.app.models.person.CreditsResponseUi
 import com.example.mymovieapp.app.models.person.PersonDetailsPresentation
-import com.example.mymovieapp.app.utils.ResourceProvider
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -38,7 +35,7 @@ class PersonDetailsViewModel constructor(
 
 
     val personFlow = personIdFlow.flatMapLatest {
-        repository.getPersonDetails(it)
+        repository.fetchAllPersonDetails(it)
     }.map(mapPersonDetailsDomainToUi::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }

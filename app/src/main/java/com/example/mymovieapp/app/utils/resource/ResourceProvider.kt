@@ -1,4 +1,4 @@
-package com.example.mymovieapp.app.utils
+package com.example.mymovieapp.app.utils.resource
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -5,7 +5,10 @@ import com.example.domain.models.person.PersonsDomain
 import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
-    fun getPeopleMovies(page: Int): Flow<PersonsDomain>
-     fun getPersonDetails(personId: Int): Flow<PersonDetailsDomain>
-    suspend fun getSearchPeopleMovies(query: String): Flow<PersonsDomain>
+
+    fun fetchAllPeopleMovies(page: Int): Flow<PersonsDomain>
+
+    fun fetchAllPersonDetails(personId: Int): Flow<PersonDetailsDomain>
+
+    fun fetchAllSearchPersons(query: String): Flow<PersonsDomain>
 }

@@ -1,9 +1,7 @@
 package com.example.data.storage.movie
 
 import androidx.room.*
-import androidx.room.Database
 import com.example.data.storage.TypeConverter
-import com.example.data.storage.movie.room.MovieDao
 
 @Entity(tableName = "movieTable")
 class MovieStorage(

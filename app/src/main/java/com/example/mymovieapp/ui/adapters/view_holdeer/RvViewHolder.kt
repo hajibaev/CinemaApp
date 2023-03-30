@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.cloud.utils.Utils
 import com.example.data.cloud.utils.Utils.IMAGE_PATH
 import com.example.mymovieapp.R
 import com.example.mymovieapp.app.models.movie.MovieUi
@@ -12,12 +11,7 @@ import com.example.mymovieapp.app.models.movie.SeriesUi
 import com.example.mymovieapp.app.models.person.CastUi
 import com.example.mymovieapp.app.models.person.CrewUi
 import com.example.mymovieapp.app.models.person.PersonPresentation
-import com.example.mymovieapp.app.utils.extensions.hideView
 import com.example.mymovieapp.app.utils.extensions.showRoundedImage
-import com.example.mymovieapp.databinding.FragmentPersonDetailsBinding
-import com.example.mymovieapp.databinding.StorageItemBinding
-import com.example.ui_core.custom.snackbar.SnackBar
-import com.squareup.picasso.Picasso
 import com.vaibhavlakhera.circularprogressview.CircularProgressView
 
 class RvViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -36,14 +30,6 @@ class RvViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bindPerson(person: PersonPresentation) =
         bindPerson(person.profile_path, popularity = person.popularity)
-
-    fun showErrorSnackbar(message: String) =
-        SnackBar
-            .Builder(view)
-            .error()
-            .message(message)
-            .build()
-            .show()
 
     fun bindCast(posterPath: String?, name: String, cast_text: String) {
         if (posterPath != null) {
@@ -78,9 +64,9 @@ class RvViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             imageUrl = IMAGE_PATH + posterPath,
             imageView = image
         )
-        if (popularity.toInt() >= 70) {
+        if (popularity >= 7.0) {
             progressView.setProgressColorRes(R.color.greenPrimaryColor)
-        } else if (popularity.toInt() in 51..69) {
+        } else if (popularity in 5.1..6.9) {
             progressView.setProgressColorRes(R.color.yellow)
         } else {
             progressView.setProgressColorRes(R.color.red)

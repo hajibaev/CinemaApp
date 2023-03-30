@@ -10,10 +10,9 @@ import com.example.mymovieapp.app.base.BaseViewModel
 import com.example.mymovieapp.app.models.movie.MovieUi
 import com.example.mymovieapp.app.models.movie.MoviesResponseUi
 import com.example.mymovieapp.app.models.movie.ResponseState
-import com.example.mymovieapp.app.utils.ResourceProvider
 import com.example.mymovieapp.app.utils.extensions.changeResponseState
+import com.example.mymovieapp.app.utils.resource.ResourceProvider
 import com.example.mymovieapp.ui.movie.see_all_screen.MovieSeeAllScreenFragmentDirections
-import com.example.mymovieapp.ui.series.tv_screen.TvMoviesFragmentViewModel
 import com.example.mymovieapp.ui.type.SeeAllMovieType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +32,6 @@ class MovieViewModels @Inject constructor(
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
 
-
     private val _movieResponseState = MutableStateFlow(ResponseState())
     val movieResponseState get() = _movieResponseState.asStateFlow()
 
@@ -44,15 +42,16 @@ class MovieViewModels @Inject constructor(
         Pair(page, genres)
     }
 
-    val popularMovies = pageToResponseFlow
-        .flatMapLatest { repository.getPopularMovies(page = it) }
-        .map(mapMovieResponse::map).flowOn(Dispatchers.Default)
+    val popularMovies = pageToResponseFlow.flatMapLatest {
+        repository.fetchAllPopularMovies(page = it)
+    }.flowOn(Dispatchers.Default)
+        .map(mapMovieResponse::map)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.currectPage, value.totalPages) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val upcomingMovies = pageToResponseFlow
-        .flatMapLatest { repository.getUpcomingMovies(page = it) }
+        .flatMapLatest { repository.fetchAllUpcomingMovies(page = it) }
         .map(mapMovieResponse::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
@@ -60,30 +59,30 @@ class MovieViewModels @Inject constructor(
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val nowPlayingMovies = pageToResponseFlow
-        .flatMapLatest { repository.getNowPlayingMovies(page = it) }
+        .flatMapLatest { repository.fetchAllNowPlayingMovies(page = it) }
         .map(mapMovieResponse::map).flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.currectPage, value.totalPages) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    val topRatedMovies = pageToResponseFlow.
-        flatMapLatest { repository.getTopRatedMovies(page = it) }
-        .map(mapMovieResponse::map).flowOn(Dispatchers.Default)
-        .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
-        .onEach { value -> settings(value.currectPage, value.totalPages) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+    val topRatedMovies =
+        pageToResponseFlow.flatMapLatest { repository.fetchAllTopRatedMovies(page = it) }
+            .map(mapMovieResponse::map).flowOn(Dispatchers.Default)
+            .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
+            .onEach { value -> settings(value.currectPage, value.totalPages) }
+            .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val trendingMovies = pageToResponseFlow
-        .flatMapLatest { repository.getTrendingMovies(page = it) }
+        .flatMapLatest { repository.fetchAllTrendingMovies(page = it) }
         .map(mapMovieResponse::map).flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.currectPage, value.totalPages) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val allGenres = pageAndGenresFlow
-        .flatMapLatest { repository.getMoviesGenres(it.first, it.second) }
-        .map(mapMovieResponse::map)
+    val allGenres = pageAndGenresFlow.flatMapLatest {
+        repository.fetchAllMoviesGenres(it.first, it.second)
+    }.map(mapMovieResponse::map)
         .flowOn(Dispatchers.Default)
         .catch { throwable: Throwable -> _error.emit(resourceProvider.handleException(throwable = throwable)) }
         .onEach { value -> settings(value.currectPage, value.totalPages) }

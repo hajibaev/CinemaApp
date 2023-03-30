@@ -2,14 +2,15 @@ package com.example.mymovieapp.app.di
 
 import com.example.data.cloud.source.handler.ResponseHandler
 import com.example.data.cloud.source.handler.ResponseHandlerImpl
-import com.example.data.cloud.source.movie.MoviesCloudDataImpl
-import com.example.data.cloud.source.movie.MoviesCloudDataSource
-import com.example.data.cloud.source.person.PersonsCloudDataImpl
-import com.example.data.cloud.source.person.PersonsCloudDataSource
-import com.example.data.cloud.source.storage.MovieSourceCloudDataImpl
-import com.example.data.cloud.source.storage.StorageCloudDataSource
-import com.example.data.cloud.source.video.VideoCloudDataSource
-import com.example.data.cloud.source.video.VideoCloudDataSourceImpl
+import com.example.data.cloud.source.movie.*
+import com.example.data.cloud.source.person.PersonsDataSource
+import com.example.data.cloud.source.person.PersonsDataSourceImpl
+import com.example.data.cloud.source.storage.StorageDataSource
+import com.example.data.cloud.source.storage.StorageDataSourceImpl
+import com.example.data.cloud.source.tv.TvDataSource
+import com.example.data.cloud.source.tv.TvDataSourceImpl
+import com.example.data.cloud.source.tv.TvDetailsDataSource
+import com.example.data.cloud.source.tv.TvDetailsDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,22 +24,38 @@ abstract class DataSourceBindModule {
     abstract fun provideResponseHandlerImpl(impl: ResponseHandlerImpl): ResponseHandler
 
     @Binds
-    abstract fun provideMoviesCloudDataSource(
-        impl: MoviesCloudDataImpl
-    ): MoviesCloudDataSource
+    abstract fun provideSearchDataSource(
+        impl: SearchDataSourceImpl
+    ): SearchDataSource
 
     @Binds
-    abstract fun provideMovieStorageCloudDataSource(
-        impl: MovieSourceCloudDataImpl
-    ): StorageCloudDataSource
+    abstract fun provideMovieDataSource(
+        impl: MovieDataSourceImpl
+    ): MovieDataSource
 
     @Binds
-    abstract fun providePersonsCloudDataSource(
-        impl: PersonsCloudDataImpl
-    ): PersonsCloudDataSource
+    abstract fun provideMovieDetailsDataSource(
+        impl: MovieDetailsDataSourceImpl
+    ): MovieDetailsDataSource
 
     @Binds
-    abstract fun provideVideoCloudDataSource(
-        impl: VideoCloudDataSourceImpl
-    ): VideoCloudDataSource
+    abstract fun provideTvDataSource(
+        impl: TvDataSourceImpl
+    ): TvDataSource
+
+    @Binds
+    abstract fun provideTvDetailsDataSource(
+        impl: TvDetailsDataSourceImpl
+    ): TvDetailsDataSource
+
+    @Binds
+    abstract fun provideStorageDataSource(
+        impl: StorageDataSourceImpl
+    ): StorageDataSource
+
+    @Binds
+    abstract fun providePersonsDataSource(
+        impl: PersonsDataSourceImpl
+    ): PersonsDataSource
+
 }

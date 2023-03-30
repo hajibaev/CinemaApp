@@ -7,5 +7,4 @@ data class ResponseState(
     var nextPage: Int = page + 1,
     var isHasPreviousPage: Boolean = false,
     var isHasNextPage: Boolean = false,
-
-    )
+)
